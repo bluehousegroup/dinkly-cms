@@ -1,0 +1,9 @@
+.navbar-inner .container-fluid,
+.home-callouts,
+.menu-nav,
+.main-content,
+#footer {
+  width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+}

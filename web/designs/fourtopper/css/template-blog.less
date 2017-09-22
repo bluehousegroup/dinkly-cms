@@ -1,0 +1,114 @@
+section.blog{
+	div.inner-wrap{
+		margin-right: 60px;
+		&>h3{
+			color: @primary-green;
+			margin-top: 40px;
+			margin-bottom: 30px;
+		}
+		ul.blog-list{
+			margin: 0px;
+			list-style-type: none;
+			&>li{
+				display: table;
+				border-bottom: 30px solid transparent;
+				width: 100%;
+				&>div.post-layout{
+					display: table-cell;
+					border-bottom: 30px solid transparent;
+				}
+				div.post-info{
+					width: 16%;
+					padding: 0 1% 0 0;
+					border-right: 1px solid @primary-yellow;
+					span{
+						display: block;
+						font-size: 0.875em; //14/16
+						text-align: right;
+						&.date{
+							background: @primary-yellow;
+							padding: 1% 4% .5%;
+							color: @primary-green;
+							text-align: left;
+							.border-radius(4px);
+						}
+						&.author{
+							margin-top: 10px;
+							.brandon-stack;
+							text-transform: uppercase;
+							color: @primary-green;
+						}
+						&.tags{
+							font-size: 0.75em; //12/16
+							margin-top: 10px;
+						}
+					}
+				}
+				div.post-content{
+					padding-left: 2%;
+					&>h4{
+						font-size: 1.25em;  //20/16
+						margin-top: 0px;
+					}
+				}
+			}
+		}
+	}
+}
+
+div.single-post{
+	div.post-layout{
+		display: table-cell;
+		border-bottom: 30px solid transparent;
+	}
+	div.post-info{
+		width: 16%;
+		padding: 0 1% 0 0;
+		border-right: 1px solid @primary-yellow;
+		&>span{
+			display: block;
+			font-size: 0.875em; //14/16
+			text-align: right;
+			&.date{
+				background: @primary-yellow;
+				padding: 1% 4% .5%;
+				color: @primary-green;
+				text-align: left;
+				.border-radius(4px);
+			}
+			&.author{
+				margin-top: 10px;
+				.brandon-stack;
+				text-transform: uppercase;
+				color: @primary-green;
+			}
+			&.tags{
+				font-size: 0.75em; //12/16
+				margin-top: 10px;
+			}
+		}
+		div.sharing-utils{
+			padding-top: 30px;
+			text-align: right;
+			div.addthis_toolbox{
+				width: 32px;
+				float: right;
+			}
+		}
+	}
+	div.post-content{
+		padding-left: 2%;
+		&>h4{
+			font-size: 1.25em;  //20/16
+		}
+	}
+}
+
+aside.blog-utils{
+	div.inner-wrap{
+		padding-top: 70px;
+		&>h4{
+			color: @primary-green;
+		}
+	}
+}

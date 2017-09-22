@@ -1,0 +1,10 @@
+table_name: cms_page_content
+registry:
+  - id
+  - created_at
+  - page_detail_id: { type: int, allow_null: false }
+  - revision: { type: int, allow_null: false }
+  - content_type: { type: varchar, length: 64, allow_null: false }
+  - content_code: { type: varchar, length: 64, allow_null: false }
+  - content_key: { type: varchar, length: 64, allow_null: false }
+  - content_value: { type: text, allow_null: true }

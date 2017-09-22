@@ -1,0 +1,28 @@
+title: 'Burger'
+desc: 'A hamburger theme'
+code: 'burger'
+preview_image: '/designs/burger/preview.png'
+layout: multiple
+default_logo: http://placehold.it/275x100
+is_public: true
+page_templates:
+    - home:
+        - slideshow: { code: slideshow, desc: 'Slideshow' } # Need to be able to use two text areas and an image on each slide
+        - image: { code: fmi, desc: 'Featured menu item image', caption_editor: 'textarea', caption_editor_height: 50, has_caption: true, hint: 'Will be resized and cropped to 265x194', crop_height: 194, crop_width: 265, height: 120, editor: 'ckeditor' }
+        - text: { code: left_head, desc: 'Left column title', hint: ''}
+        - text: { code: left_text, desc: 'Left column content', hint: ''}
+        - text: { code: hours_text, desc: 'Hours', editor: 'ckeditor', hint: 'Pressing Enter will create dividing lines; use Shift-Enter to avoid this'} # TEAGAN: Edit CSS so that every p in the menu block has a border-bottom 
+    # - menu:
+    #     - menu: { code: menu, desc: 'Menu', hint: '' }
+    # - about:
+    #     - text: { code: about_text, desc: 'Content', hint: '' }
+    #     - employees: { code: about_employees, desc: 'Employees', hint: '' }
+    # - events:
+    #     - event: { code: event, desc: 'Event', hint: '' }
+    #     - text: { code: event_text, desc: 'Content', hint: '' }
+    # - catering:
+    #     - text: { code: catering_text, desc: 'Content', hint: '' }
+    # - directions:
+    #     - text: { code: directions_text, desc: 'Directions', hint: '' }
+    #     - text: { code: parking_text, desc: 'Parking Information', hint: '' }
+    #     - text: { code: hours_text2, desc:  'Hours', hint: ''}

@@ -1,0 +1,14 @@
+table_name: cms_event
+registry:
+  - id
+  - created_at
+  - updated_at
+  - title: { type: varchar, length: 256, allow_null: true }
+  - location: { type: varchar, length: 256, allow_null: true }
+  - description: { type: varchar, length: 2048, allow_null: true }
+  - start_datetime: { type: datetime, allow_null: true }
+  - end_datetime: { type: datetime, allow_null: true }
+  - repeating: { type: varchar, length: 2048, allow_null: true }
+  - is_deleted: { type: boolean, allow_null: true }
+  - parent: { type: int, allow_null: true }
+  - is_published: { type: int, length: 1, allow_null: true }

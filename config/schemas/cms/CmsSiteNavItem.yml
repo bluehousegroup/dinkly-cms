@@ -1,0 +1,6 @@
+table_name: cms_site_nav_item
+registry:
+  - id
+  - created_at
+  - parent_id: { type: int, allow_null: true }
+  - position: { type: int, allow_null: false }

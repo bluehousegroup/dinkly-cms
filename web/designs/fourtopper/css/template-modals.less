@@ -1,0 +1,327 @@
+/*!
+ * Bootstrap Modal
+ *
+ * Copyright Jordan Schroter
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
+
+.modal-open {
+	overflow: hidden;
+}
+
+
+/* add a scroll bar to stop page from jerking around */
+.modal-open.page-overflow .page-container,
+.modal-open.page-overflow .page-container .navbar-fixed-top,
+.modal-open.page-overflow .page-container .navbar-fixed-bottom,
+.modal-open.page-overflow .modal-scrollable {
+	overflow-y: scroll;
+}
+
+@media (max-width: 979px) {
+	.modal-open.page-overflow .page-container .navbar-fixed-top,
+	.modal-open.page-overflow .page-container .navbar-fixed-bottom  {
+		overflow-y: visible;
+	}
+}
+
+
+.modal-scrollable {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: auto;
+}
+
+.modal {
+	outline: none;
+	position: fixed;
+	margin-top: 0;
+	top: 50%;
+	overflow: visible; /* allow content to popup out (i.e tooltips) */
+}
+
+.modal.fade {
+	top: -100%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;	
+	   -moz-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+	     -o-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+	        transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+}
+
+.modal.fade.in {
+	top: 50%;
+}
+
+.modal-body {
+	max-height: none;
+	overflow: visible;
+}
+
+.modal.modal-absolute {
+	position: absolute;
+	z-index: 950;
+}
+
+.modal .loading-mask {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #fff;
+	border-radius: 6px;
+}
+
+.modal-backdrop.modal-absolute{
+	position: absolute;
+	z-index: 940;
+}
+
+.modal-backdrop, 
+.modal-backdrop.fade.in{
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	background: #fff;
+}
+
+.modal.container {
+  width: 940px;
+  margin-left: -470px;
+}
+
+/* Modal Overflow */
+
+.modal-overflow.modal {
+	top: 1%;
+}
+
+.modal-overflow.modal.fade {
+	top: -100%;
+}
+
+.modal-overflow.modal.fade.in {
+	top: 1%;
+}
+
+.modal-overflow .modal-body {
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* Responsive */
+
+@media (min-width: 1200px) {
+	.modal.container {
+		width: 1170px;
+		margin-left: -585px;
+	}
+}
+
+@media (max-width: 979px) {
+	.modal, 
+	.modal.container,
+	.modal.modal-overflow 	{
+		top: 1%;
+		right: 1%;
+		left: 1%;
+		bottom: auto;
+		width: auto !important;
+		height: auto !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	
+	.modal.fade.in, 
+	.modal.container.fade.in,
+	.modal.modal-overflow.fade.in {
+		top: 1%;
+		bottom: auto;
+	}
+	
+	.modal-body,
+	.modal-overflow .modal-body {
+		position: static;
+		margin: 0;
+		height: auto !important;
+		max-height: none !important;
+		overflow: visible !important;
+	}
+	
+	.modal-footer,
+	.modal-overflow .modal-footer {
+		position: static;
+	}
+}
+
+.loading-spinner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -12px 0 0 -12px;
+}
+
+/*
+Animate.css - http://daneden.me/animate
+Licensed under the ☺ license (http://licence.visualidiot.com/)
+
+Copyright (c) 2012 Dan Eden*/
+
+.animated {
+	-webkit-animation-duration: 1s;
+	   -moz-animation-duration: 1s;
+	     -o-animation-duration: 1s;
+	        animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	   -moz-animation-fill-mode: both;
+	     -o-animation-fill-mode: both;
+	        animation-fill-mode: both;
+}
+
+@-webkit-keyframes shake {
+	0%, 100% {-webkit-transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {-webkit-transform: translateX(10px);}
+}
+
+@-moz-keyframes shake {
+	0%, 100% {-moz-transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {-moz-transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {-moz-transform: translateX(10px);}
+}
+
+@-o-keyframes shake {
+	0%, 100% {-o-transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {-o-transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {-o-transform: translateX(10px);}
+}
+
+@keyframes shake {
+	0%, 100% {transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {transform: translateX(10px);}
+}
+
+.shake {
+	-webkit-animation-name: shake;
+	-moz-animation-name: shake;
+	-o-animation-name: shake;
+	animation-name: shake;
+}
+
+/*
+ *
+ * | Our Styles |
+ *
+*/
+
+.modal{
+	text-align: center;
+	.box-shadow(none);
+	border: none;
+	padding-bottom: 10px;
+	&#beta-signup-modal,&#contact-form-modal, &#submission-success-modal{
+		background: transparent;
+		color: @white;
+		div.modal-header{
+			position: static;
+			padding: 0px;
+			background: transparent;
+			button.close{
+				color: @white;
+				opacity: 1;
+				padding-bottom: 10px;
+			}
+		}
+		.modal-body{
+			p{text-align: center;}
+			h3{
+				text-align: center;
+			}
+			text-align: left;
+		}
+		.modal-footer{
+			background: transparent;
+			border: none;
+			.box-shadow(none);
+		}
+	}
+	&#catch-modal{
+		.modal-body{
+			text-align: left;
+			.btn.green{
+				margin-top: 15px;
+			}
+		}
+	}
+	div.modal-header{
+		border-bottom: none;
+		button.close{
+			font-size: .8em;
+			margin: 0px;
+			width: auto;
+			padding: 0;
+		}
+	}
+	div.modal-body{
+		padding: 0px 6.4516129% 10px;
+		clear: both;
+		h3{
+			text-transform: uppercase;
+			font-size: 1.6875em;  //27/16
+		}
+		.btn.green{
+			line-height: 1;
+			font-size: 1.125em; //18/16
+			text-transform: uppercase;
+			padding: 16px 18px 12px 18px;
+		}
+		input.text, textarea{
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+			width: 100%;
+			padding: 9px;
+			border: 1px solid #333;
+			.border-radius(3px);
+			font-size: 1.5em;
+			height: auto;
+			line-height: 1.5;
+			margin: 5px 0;
+		}
+		form .btn.green{
+			margin-top: 5px;
+			float: right;
+		}
+	}
+	div.modal-footer{
+		text-align: center;
+		background: @white;
+		border-top: none;
+		padding-top: 0px;
+		.btn.green{
+			line-height: 1;
+			font-size: 1.125em; //18/16
+			text-transform: uppercase;
+			padding: 16px 18px 12px 18px;
+			float: right;
+		}
+	}
+}
+
+div.modal-backdrop.fade{
+	background: #000;
+	background: -webkit-gradient(radial, 50% 25%, 0, 50% 25%, 800, from(rgba(2, 35, 42, 0.85)), to(#000000)) transparent;
+  background: -moz-radial-gradient(center 45deg, circle cover, rgba(2, 35, 42, 0.85) 0%, #000000 100%) transparent;
+  &.in{
+  	background: #000;
+		background: -webkit-gradient(radial, 50% 25%, 0, 50% 25%, 800, from(rgba(2, 35, 42, 0.85)), to(#000000)) transparent;
+	  background: -moz-radial-gradient(center 45deg, circle cover, rgba(2, 35, 42, 0.85) 0%, #000000 100%) transparent;
+  	opacity: 1;
+	  filter: alpha(opacity=100);
+  }
+}

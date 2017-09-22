@@ -1,0 +1,1 @@
+<?php include_once('../web/designs/'.$settings['design_code'].'/html/includes/footer.php'); ?>

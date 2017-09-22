@@ -1,0 +1,60 @@
+.thanks, .headstart {
+	color:@primary-green;
+	margin:0 auto;
+	max-width:608px;
+	text-align:center;
+	h2 {
+		color:@primary-green;
+		font-size:36/16em;
+		line-height:1;
+		margin:0 0 10px;
+		text-transform:uppercase;
+	}
+	p {
+		color:@primary-green;
+		font-size:18/16em;
+		line-height:24/18;
+	}
+}
+
+.thanks {
+	padding:50px 20px 30px;
+}
+
+.headstart {
+	background:@white url(../img/pattern_yellowscallop.png) 0 100% repeat-x;
+	.border-radius(3px);
+	.pad {
+		padding:30px 50px;
+		border:3px solid @primary-green;
+		.border-radius(3px);
+	}
+	h2 {
+		margin:0 0 20px;
+	}
+	p {
+		font-size:21/16em;
+		line-height:1.2;
+	}
+	img {
+		max-width:290px;
+		margin:0 0 18px;
+	}
+}
+
+@media (max-width:648px) {
+	.headstart {
+		margin:0 20px;
+	}
+}
+
+@media (max-width:400px) {
+	.headstart {
+		p {
+			font-size:18/16em;
+		}
+		img {
+			max-width:100%;
+		}
+	}
+}

@@ -1,0 +1,8 @@
+table_name: cms_activity_log
+registry:
+  - id
+  - created_at
+  - entry_type: { type: varchar, length: 45, allow_null: false }
+  - user_id: { type: int, allow_null: true }
+  - event: { type: varchar, length: 255, allow_null: false }
+  - data: { type: text, allow_null: false }

@@ -1,0 +1,168 @@
+.pricing-features {
+	max-width:797px;
+	margin:0 auto;
+	.tier {
+		float:left;
+		width:50%;
+		margin-top:71px;
+		text-align:center;
+		h2 {
+			background:transparent none 50% -20px no-repeat;
+			color:@primary-green;
+			font-size:66/16em;
+			margin:0;
+			padding:116px 0 0;
+			line-height:1;
+			span {
+				font-size:30/66em;
+			}
+			a {
+				display:block;
+				font-size:18/66em;
+				text-transform:uppercase;
+				max-width:202px;
+				margin:10px auto 0;
+			}
+		}
+		h3 {
+			background-color:@primary-blue;
+			color:@white;
+			font-size:21/16em;
+			height:39px;
+			line-height:2.2;
+			margin:-39px 0 0;
+			text-transform:uppercase;
+		}
+		ul, li {
+			color:#777;
+			font-size:18/16em;
+			line-height:1.2;
+			list-style:none;
+			margin:0;
+			-webkit-font-smoothing:antialiased;
+			strong {
+				color:@primary-green;
+			}
+		}
+		ul {
+			margin:22px 0 0;
+			li {
+				margin:0 0 18px;
+			}
+		}
+		.inner {
+			border:1px solid #d0d0d0;
+			min-height:575px;
+			padding:20px;
+		}
+	}
+	.basic {
+		h2 {
+			background-image:url(../img/basic-tier.png);
+		}
+		.inner {
+			background:#e9f8fc none no-repeat;
+			border-right:0;
+		}
+	}
+	.premium {
+		h2 {
+			background-image:url(../img/premium-tier.png);
+		}
+		.inner {
+			background:transparent url(../img/pricing-popular-bg.png) 0 0 repeat;
+			border-color:@primary-blue;
+		}
+	}
+}
+
+.questions {
+	max-width:1073px;
+	margin:60px auto 0;
+	.question {
+		float:left;
+		font-size:18/16em;
+		width:50%;
+		h3 {
+			font-size:24/18em;
+			line-height:1.2;
+			text-transform:uppercase;
+		}
+		p {
+			line-height:25/18;
+		}
+		.pad {
+			padding:0 20px 40px 40px;
+		}
+		&.first {
+			.pad {
+				padding:0 40px 40px 20px;
+			}
+		}
+	}
+}
+
+@media(max-width: 767px){
+	.pricing-features {
+		padding:0 20px;
+		.tier {
+			float:none;
+			margin:30px auto 0;
+			max-width:360px;
+			width:100%;
+			ul {
+				margin:18px 0 0;
+				li {
+					margin:0 0 10px;
+				}
+			}
+			.inner {
+				min-height:0;
+			}
+		}
+		.basic {
+			.inner {
+				border-right:1px solid #d0d0d0;
+			}
+		}
+		.premium {
+			h3 {
+				margin:0;
+			}
+		}
+	}
+	.questions {
+		margin-top:30px;
+		.question {
+			float:none;
+			width:auto;
+			&.first, &.last {
+				.pad {
+					padding:20px 20px 0;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width:480px) {
+	.pricing-features {
+		.tier {
+			max-width:100%;
+		}
+	}
+}
+
+@media (max-width:380px) {
+	.pricing-features {
+		.tier {
+			h2 {
+				background:transparent none;
+				padding:10px 0 0;
+				a {
+					max-width:100%;
+				}
+			}
+		}
+	}
+}

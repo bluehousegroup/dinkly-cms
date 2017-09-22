@@ -1,0 +1,13 @@
+table_name: cms_blog_post
+registry:
+  - id
+  - created_at
+  - updated_at
+  - post_date: { type: datetime, allow_null: false }
+  - author: { type: varchar, length: 200, allow_null: false }
+  - content: { type: longtext, allow_null: false }
+  - title: { type: text, allow_null: false }
+  - post_name: { type: varchar, length: 200, allow_null: false }
+  - excerpt: { type: text, allow_null: false }
+  - status: { type: varchar, length: 20, allow_null: false }
+  - post_type: { type: varchar, length: 20, allow_null: false }

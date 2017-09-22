@@ -1,0 +1,162 @@
+.get-started-form {
+	max-width:1318px;
+	padding:55px 0 0;
+	margin:0 auto;
+	.col {
+		float:left;
+		width:50%;
+		.pad {
+			padding:0 40px;
+		}
+	}
+	.steps {
+		float:right;
+		h3 {
+			color:@primary-green;
+			font-size:24/16em;
+			line-height:28/24;
+			margin:0 0 22px;
+			text-transform:uppercase;
+		}
+		ol,ul {
+			color:@primary-green;
+			font-size:21/16em;
+			li {
+				line-height:25/21;
+				margin:0 0 22px;
+			}
+		}
+	}
+	.start-form {
+		.form-actions {
+			background:transparent;
+			border:0;
+			padding:0;
+			margin:0;
+			text-align:right;
+			p {
+				margin:18px 0 0;
+			}
+		}
+		.control-label {
+			font-size:21/16em;
+			font-weight:700;
+			height:50px;
+			line-height:56/21;
+		}
+		form {
+			margin:0;
+		}
+		input {
+			.proxima-stack();
+			font-size:21/16em;
+			height:56px;
+			line-height:1;
+			padding:12px 18px;
+			margin-bottom:20px;
+		}
+	}
+}
+
+@media (max-width:1170px) {
+	.get-started-form {
+		.start-form {
+			.control-label {
+				width:120px;
+			}
+			.controls {
+				margin-left:140px;
+			}
+		}
+	}
+}
+
+@media (max-width:1024px) {
+	.get-started-form {
+		.col {
+			.pad {
+				padding:0 20px;
+			}
+		}
+		.start-form {
+			.control-label {
+				width:100px;
+			}
+			.controls {
+				margin-left:120px;
+			}
+		}
+	}
+}
+
+@media (max-width:800px) {
+	.get-started-form {
+		padding:35px 0 0;
+		.col {
+			float:none;
+			margin:0 auto;
+			max-width:480px;
+			width:auto;
+		}
+		.steps {
+			margin:0 auto 48px;
+			text-align:center;
+			ol {
+				counter-reset:item;
+				margin-left:0;
+				li {
+					counter-increment:item;
+					list-style:none;
+					&:before {
+						content:counter(item)'. ';
+					}
+				}
+			}
+		}
+		.start-form {
+			.form-actions {
+				text-align:left;
+				padding-left:120px;
+			}
+		}
+	}
+}
+
+@media (max-width:480px) {
+	.get-started-form {
+		.steps {
+			text-align:left;
+			h3 {
+				text-align:center;
+			}
+			ol {
+				font-size:18/16em;
+				margin-left:25px;
+				li {
+					list-style:decimal;
+					&:before {
+						content:'';
+					}
+				}
+			}
+		}
+		.start-form {
+			.form-actions {
+				text-align:center;
+				padding:0;
+			}
+			.control-label {
+				font-size:18/16em;
+				height:auto;
+				line-height:1;
+				width:auto;
+			}
+			.controls {
+				margin-left:0;
+			}
+			input {
+				margin-bottom:0;
+			}
+		}
+	}
+}

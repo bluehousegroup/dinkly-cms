@@ -1,0 +1,87 @@
+title: 'FourTopper'
+desc: 'FourTopper Marketing Site'
+code: 'fourtopper'
+preview_image: 'preview.png'
+layout: multiple 
+is_public: false
+default_logo: http://placehold.it/400x200
+page_templates:
+    - home:
+      - text: {code: banner_line_1, desc: 'Banner Line 1', hint: ''}
+      - text: {code: banner_line_2, desc: 'Banner Line 2', hint: ''}
+      - text: {code: banner_line_3, desc: 'Banner Line 3', hint: ''}
+      - text: {code: connect_text, desc: 'Connect Text', hint: ''}
+      - text: {code: control_text, desc: 'Control Text', hint: ''}
+      - text: {code: cash_in_text, desc: 'Cash In Text', hint: ''}
+      - text: {code: guarantee_text, desc: 'Guarantee Text', hint: ''}
+      - image: {code: 'testimonial_image', desc: 'Testimonial Image', has_caption: false}
+      - text: {code: 'testimonial_text', desc: 'Testimonial Text', hint: ''}
+      - text: {code: 'testimonial_attribution', desc: 'Testimonial Attribution', hint: ''}
+    - tour:
+      - text: {code: line_1_heading, desc: 'Line 1 Heading', hint: ''}
+      - image: {code: line_1_image, desc: 'Line 1 Image', has_caption: false}
+      - text: {code: line_1_text, desc: 'Line 1 Text', hint: ''}
+      - text: {code: line_2_heading, desc: 'Line 2 Heading', hint: ''}
+      - image: {code: line_2_image, desc: 'Line 2 Image', has_caption: false}
+      - text: {code: line_2_text, desc: 'Line 2 Text', hint: ''}
+      - text: {code: line_3_heading, desc: 'Line 3 Heading', hint: ''}
+      - image: {code: line_3_image, desc: 'Line 3 Image', has_caption: false}
+      - text: {code: line_3_text, desc: 'Line 3 Text', hint: ''}
+      - text: {code: line_4_heading, desc: 'Line 4 Heading', hint: ''}
+      - image: {code: line_4_image, desc: 'Line 4 Image', has_caption: false}
+      - text: {code: line_4_text, desc: 'Line 4 Text', hint: ''}
+      - text: {code: line_5_heading, desc: 'Line 5 Heading', hint: ''}
+      - image: {code: line_5_image, desc: 'Line 5 Image', has_caption: false}
+      - text: {code: line_5_text, desc: 'Line 5 Text', hint: ''}
+    - design:
+    - get_started:
+    - signup_thanks:
+    - pricing:
+      - text: {code: block_1_heading, desc: 'Block 1 Heading', hint: ''}
+      - text: {code: block_1_text, desc: 'Block 1 Text', hint: ''}
+      - text: {code: block_2_heading, desc: 'Block 2 Heading', hint: ''}
+      - text: {code: block_2_text, desc: 'Block 2 Text', hint: ''}
+      - text: {code: block_3_heading, desc: 'Block 3 Heading', hint: ''}
+      - text: {code: block_3_text, desc: 'Block 3 Text', hint: ''}
+      - text: {code: block_4_heading, desc: 'Block 4 Heading', hint: ''}
+      - text: {code: block_4_text, desc: 'Block 4 Text', hint: ''}
+    - meet_us:
+      - employees: {code: employees, desc: 'Employees', hint: ''}
+    - custom1:
+        - image: { code: custom1_image, desc: 'Banner Image', hint: '' }
+        - text: { code: custom1_content1, desc: 'Content Area 1', hint: '' }
+        - text: { code: custom1_content2, desc: 'Content Area 2', hint: '' }
+    - custom2:
+        - image: { code: custom2_image1, desc: 'Banner Image Left', hint: '' }
+        - image: { code: custom2_image2, desc: 'Banner Image Right', hint: '' }
+        - text: { code: custom2_content1, desc: 'Content Area 1', hint: '' }
+        - text: { code: custom2_content2, desc: 'Content Area 2', hint: '' }
+    - custom3:
+        - image: { code: custom3_image, desc: 'Banner Image', hint: ''}
+        - text: { code: custom3_content_left, desc: 'Content Area 1 (text left)', hint: '' }
+        - image: { code: custom3_image_right, desc: 'Content Area 1 (image right)', hint: '' }
+        - text: { code: custom3_content2, desc: 'Content Area 2', hint: '' }
+    - custom4:
+        - text: { code: custom4_left_content1, desc: 'Left Column Content Area 1', hint: '' }
+        - text: { code: custom4_left_content2, desc: 'Left Column Content Area 2', hint: '' }
+        - image: { code: custom4_right_image, desc: 'Right Column Image', hint: '' }
+        - text: { code: custom4_right_content1, desc: 'Right Column Content Area 1', hint: '' }
+    - custom5:
+        - image: { code: custom5_image, desc: 'Banner Image', hint: '' }
+        - text: { code: custom5_content, desc: 'Content Area', hint: ''}
+    - custom6:
+        - text: { code: custom6_content1, desc: 'Content Area 1', hint: '' }
+        - image: { code: custom6_image, desc: 'Sandwiched Image', hint: '' }
+        - text: { code: custom6_content2, desc: 'Content Area 2', hint: '' }
+    - custom7:
+        - text: { code: custom7_content1, desc: 'Content Area 1', hint: '' }
+        - image: { code: custom7_image_left, desc: 'Content Area 2 (image left)', hint: '' }
+        - text: { code: custom7_content_left, desc: 'Content Area 2 (content right)', hint: '' }
+        - text: { code: custom7_content_right, desc: 'Content Area 3', hint: '' }
+    - custom8:
+        - text: { code: custom8_content1, desc: 'Content Area 1', hint: '' }
+        - text: { code: custom8_content2, desc: 'Content Area 2', hint: '' }
+        - text: { code: custom8_content3, desc: 'Content Area 3', hint: '' }
+    - blog:
+    - landingpage1:
+    - themelandingpage:

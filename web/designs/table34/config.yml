@@ -1,0 +1,53 @@
+title: 'Table34'
+desc: 'Our first theme'
+code: 'table34'
+preview_image: '/designs/table34/preview.png'
+layout: multiple
+default_logo: http://placehold.it/400x200
+is_public: true
+page_templates:
+    - home:
+        - slideshow: { code: slideshow, desc: 'Slideshow' }
+        - image: { code: image1, desc: 'Left column image', has_caption: true, hint: '' }
+        - text: { code: left_text, desc: 'Left column content', hint: '', editor_height: 120, editor: 'ckeditor' }
+        - text: { code: upcomingevents_text, desc: 'Upcoming events', hint: '', editor_height: 120, editor: 'ckeditor' }
+        - text: { code: specials_text, desc: "Today's specials", hint: '', editor_height: 120, editor: 'ckeditor' }
+        - text: { code: hours_text, desc: 'Hours', hint: '', editor_height: 120, editor: 'ckeditor' }
+    - about:
+        - image: { code: about_image, has_caption: false, desc: 'Top Image', hint: 'Image will be cropped and resized to fit 1200px wide by 480px high', crop_height: 480, crop_width: 1200 }
+        - text: { code: about_text, desc: 'Content', hint: '', editor_height: 120, editor: 'ckeditor' }
+        - employees: { code: about_employees, desc: 'Employees', hint: '' }
+    - events:
+        - image: { code: events_image, has_caption: false, desc: 'Top Image', hint: 'Image will be cropped and resized to fit 1200px wide by 480px high', crop_height: 480, crop_width: 1200 }
+        - event: { code: event, desc: 'Event', hint: '' }
+        - text: { code: event_text, desc: 'Content', hint: '', editor_height: 120, editor: 'ckeditor' }
+    - directions:
+        - text: { code: directions_text, desc: 'Directions', hint: '', editor_height: 80 }
+        - text: { code: parking_text, desc: 'Parking Information', hint: '', editor_height: 80 }
+        - text: { code: hours_text2, desc:  'Hours', hint: '', editor_height: 80 }
+    - custom1:
+        - image: { code: custom1_image, has_caption: false, desc: 'Top Image', hint: 'Image will be cropped and resized to fit 1200px wide by 480px high', crop_height: 480, crop_width: 1200 }
+        - text: { code: custom1_content1, desc: 'Main Content', hint: '', editor_height: 120, editor: 'ckeditor' }
+    - custom2:
+        - image: { code: custom2_image1, has_caption: false, desc: 'Top Left Image', hint: 'Image will be cropped and resized to fit 480px by 480px', crop_height: 480, crop_width: 480 }
+        - image: { code: custom2_image2, has_caption: false, desc: 'Top Right Image', hint: 'Image will be cropped and resized to fit 480px by 480px', crop_height: 480, crop_width: 480 }
+        - text: { code: custom2_content1, desc: 'Main Content', hint: '', editor_height: 120, editor: 'ckeditor' }
+    - custom3:
+        - image: { code: custom3_image, has_caption: false, desc: 'Top Image', hint: 'Image will be cropped and resized to fit 1200px wide by 480px high', crop_height: 480, crop_width: 1200 }
+        - image: { code: custom3_image_right, has_caption: false, desc: 'Right hand Image', hint: 'Image will be cropped and resized to fit 480px wide by 480px high and will float to the right of the content below', crop_width: 480, crop_height: 480 }
+        - text: { code: custom3_content, desc: 'Main Content', hint: '', editor_height: 120, editor: 'ckeditor' }
+    - custom4:
+        - text: { code: custom4_left_content1, desc: 'Left Column Content', hint: '', editor_height: 120, editor: 'ckeditor' }
+        - image: { code: custom4_right_image, has_caption: false, desc: 'Right Column Image', hint: 'Image will be resized to fit 540px wide', crop_width: 540 }
+        - text: { code: custom4_right_content1, desc: 'Right Column Content', hint: '', editor_height: 120, editor: 'ckeditor' }
+    - custom5:
+        - text: { code: custom5_content1, desc: 'Top Content', hint: 'Displayed above image', editor_height: 120, editor: 'ckeditor' }
+        - image: { code: custom5_image, has_caption: false, desc: 'Middle Image', hint: 'Image will be cropped and resized to fit 1200px wide by 480px high', crop_height: 480, crop_width: 1200 }
+        - text: { code: custom5_content2, desc: 'Bottom Content', hint: 'Displayed below image', editor_height: 120, editor: 'ckeditor' }
+    - custom6:
+        - text: { code: custom6_content1, desc: 'Top Content', hint: '', editor_height: 120, editor: 'ckeditor' }
+        - image: { code: custom6_image_left, has_caption: false, desc: 'Left Column Image', hint: 'Image will be resized to fit 540px wide', crop_width: 540 }
+        - text: { code: custom6_content_left, desc: 'Left Column Content', hint: '', editor_height: 120, editor: 'ckeditor' }
+        - text: { code: custom6_content_right, desc: 'Right Column Content', hint: '', editor_height: 120, editor: 'ckeditor' }
+    - custom7:
+        - text: { code: custom7_content, desc: 'Main Content', hint: '', editor_height: 160, editor: 'ckeditor' }

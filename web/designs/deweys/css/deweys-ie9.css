@@ -1,0 +1,13 @@
+.responsive-map {
+  height: 415px;
+}
+@media (max-width: 767px) {
+  .responsive-map {
+    height: 360px;
+  }
+}
+@media (max-width: 480px) {
+  .responsive-map {
+    height: 240px;
+  }
+}

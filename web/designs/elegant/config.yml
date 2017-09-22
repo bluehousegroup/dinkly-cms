@@ -1,0 +1,30 @@
+title: 'Elegant'
+desc: 'An elegant theme'
+code: 'elegant'
+preview_image: '/designs/elegant/preview.png'
+layout: multiple
+default_logo: http://placehold.it/275x100
+is_public: true
+page_templates:
+    - home:
+        - text: { code: specials_text, desc: "Today's specials", hint: '', height: 120, editor: 'ckeditor' }
+        - text: { code: home_about_header_text, desc: 'About column header', hint: '', editor: 'text' }
+        - text: { code: home_about_text, desc: 'About column content', hint: '', height: 120, editor: 'ckeditor' }
+        - text: { code: home_hours_text, desc: 'Hours', hint: 'Pressing Enter will create dividing lines; use Shift-Enter to avoid this'} # TEAGAN: Edit CSS so that every p in the menu block has a border-bottom 
+    - menu:
+        - menu: { code: menu, desc: 'Menu', hint: '' }
+    - about:
+        - text: { code: about_about_text, desc: 'Content', hint: '' }
+        - text: { code: about_about_header_text, desc: 'Heading', hint: '' }
+        - image: { code: about_image, has_caption: false, desc: 'Top Image', hint: 'Image will be cropped and resized with a height of 400px', crop_height: 400, crop_width: 1200 }
+    - events:
+        - event: { code: event, desc: 'Event', hint: '' }
+        - text: { code: events_header_text, desc: 'Heading', hint: '' }
+        - text: { code: events_text, desc: 'Content', hint: '' }
+    - catering:
+        - image: { code: catering_image, has_caption: false, desc: 'Top Image', hint: 'Image will be cropped and resized with a height of 400px', crop_height: 400, crop_width: 1200 }
+        - text: { code: catering_header_text, desc: 'Heading', hint: '' }
+        - text: { code: catering_text, desc: 'Content', hint: '' }
+    - directions:
+        - text: { code: directions_text, desc: 'Directions', hint: '' }
+        - text: { code: directions_hours_text, desc:  'Hours', hint: ''}

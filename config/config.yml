@@ -1,0 +1,46 @@
+#It's recommended that you copy this file into a new file named 'config.yml' to work with as a template
+
+global:
+    settings:
+        dinkly_version: "3.20"
+        time_format: h:i a
+        languages:
+            english:
+                - en
+                - en_US
+            french: 
+                - fr
+                - fr_FR
+
+    apps:
+        cms_site:
+            base_href: /
+            default_app: true
+            default_module: home
+            enabled: true
+            app_name: Dinkly CMS Site
+
+        cms_admin:
+            base_href: /cms_admin
+            default_module: home
+            enabled: true
+            app_name: Dinkly CMS Site Admin
+
+    plugins:
+
+    databases: #First entry will be default
+        cms:
+            host: localhost
+            user: root
+            pass: root
+            name: dinkly_cms
+
+dev:
+    #Put dev environment overrides here
+    settings:
+
+    apps:
+        
+    plugins:
+
+    databases:

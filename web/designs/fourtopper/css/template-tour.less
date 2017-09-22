@@ -1,0 +1,33 @@
+section.tour{
+	.style-wrap{
+		padding-top: 50px;
+	}
+	.feature {
+	  .clearfix;
+	  padding:0 0 80px;
+	  .feature-image {
+	    text-align:center;
+	  }
+	  .feature-content {
+	  	box-sizing: border-box;
+	    padding-top:2em;
+	    padding: 2em 0px 0px;
+	    h2{
+				color: @primary-green;
+				text-shadow: 1px 1px 1px rgba(117,130,132,.4);
+	    }
+	  }
+	  // .feature-image + .feature-content{
+	  // 	padding-left: 0px;
+	  // }
+	}
+}
+
+@media(max-width: 1238px){
+	div.container-fluid{
+		padding: 0px 0px;
+		.feature .feature-content{
+			padding: 2em 10px 0;
+		}
+	}
+}

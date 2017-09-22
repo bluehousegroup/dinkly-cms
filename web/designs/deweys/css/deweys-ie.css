@@ -1,0 +1,10 @@
+.container-fluid {
+  width: 820px;
+  min-width: 820px;
+}
+.responsive-map {
+  height: 415px;
+}
+.section-content .image-wrap img {
+  border: 0;
+}

@@ -1,0 +1,19 @@
+table_name: cms_page_detail
+registry:
+  - id
+  - created_at
+  - updated_at
+  - site_nav_item_id: { type: int, allow_null: false }
+  - slug: { type: varchar, length: 512, allow_null: false }
+  - page_template_code: { type: varchar, length: 64, allow_null: false }
+  - title: { type: varchar, length: 256, allow_null: false }
+  - nav_label: { type: varchar, length: 256, allow_null: false }
+  - meta_title: { type: varchar, length: 512, allow_null: true }
+  - meta_keywords: { type: varchar, length: 2000, allow_null: true }
+  - meta_description: { type: varchar, length: 5000, allow_null: true }
+  - is_current_draft: { type: boolean, allow_null: false }
+  - is_current_live: { type: boolean, allow_null: false }
+  - is_autosave: { type: boolean, allow_null: false }
+  - revision: { type: int, allow_null: false }
+  - is_deleted: { type: boolean, allow_null: false }
+  - is_enabled: { type: boolean, allow_null: false }
