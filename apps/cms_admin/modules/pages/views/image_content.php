@@ -5,10 +5,10 @@
 			<?php echo ($block->getHint()) ? '<p class="hint">'.$block->getHint().'</p>' : ''; ?>
 			<?php if(isset($content_index[$block->getCode()])): ?>
 				<?php if($content_index[$block->getCode()]->getThumbId() > 0): ?>
-				<img class="filedrag-preview image-content-image" src="/site_admin/pages/display_image/image_id/<?php echo $content_index[$block->getCode()]->getThumbId(); ?>">
+				<img class="filedrag-preview image-content-image" src="/cms_admin/pages/display_image/image_id/<?php echo $content_index[$block->getCode()]->getThumbId(); ?>">
 				<label class="filedrag-filename"><?php echo $content_index[$block->getCode()]->getFilename(); ?></label>
 				<?php else: ?>
-				<img class="filedrag-preview" src="/images/placeholder1.gif">
+				<img class="filedrag-preview" src="/img/placeholder1.gif">
 				<?php endif; ?>
 			<?php endif; ?>
 			<div>&nbsp;</div>

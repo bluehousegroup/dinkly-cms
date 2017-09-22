@@ -95,7 +95,7 @@ class AnalyticsController extends SiteAdminController
 					$_SESSION['token'] = $client->getAccessToken();
 					// $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
 					// header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
-					$this->loadModule('site_admin', 'analytics', 'default', true, true);
+					$this->loadModule('cms_admin', 'analytics', 'default', true, true);
 				}
 
 				if(isset($_SESSION['token']))

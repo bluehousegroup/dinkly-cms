@@ -1,7 +1,7 @@
 <div id="main" role="main">
 	<div id="content">
 		<div class="content-wrapper has-header">
-			<?php include('../apps/site_admin/layout/messaging.php'); ?>
+			<?php include('../apps/cms_admin/layout/messaging.php'); ?>
 			<div class="content-header clearfix">
 				<h2 class="pull-left">Pages <span class="loading" style="display: none;"></span></h2>
 				<div class="pull-right">
@@ -36,15 +36,15 @@
 						<p>Using design <strong><?php echo $page->getDesign()->getTitle(); ?></strong></p>
 						<ul class="nav nav-pills nav-stacked site-nav">
 							<?php foreach($site->getStructure(true) as $nav_item): ?>
-							<li id="<?php echo $nav_item->getPage()->getDetail()->getSiteNavItemId(); ?>" <?php echo ($nav_item->getPage()->getDetail()->getSiteNavItemId() == $page_id) ? 'class="active"' : ''; ?>><a href="/site_admin/pages/edit/page/<?php echo $nav_item->getPage()->getDetail()->getSiteNavItemId(); ?>"><?php echo $nav_item->getPage()->getDetail()->getNavLabel(); ?></a></li>
+							<li id="<?php echo $nav_item->getPage()->getDetail()->getSiteNavItemId(); ?>" <?php echo ($nav_item->getPage()->getDetail()->getSiteNavItemId() == $page_id) ? 'class="active"' : ''; ?>><a href="/cms_admin/pages/edit/page/<?php echo $nav_item->getPage()->getDetail()->getSiteNavItemId(); ?>"><?php echo $nav_item->getPage()->getDetail()->getNavLabel(); ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 					</div>
 					<!-- Revision History -->
-					<?php include('../apps/site_admin/modules/pages/views/revision_history.php'); ?>
+					<?php include('../apps/cms_admin/modules/pages/views/revision_history.php'); ?>
 				</div>
 
-				<form id="content-form" class="editor-form form-horizontal" action="/site_admin/pages/edit/page/<?php echo $parameters['page']; ?>" method="post" enctype="multipart/form-data">
+				<form id="content-form" class="editor-form form-horizontal" action="/cms_admin/pages/edit/page/<?php echo $parameters['page']; ?>" method="post" enctype="multipart/form-data">
 					<div class="content-editor scrollable">
 						<div class="pad">
 							<div class="content-tabs">
@@ -62,14 +62,14 @@
 									<div class="control-group">
 										<label for="" class="control-label"></label>
 										<div class="controls">
-											<a class="btn btn-large btn-primary" href="/site_admin/menu/"><i class="icon icon-edit"></i> Edit food menus</a>
+											<a class="btn btn-large btn-primary" href="/cms_admin/menu/"><i class="icon icon-edit"></i> Edit food menus</a>
 										</div>
 									</div>
 									<?php elseif($page->getTemplate()->getCode() == 'events'): ?>
 									<div class="control-group">
 										<label for="" class="control-label"></label>
 										<!-- <div class="controls">
-											<a class="btn btn-large btn-primary" href="/site_admin/events/"><i class="icon icon-edit"></i> Edit events</a>
+											<a class="btn btn-large btn-primary" href="/cms_admin/events/"><i class="icon icon-edit"></i> Edit events</a>
 										</div> -->
 									</div>
 									<?php endif; ?>
@@ -78,13 +78,13 @@
 									<?php if($template_content_blocks != array()): ?>
 										<?php foreach($template_content_blocks as $block): ?>
 											<?php if(get_class($block) == 'SlideshowContent'): ?>
-												<?php include('../apps/site_admin/modules/pages/views/slideshow_content.php'); ?>
+												<?php include('../apps/cms_admin/modules/pages/views/slideshow_content.php'); ?>
 											<?php elseif(get_class($block) == 'ImageContent'): ?>
-												<?php include('../apps/site_admin/modules/pages/views/image_content.php'); ?>
+												<?php include('../apps/cms_admin/modules/pages/views/image_content.php'); ?>
 											<?php elseif(get_class($block) == 'TextContent'): ?>	
-												<?php include('../apps/site_admin/modules/pages/views/text_content.php'); ?>
+												<?php include('../apps/cms_admin/modules/pages/views/text_content.php'); ?>
 											<?php elseif(get_class($block) == 'EmployeeContent'): ?>	
-												<?php include('../apps/site_admin/modules/pages/views/employee_content.php'); ?>
+												<?php include('../apps/cms_admin/modules/pages/views/employee_content.php'); ?>
 											<?php endif; ?>
 										<?php endforeach; ?>
 									<?php endif; ?>
@@ -94,7 +94,7 @@
 								</div>
 
 								<!-- Metadata -->
-								<?php include('../apps/site_admin/modules/pages/views/metadata.php'); ?>
+								<?php include('../apps/cms_admin/modules/pages/views/metadata.php'); ?>
 
 								<!-- History -->
 								 <div class="tab-pane" id="page-history">
@@ -107,8 +107,8 @@
 					<div class="content-editor-actions">
 						<div class="pad">
 							<button onclick="saveSubmit();" class="btn btn-primary save-button" data-loading-text="Saving...">Save Draft</button>
-							<a href="/site_admin/pages/edit/page/<?php echo $page_id; ?>/discarded/1" class="btn">Discard Changes</a>
-							<a href="#/site_admin/pages/delete/page/<?php echo $page_id; ?>" class="delete-page pull-right">Delete Page</a>
+							<a href="/cms_admin/pages/edit/page/<?php echo $page_id; ?>/discarded/1" class="btn">Discard Changes</a>
+							<a href="#/cms_admin/pages/delete/page/<?php echo $page_id; ?>" class="delete-page pull-right">Delete Page</a>
 						</div>
 					</div>
 					<!-- Live Preview -->
@@ -122,4 +122,4 @@
 </div>
 </div>
 <input type="hidden" name="page_id" id="page_id" value="<?php echo $page_id; ?>">
-<?php include('../apps/site_admin/modules/pages/views/javascript.php'); ?>
+<?php include('../apps/cms_admin/modules/pages/views/javascript.php'); ?>

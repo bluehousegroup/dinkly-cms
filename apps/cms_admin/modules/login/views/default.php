@@ -4,16 +4,10 @@
 			<div id="login" class="loginform">
 				<div class="pad">
 					<div  class="block-header form-header" style="text-align: center;">
-						<h4><?php echo (!$site->isNew()) ? $site->getName() . ' Site Admin' : Dinkly::getConfigValue('app_name', 'site_admin'); ?></h4>
+						<h4>Dinkly CMS Site Admin</h4>
 					</div>
-					<?php include_once('../apps/site_admin/layout/messaging.php'); ?>
+					<?php include_once('../apps/cms_admin/layout/messaging.php'); ?>
 					<form method="post" action="" class="form-vertical">
-						<div class="control-group">
-							<label for="domain" class="control-label"></label>
-							<div class="controls">
-								<input type="text" class="input-block-level" id="domain" name="domain" placeholder="domain.com" value="">
-							</div>
-						</div>
 						<div class="control-group">
 							<label for="username" class="control-label"></label>
 							<div class="controls">

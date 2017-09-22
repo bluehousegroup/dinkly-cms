@@ -1,7 +1,7 @@
 <div id="main" role="main">
 	<div id="content">
 		<div class="content-wrapper has-header">
-			<?php include_once('../apps/site_admin/layout/messaging.php'); ?>
+			<?php include_once('../apps/cms_admin/layout/messaging.php'); ?>
 			<div class="content-header clearfix">
 				<h2 class="pull-left">Design</h2>
 				<div class="pull-right">
@@ -42,7 +42,7 @@
 					<?php if(isset($_SESSION['is_super_admin'])): ?>
 					<div class="block">
 						<div class="pad">
-							<form action="/site_admin/design/default_content" method="post">
+							<form action="/cms_admin/design/default_content" method="post">
 								<div class="block-header just-header">
 									<h4>Default Content <button type="submit" class="btn btn-primary save-logo pull-right">Load Content</button></h4>
 								</div>
@@ -52,12 +52,12 @@
 					<?php endif; ?>
 					<div class="block">
 						<div class="pad">
-							<form class="logo-form" method="post" action="/site_admin/design/saveLogo" enctype="multipart/form-data">
+							<form class="logo-form" method="post" action="/cms_admin/design/saveLogo" enctype="multipart/form-data">
 								<div class="block-header form-header">
 									<h4>Upload a Logo <button type="submit" class="btn btn-primary save-logo pull-right">Save Logo</button></h4>
 								</div>
 								<div class="control-group controls">
-									<img class="image-content-image" src="<?php echo ($setting_values['logo_image_thumb_id'] > 0) ? '/site_admin/pages/display_image/image_id/'.$setting_values['logo_image_thumb_id'] : 'http://placehold.it/148x148/&amp;text=IMAGE';?>">
+									<img class="image-content-image" src="<?php echo ($setting_values['logo_image_thumb_id'] > 0) ? '/cms_admin/pages/display_image/image_id/'.$setting_values['logo_image_thumb_id'] : 'http://placehold.it/148x148/&amp;text=IMAGE';?>">
 									<label class="image-filename"></label>
 									<span class="btn fileinput-button">
 										<i class="icon-plus icon-white"></i>
@@ -140,7 +140,7 @@
 //CSS Form - AJAX post of the custom css form
 function saveCss() {
 	css = $('#site_custom_css').val();
-	$.post("/site_admin/design/save_css/", { site_custom_css: css }, function(msg) {
+	$.post("/cms_admin/design/save_css/", { site_custom_css: css }, function(msg) {
 		$message = $('#hidden-good-message').val(msg);
 		displayGoodMessages();
 	});
@@ -149,7 +149,7 @@ function saveCss() {
 //Theme Form - AJAX post of the theme selection form
 function saveDesign() {
 	code = $('.design-picker').find('.selected').attr('id');
-	$.post("/site_admin/design/save_design/", { design_code: code }, function(msg) {
+	$.post("/cms_admin/design/save_design/", { design_code: code }, function(msg) {
 		$message = $('#hidden-good-message').val(msg);
 		displayGoodMessages();
 	});

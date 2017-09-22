@@ -18,7 +18,7 @@ class UserController extends SiteAdminController
 
 			SiteActivityLogCollection::addSiteActivity('user', 'deleted', $parameters['id']);
 
-			$this->loadModule('site_admin', 'user', 'default', true, true, array('deleted' => true));
+			$this->loadModule('cms_admin', 'user', 'default', true, true, array('deleted' => true));
 			return false;
 		}
 		return false;
@@ -42,7 +42,7 @@ class UserController extends SiteAdminController
 			//User doesn't exist, therefore we do not belong here
 			if($this->user->isNew())
 			{
-				$this->loadModule('site_admin', 'user', 'default', true, true);
+				$this->loadModule('cms_admin', 'user', 'default', true, true);
 				return false;
 			}
 
@@ -90,7 +90,7 @@ class UserController extends SiteAdminController
 
 				SiteActivityLogCollection::addSiteActivity('user', 'new', json_encode($_POST));
 
-				$this->loadModule('site_admin', 'user', 'view', true, true, array('created' => true, 'id' => $user->getId()));
+				$this->loadModule('cms_admin', 'user', 'view', true, true, array('created' => true, 'id' => $user->getId()));
 				return false;
 			}
 		}
@@ -140,7 +140,7 @@ class UserController extends SiteAdminController
 
 				SiteActivityLogCollection::addSiteActivity('user', 'edited', json_encode($_POST));
 
-				$this->loadModule('site_admin', 'user', 'view', true, true, array('saved' => true, 'id' => $this->user->getId()));
+				$this->loadModule('cms_admin', 'user', 'view', true, true, array('saved' => true, 'id' => $this->user->getId()));
 			}
 		}
 

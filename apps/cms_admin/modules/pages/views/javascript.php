@@ -5,7 +5,7 @@ function updateSortOrder() {
 	displaySavingIndicator('Updating position...');
 	$.ajax({
 	  type: "POST",
-	  url: '/site_admin/pages/update_page_order/', 
+	  url: '/cms_admin/pages/update_page_order/', 
 	  data: { order: data },
 	  success: function(msg) {
 	  	hideSavingIndicator();
@@ -26,7 +26,7 @@ function saveSubmit() {
 }
 
 function deletePage($target) {
-	window.location = "/site_admin/pages/delete/page/"+$('#page_id').val();
+	window.location = "/cms_admin/pages/delete/page/"+$('#page_id').val();
 }
 
 function autosave() {
@@ -39,7 +39,7 @@ function autosave() {
 
 	$.ajax({
 	  type: "POST",
-	  url: '/site_admin/pages/autosave/page/'+$('#page_id').val(), 
+	  url: '/cms_admin/pages/autosave/page/'+$('#page_id').val(), 
 	  data: $('#content-form').serialize(),
 	  success: function(msg) {
 	  	var currSrc = $("#autosave-preview").attr("src");
@@ -73,7 +73,7 @@ $(function () {
 		},
 	});
 
-	initUploaders('/site_admin/pages/image_upload/page/'+$('#page_id').val(), 'handleUploadResponse');
+	initUploaders('/cms_admin/pages/image_upload/page/'+$('#page_id').val(), 'handleUploadResponse');
 
 	/******************************************************************************** EVENTS */
 

@@ -14,13 +14,13 @@ class SettingsController extends Dinkly
 		//Not logged in, boot'em out
 		if(!SiteAdminUser::isLoggedIn())
 		{
-			$this->loadModule('site_admin', 'login', 'default', true);
+			$this->loadModule('cms_admin', 'login', 'default', true);
 			return false;
 		}
 
 		//Initialize site and connect to its database
 		$this->site = new CustomerSite();
-		$this->site->init($_SESSION['site_admin']['customer_site_id']);
+		$this->site->init($_SESSION['cms_admin']['customer_site_id']);
 		$this->site->connectToSiteDb();
 
 		//Get our settings
@@ -55,7 +55,7 @@ class SettingsController extends Dinkly
 
 			SiteActivityLogCollection::addSiteActivity('settings', 'updated', json_encode($settings));
 
-			$this->loadModule('site_admin', 'settings', $source, true, true, array('saved' => true));
+			$this->loadModule('cms_admin', 'settings', $source, true, true, array('saved' => true));
 		}
 
 		return false;
@@ -64,7 +64,7 @@ class SettingsController extends Dinkly
 	public function loadDefault()
 	{
 		//Redirect to general
-		$this->loadModule('site_admin', 'settings', 'general', true);
+		$this->loadModule('cms_admin', 'settings', 'general', true);
 
 		return true;
 	}

@@ -1,7 +1,7 @@
 <div id="main" role="main">
 	<div id="content">
 		<div class="content-wrapper has-header">
-			<?php include_once('../apps/site_admin/layout/messaging.php'); ?>
+			<?php include_once('../apps/cms_admin/layout/messaging.php'); ?>
 			<div class="content-header clearfix">
 				<h2 class="pull-left">Edit User</h2>
 				<div class="actions pull-right">

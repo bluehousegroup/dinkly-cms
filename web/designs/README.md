@@ -84,7 +84,7 @@ Create blank header.php and footer.php files and put them in html/includes.  Fou
         $settings['zip_code'];
         $settings['page_title'];
         
-    This list may not be entirely inclusive, but follows a simple pattern.  Just look in the settings tab of fourtopper site_admin and the fields available.  If there is a field you want to build a hook for, just look at its label and place it lowercased into $settings['your_label_here'].  Note that words are separated with underscores.
+    This list may not be entirely inclusive, but follows a simple pattern.  Just look in the settings tab of fourtopper cms_admin and the fields available.  If there is a field you want to build a hook for, just look at its label and place it lowercased into $settings['your_label_here'].  Note that words are separated with underscores.
 
 Defining Content Blocks in config.yml
 -------------------------------------

@@ -4,7 +4,7 @@ class BlogController extends SiteAdminController
 {
 	public function loadDefault($parameters)
 	{
-		$this->loadModule('site_admin', 'blog', 'edit', true, true);
+		$this->loadModule('cms_admin', 'blog', 'edit', true, true);
 
 		return false;
 	}
@@ -57,7 +57,7 @@ class BlogController extends SiteAdminController
 
 		$id = $post->getId();
 
-		$this->loadModule('site_admin', 'blog', 'edit', true, true, array('post' => $id));
+		$this->loadModule('cms_admin', 'blog', 'edit', true, true, array('post' => $id));
 	}
 
 	public function loadDelete($parameters)
@@ -70,7 +70,7 @@ class BlogController extends SiteAdminController
 			$old_post->save();
 		}
 
-		$this->loadModule('site_admin', 'blog', 'edit', true, true);
+		$this->loadModule('cms_admin', 'blog', 'edit', true, true);
 
 		return false;
 	}

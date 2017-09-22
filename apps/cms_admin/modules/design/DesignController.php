@@ -38,7 +38,7 @@ class DesignController extends SiteAdminController
 			if($_FILES['logo']['size'] > 0)
 			{
 				//Enforce the max post limit (based on PHP and MySQL)
-				if($_FILES['logo']['size'] < Dinkly::getConfigValue('max_post_limit','site_admin'))
+				if($_FILES['logo']['size'] < Dinkly::getConfigValue('max_post_limit','cms_admin'))
 				{
 					$filename = $_FILES['logo']['name'];
 					$type = $_FILES['logo']['type'];
@@ -76,11 +76,11 @@ class DesignController extends SiteAdminController
 					$setting->setSettingValue($original_id);
 					$setting->save();
 
-					$this->loadModule('site_admin', 'design', 'default', true, true, array('logo_saved' => true));
+					$this->loadModule('cms_admin', 'design', 'default', true, true, array('logo_saved' => true));
 				}
 				else
 				{
-					$this->loadModule('site_admin', 'design', 'default', true, true, array('image_exceed' => true));
+					$this->loadModule('cms_admin', 'design', 'default', true, true, array('image_exceed' => true));
 				}
 			}
 			else
@@ -112,7 +112,7 @@ class DesignController extends SiteAdminController
 				$setting->setSettingValue(null);
 				$setting->save();
 
-				$this->loadModule('site_admin', 'design', 'default', true, true, array('logo_removed' => true));
+				$this->loadModule('cms_admin', 'design', 'default', true, true, array('logo_removed' => true));
 			}
 		}
 
@@ -124,7 +124,7 @@ class DesignController extends SiteAdminController
 		$design_short_name = $this->site->getDesign()->getShortName();
 		$this->site->setDefaultContent($design_short_name);
 
-		$this->loadModule('site_admin', 'design', 'default', true, true, array('default_content_loaded' => true));
+		$this->loadModule('cms_admin', 'design', 'default', true, true, array('default_content_loaded' => true));
 	}
 
 	public function loadDefault($parameters)

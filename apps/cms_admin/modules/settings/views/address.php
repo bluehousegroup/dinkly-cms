@@ -1,7 +1,7 @@
 <div id="main" role="main">
 	<div id="content">
 		<div class="content-wrapper has-header">
-			<?php include_once('../apps/site_admin/layout/messaging.php'); ?>
+			<?php include_once('../apps/cms_admin/layout/messaging.php'); ?>
 			<div class="content-header clearfix">
 				<h2 class="pull-left">Site Settings</h2>
 				<div class="pull-right">
@@ -12,14 +12,14 @@
 			<div class="content-body scrollable">
 				<div class="sidebar-left">
 					<div class="pad active scrollable">
-						<?php include_once('../apps/site_admin/modules/settings/views/sidebar_nav.php'); ?>
+						<?php include_once('../apps/cms_admin/modules/settings/views/sidebar_nav.php'); ?>
 					</div>
 				</div>
 				<div class="content-editor has-top-actions scrollable">
 					<div class="pad">
 						<!-- Address/Map -->
 						<div class="tab-pane" id="address">
-							<form class="editor-form form-horizontal" action="/site_admin/settings/save_settings/" method="post">
+							<form class="editor-form form-horizontal" action="/cms_admin/settings/save_settings/" method="post">
 								<h4>Address &amp; Mapping</h4>
 								<div class="control-group">
 									<label class="control-label" for="street_address">Street Address</label>

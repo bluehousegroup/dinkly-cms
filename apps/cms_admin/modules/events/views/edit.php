@@ -6,7 +6,7 @@ Post value 'today' actually refers to on day of Event
 <div id="main" role="main">
 	<div id="content">
 		<div class="content-wrapper has-header">
-			<?php include_once('../apps/site_admin/layout/messaging.php'); ?>
+			<?php include_once('../apps/cms_admin/layout/messaging.php'); ?>
 			<div class="content-header clearfix">
 				<h2 class="pull-left">Manage Events <span class="loading" style="display: none;"></span></h2>
 				<div class="pull-right">
@@ -21,8 +21,8 @@ Post value 'today' actually refers to on day of Event
 			<div class="content-body">
 				<?php
 				//include sidebar-left
-				include_once('../apps/site_admin/modules/events/views/sidebar-left.php'); ?>
-				<form id="content-form" class="editor-form form-horizontal clearfix" action="/site_admin/events/edit" method="post" enctype="multipart/form-data">
+				include_once('../apps/cms_admin/modules/events/views/sidebar-left.php'); ?>
+				<form id="content-form" class="editor-form form-horizontal clearfix" action="/cms_admin/events/edit" method="post" enctype="multipart/form-data">
 					<div class="content-editor scrollable">
 						<div class="pad">
 							<div class="form-left">
@@ -34,7 +34,7 @@ Post value 'today' actually refers to on day of Event
 									<div class="collapse-body">
 										<?php
 										//include event-detail form
-										include_once('../apps/site_admin/modules/events/views/event-detail-form.php');
+										include_once('../apps/cms_admin/modules/events/views/event-detail-form.php');
 										?>
 									</div>
 								</div>
@@ -47,7 +47,7 @@ Post value 'today' actually refers to on day of Event
 									<div class="collapse-body">
 										<?php
 										//include social posting guff
-										include_once('../apps/site_admin/modules/events/views/social-post-settings.php');
+										include_once('../apps/cms_admin/modules/events/views/social-post-settings.php');
 										?>
 									</div>
 								</div>
@@ -73,7 +73,7 @@ Post value 'today' actually refers to on day of Event
 											<?php if(stristr($_SERVER['HTTP_HOST'], "localhost")): ?>
 												<h6>(Social Media requires you use 127.0.0.1 instead of localhost)</h6>
 											<?php else: ?>
-												<a href="/site_admin/settings/socialIntegration" class="auth-exit btn btn-primary">Authorize More</a>
+												<a href="/cms_admin/settings/socialIntegration" class="auth-exit btn btn-primary">Authorize More</a>
 											<?php endif; ?>
 										<?php endif; ?>
 
@@ -93,7 +93,7 @@ Post value 'today' actually refers to on day of Event
 											<?php else: ?>
 												<h4>Get more exposure with social media!</h4>
 												<p>If you've got social media accounts we can send out reminders to your audience automatically.  This saves you time and increases the amount of potential customers you reach with the news!</p>
-												<a href="/site_admin/settings/socialIntegration" class="btn btn-primary auth-exit">Get Started!</a>
+												<a href="/cms_admin/settings/socialIntegration" class="btn btn-primary auth-exit">Get Started!</a>
 											<?php endif; ?>
 										</p>
 										<?php endif; ?>
@@ -111,8 +111,8 @@ Post value 'today' actually refers to on day of Event
 					<div class="content-editor-actions">
 						<div class="pad">
 							<button class="btn btn-primary save-button save-event" data-publish="<?= ($event) ? $event->getIsPublished() : 0 ?>" data-loading-text="Saving...">Save</button>
-							<a href="/site_admin/events/edit/event/<?= ($event) ? $event->getId() : "" ?>" class="btn">Cancel</a>
-							<?= ($event) ? "<a href='#/site_admin/events/delete/event/" . $event->getId() . "' class='delete-event btn btn-danger pull-right'>Delete Event</a>" : "" ?>
+							<a href="/cms_admin/events/edit/event/<?= ($event) ? $event->getId() : "" ?>" class="btn">Cancel</a>
+							<?= ($event) ? "<a href='#/cms_admin/events/delete/event/" . $event->getId() . "' class='delete-event btn btn-danger pull-right'>Delete Event</a>" : "" ?>
 						</div>
 					</div>
 				</form>
@@ -156,7 +156,7 @@ Post value 'today' actually refers to on day of Event
 			post_schedule: JSON.stringify(generateScheduleObj())
 		};
 
-		$.post("/site_admin/events/saveDraft", data, function(response) {
+		$.post("/cms_admin/events/saveDraft", data, function(response) {
 			//console.log(response);
 		});
 	}
@@ -450,7 +450,7 @@ Post value 'today' actually refers to on day of Event
 			post_schedule: JSON.stringify(generateScheduleObj())
 		};
 
-		$.post("/site_admin/events/saveSocialPost", data, function(response) {
+		$.post("/cms_admin/events/saveSocialPost", data, function(response) {
 			//console.log(response);
 		});
 	}

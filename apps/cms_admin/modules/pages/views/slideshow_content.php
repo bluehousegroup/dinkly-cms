@@ -31,7 +31,7 @@
 				<tr class="slideshow-slide">
 					<td>
 						<?php if($slide->getThumbId() > 0): ?>
-						<img src="/site_admin/pages/display_image/image_id/<?php echo $slide->getThumbId(); ?>">
+						<img src="/cms_admin/pages/display_image/image_id/<?php echo $slide->getThumbId(); ?>">
 						<input type="file" style="display: none;" class="input-slideshow-image" name="content&&&slideshow&&&<?php echo $block->getCode(); ?>&&&<?php echo get_class($block); ?>&&&filename[]">
 						<?php endif; ?>
 					</td>

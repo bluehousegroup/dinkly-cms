@@ -6,7 +6,7 @@ class EventsController extends SiteAdminController
 {
 	public function loadDefault($parameters)
 	{
-		$this->loadModule('site_admin', 'events', 'edit', true, true, $parameters);
+		$this->loadModule('cms_admin', 'events', 'edit', true, true, $parameters);
 		return false;
 	}
 
@@ -62,7 +62,7 @@ class EventsController extends SiteAdminController
 					$parameters['postSaved'] = $postSaved;
 
 				unset($_POST);
-				$this->loadModule('site_admin', 'events', 'edit', true, true, $parameters);
+				$this->loadModule('cms_admin', 'events', 'edit', true, true, $parameters);
 				return false;
 			}
 		}
@@ -158,7 +158,7 @@ class EventsController extends SiteAdminController
 		$event = new Event();
 		$event->init($event_id);
 
-		$this->loadModule('site_admin', 'events', '', true, true, array('deleted' => $event->delete()));
+		$this->loadModule('cms_admin', 'events', '', true, true, array('deleted' => $event->delete()));
 	}
 
 	public function validatePost()

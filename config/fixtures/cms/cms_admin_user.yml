@@ -1,0 +1,11 @@
+table_name: cms_admin_user
+records:
+    -   
+        created_at:     
+        updated_at:
+        username:   chris@bluehousegroup.com
+        password:   shut711up
+        first_name: Christopher
+        last_name:  Lewis
+        title:  |
+            Chef

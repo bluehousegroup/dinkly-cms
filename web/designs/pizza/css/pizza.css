@@ -2041,8 +2041,8 @@ table th[class*="span"],
  */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../font/fontawesome-webfont.eot?v=3.0.1');
-  src: url('../font/fontawesome-webfont.eot?#iefix&v=3.0.1') format('embedded-opentype'), url('../font/fontawesome-webfont.woff?v=3.0.1') format('woff'), url('../font/fontawesome-webfont.ttf?v=3.0.1') format('truetype');
+  src: url('../fonts/fontawesome-webfont.eot?v=3.0.1');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=3.0.1') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=3.0.1') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=3.0.1') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -6393,37 +6393,37 @@ input[type="submit"].btn.btn-mini {
 }
 @font-face {
   font-family: 'ProximaNova';
-  src: url('../font/ProximaNovaCond-SemiboldIt.otf');
+  src: url('../fonts/ProximaNovaCond-SemiboldIt.otf');
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
 }
 @font-face {
   font-family: 'ProximaNova';
-  src: url('../font/ProximaNovaCond-Regular.otf');
+  src: url('../fonts/ProximaNovaCond-Regular.otf');
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
 }
 @font-face {
   font-family: 'ProximaNova';
-  src: url('../font/ProximaNovaCond-LightIt.otf');
+  src: url('../fonts/ProximaNovaCond-LightIt.otf');
   font-weight: 100;
   -webkit-font-smoothing: antialiased;
 }
 @font-face {
   font-family: 'Clarendon';
-  src: url('../font/ClarendonLTStd.otf');
+  src: url('../fonts/ClarendonLTStd.otf');
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
 }
 @font-face {
   font-family: 'Clarendon';
-  src: url('../font/ClarendonLTStd-Bold.otf');
+  src: url('../fonts/ClarendonLTStd-Bold.otf');
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
 }
 @font-face {
   font-family: 'Clarendon';
-  src: url('../font/ClarendonLTStd-Light.otf');
+  src: url('../fonts/ClarendonLTStd-Light.otf');
   font-weight: 100;
   -webkit-font-smoothing: antialiased;
 }

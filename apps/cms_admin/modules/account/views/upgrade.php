@@ -1,7 +1,7 @@
 <div id="main" role="main">
 	<div id="content">
 		<div class="content-wrapper has-header">
-			<?php include_once('../apps/site_admin/layout/messaging.php'); ?>
+			<?php include_once('../apps/cms_admin/layout/messaging.php'); ?>
 			<div class="content-header clearfix">
 				<h2 class="pull-left">My Account</h2>
 			</div>
@@ -9,7 +9,7 @@
 			<div class="content-body scrollable">
 				<div class="sidebar-left">
 					<div class="pad active scrollable">
-						<?php include_once('../apps/site_admin/modules/account/views/sidebar_nav.php'); ?>
+						<?php include_once('../apps/cms_admin/modules/account/views/sidebar_nav.php'); ?>
 					</div>
 				</div>
 

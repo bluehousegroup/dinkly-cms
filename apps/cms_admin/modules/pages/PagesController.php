@@ -79,7 +79,7 @@ class PagesController extends SiteAdminController
 
 		$parameters = array_merge($parameters, array('page' => $page_id));
 
-		$this->loadModule('site_admin', 'pages', 'edit', true, true, $parameters);
+		$this->loadModule('cms_admin', 'pages', 'edit', true, true, $parameters);
 
 		return true;
 	}
@@ -104,7 +104,7 @@ class PagesController extends SiteAdminController
 
 		SiteActivityLogCollection::addSiteActivity('page', 'published', json_encode($live_page->getDetail()));
 
-		$this->loadModule('site_admin', 'pages', 'edit', true, true, array('page' => $this->page_id, 'published' => 1));
+		$this->loadModule('cms_admin', 'pages', 'edit', true, true, array('page' => $this->page_id, 'published' => 1));
 
 		return false;
 	}
@@ -145,7 +145,7 @@ class PagesController extends SiteAdminController
 
 		SiteActivityLogCollection::addSiteActivity('page', 'deleted', $this->page_id);
 
-		$this->loadModule('site_admin', 'pages', '', true, true, array('deleted' => 1));
+		$this->loadModule('cms_admin', 'pages', '', true, true, array('deleted' => 1));
 
 		return false;
 	}
@@ -208,8 +208,8 @@ class PagesController extends SiteAdminController
 		//We haven't got a single page to display, create one
 		if($this->page->getDetail()->isNew())
 		{
-			DinklyBuilder::loadFixture('site_admin', 'SiteNavItem', true, false);
-			DinklyBuilder::loadFixture('site_admin', 'PageDetail', true, false);
+			DinklyBuilder::loadFixture('cms_admin', 'SiteNavItem', true, false);
+			DinklyBuilder::loadFixture('cms_admin', 'PageDetail', true, false);
 
 			$this->page->init($this->page_id, true);
 		}
@@ -295,7 +295,7 @@ class PagesController extends SiteAdminController
 
 				unset($_POST['add_page_posted']);
 
-				$this->loadModule('site_admin', 'pages', 'edit', true, true, array('page' => $this->page_id, 'added' => 1));
+				$this->loadModule('cms_admin', 'pages', 'edit', true, true, array('page' => $this->page_id, 'added' => 1));
 			}
 		}
 	}
@@ -583,12 +583,12 @@ class PagesController extends SiteAdminController
 
 				if($_POST['publish'] == 'true')
 				{
-					$this->loadModule('site_admin', 'pages', 'publish', true, true, $output_parameters);
+					$this->loadModule('cms_admin', 'pages', 'publish', true, true, $output_parameters);
 				}
 				else
 				{
 					$output_parameters['saved'] = 1;
-					$this->loadModule('site_admin', 'pages', 'edit', true, true, $output_parameters);
+					$this->loadModule('cms_admin', 'pages', 'edit', true, true, $output_parameters);
 				}
 			}	
 		}

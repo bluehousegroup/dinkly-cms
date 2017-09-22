@@ -2,8 +2,6 @@
 
 class CmsAdminUser extends BaseCmsAdminUser
 {
-	public $dbTable = 'site_admin_user';
-
 	public function initWithUsername($username)
 	{
 		$db = self::fetchDB();
@@ -15,6 +13,7 @@ class CmsAdminUser extends BaseCmsAdminUser
 			$this->hydrate($result, true);
 		}
 	}
+
 	public function setPassword($password)
 	{
 		$this->Password = crypt($password);
@@ -60,13 +59,13 @@ class CmsAdminUser extends BaseCmsAdminUser
 	{
 		$dbo = self::fetchDB();
 
-		$sql = "select * from admin_user where username=".$dbo->quote($username);
+		$user = new CmsAdminUser();
+		$sql = $user->getSelectQuery() . " where username=".$dbo->quote($username);
 		$result = $dbo->query($sql)->fetchAll();
 
 		//We found a match for the username      
 		if($result != array())
 		{
-			$user = new CmsAdminUser();
 			$user->init($result[0]['id']);
 			$hashed_password = $result[0]['password'];
 
