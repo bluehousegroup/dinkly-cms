@@ -26,7 +26,7 @@ class CmsDesign
 
 		foreach($yaml['page_templates'] as $p)
 		{
-			$page_template = new PageTemplate();
+			$page_template = new CmsPageTemplate();
 			$page_template->init($p);
 
 			$this->page_templates[] = $page_template;

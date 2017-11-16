@@ -1,0 +1,74 @@
+restaurant_name:
+    length: 256
+
+tagline:
+    length: 512
+
+phone:
+    length: 20
+
+email:
+    length: 128
+
+copyright:
+    length: 256
+
+address:
+    length: 256
+
+city:
+    length: 128
+
+state:
+    length: 36
+
+zipcode:
+    length: 16
+
+google_analytics_id:
+    length: 1000
+
+custom_tracking_code:
+    length: 5000
+
+meta_title:
+    length: 256
+
+meta_keywords:
+    length: 2000
+
+meta_description:
+    length: 20000
+
+social_facebook:
+    length: 512
+
+social_twitter:
+    length: 512
+
+social_googleplus:
+    length: 512
+
+social_urbanspoon:
+    length: 512
+
+social_yelp:
+    length: 512
+
+social_tripadvisor:
+    length: 512
+
+social_pinterest:
+    length: 512
+
+design_code:
+    length: 128
+
+logo_image_original_id:
+    length: 12
+
+logo_image_thumb_id:
+    length: 12
+
+site_custom_css:
+    length: 20000

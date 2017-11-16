@@ -30,7 +30,7 @@ class CmsDesignCollection
 			{
 				$design_config = Yaml::parse($file);
 				
-				$design = new Design();
+				$design = new CmsDesign();
 				$design->init($design_config);
 				$designs[] = $design;
 			}
@@ -53,7 +53,7 @@ class CmsDesignCollection
 
 				if($design_config['code'] == $code)
 				{
-					$design = new Design();
+					$design = new CmsDesign();
 					$design->init($design_config);
 
 					return $design;

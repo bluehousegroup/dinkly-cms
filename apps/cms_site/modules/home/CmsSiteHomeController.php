@@ -41,6 +41,7 @@ class CmsSiteHomeController extends CmsSiteController
 		$this->nav_items = array();
 		$this->logo_path = null;
 		$this->revision_number = null;
+		$this->is_draft = false;
 
 		//For a one page layout, we'll need all pages right off the bat
 		$this->template_files = array();
@@ -210,6 +211,7 @@ class CmsSiteHomeController extends CmsSiteController
 			$year = date("Y"); $month = null; $archive_parts = explode("_", $slug);
 			if(isset($archive_parts[1])) $year = $archive_parts[1];
 			if(isset($archive_parts[2])) $month = $archive_parts[2];
+			
 			//Get a list of posts using archive paramaters
 			$this->posts = CmsPostCollection::getBlogArchive($year, $month);
 

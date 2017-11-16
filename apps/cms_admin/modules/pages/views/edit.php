@@ -6,7 +6,7 @@
 				<h2 class="pull-left">Pages <span class="loading" style="display: none;"></span></h2>
 				<div class="pull-right">
 					<a onclick="saveAndPublish();" class="btn">Publish Page</a>
-					<a target="_blank" href="/site/<?php echo $site->getDomain(); ?>/<?php echo $page->getDetail()->getSlug(); ?>" class="btn">View Draft</a>
+					<a target="_blank" href="/site/<?php echo $page->getDetail()->getSlug(); ?>" class="btn">View Draft</a>
 				</div>
 			</div>
 			<div class="content-body">
@@ -32,10 +32,10 @@
 								</div>
 							</form>
 						</div>
-						<h4><?php echo ($site->getSettings()['restaurant_name']) ? $site->getSettings()['restaurant_name'] : 'Unnamed Restaurant'; ?></h4>
+						<h4><?php echo ($settings['site_name']) ? $site->getSettings()['site_name'] : 'Unnamed Site'; ?></h4>
 						<p>Using design <strong><?php echo $page->getDesign()->getTitle(); ?></strong></p>
 						<ul class="nav nav-pills nav-stacked site-nav">
-							<?php foreach($site->getStructure(true) as $nav_item): ?>
+							<?php foreach($structure as $nav_item): ?>
 							<li id="<?php echo $nav_item->getPage()->getDetail()->getSiteNavItemId(); ?>" <?php echo ($nav_item->getPage()->getDetail()->getSiteNavItemId() == $page_id) ? 'class="active"' : ''; ?>><a href="/cms_admin/pages/edit/page/<?php echo $nav_item->getPage()->getDetail()->getSiteNavItemId(); ?>"><?php echo $nav_item->getPage()->getDetail()->getNavLabel(); ?></a></li>
 							<?php endforeach; ?>
 						</ul>
@@ -113,7 +113,7 @@
 					</div>
 					<!-- Live Preview -->
 					<div class="content-preview">
-						<iframe id="autosave-preview" src="/site/<?php echo $site->getDomain(); ?>/<?php echo $page->getDetail()->getSiteNavItemId(); ?>/autosave" width="100%" height="100%" frameborder="0"></iframe>
+						<iframe id="autosave-preview" src="/site/<?php echo $page->getDetail()->getSiteNavItemId(); ?>/autosave" width="100%" height="100%" frameborder="0"></iframe>
 					</div>
 				</form>
 			</div>

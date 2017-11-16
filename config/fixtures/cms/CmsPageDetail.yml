@@ -1,0 +1,13 @@
+table_name: cms_page_detail
+records:
+    -
+        site_nav_item_id: 1
+        page_template_code:	home
+        slug: home
+        title: 'Home'
+        nav_label: 'Home'
+        is_current_draft: 1
+        is_current_live: 1
+        revision: 1
+        is_deleted: 0
+        is_enabled: 1

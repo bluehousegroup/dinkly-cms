@@ -1,0 +1,7 @@
+table_name: cms_setting
+registry:
+  - id
+  - created_at
+  - updated_at
+  - setting_key: { type: varchar, length: 128, allow_null: false }
+  - setting_value: { type: text, allow_null: true }

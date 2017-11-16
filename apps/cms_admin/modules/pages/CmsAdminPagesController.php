@@ -1,6 +1,6 @@
 <?php
 
-class PagesController extends SiteAdminController 
+class CmsAdminPagesController extends CmsAdminController 
 {
 	public function loadImageUpload($parameters)
 	{
@@ -70,14 +70,23 @@ class PagesController extends SiteAdminController
 
 	public function loadDefault($parameters)
 	{
+		$this->structure = CmsSiteNavItemCollection::getStructure();
+
 		$page_id = null;
-		if(!isset($this->site->getStructure()[1]))
+		if(!isset($this->structure[1]))
 		{
 			$page_id = 1;
 		}
-		else { $page_id = $this->site->getStructure()[1]->getId(); }
+		else { $page_id = $this->structure[1]->getId(); }
 
-		$parameters = array_merge($parameters, array('page' => $page_id));
+		if($parameters != array())
+		{
+			$parameters = array_merge($parameters, array('page' => $page_id));
+		}
+		else
+		{
+			$parameters = array('page' => $page_id);
+		}
 
 		$this->loadModule('cms_admin', 'pages', 'edit', true, true, $parameters);
 
@@ -194,27 +203,32 @@ class PagesController extends SiteAdminController
 
 	protected function initEdit($parameters)
 	{
+		$parameters = $this->fetchGetParams();
+
 		//Output any messaging
 		$this->setMessages($parameters);
 
 		//Initialize current page
 		$this->page_id = $parameters['page'];
-		$this->page = new Page();
+		$this->page = new CmsPage();
 		$this->page->init($this->page_id, true);
 
+		$this->structure = CmsSiteNavItemCollection::getStructure();
+		$this->settings = CmsSettingCollection::getAll(true);
+
 		//Clean up previous autosaves
-		PageDetailCollection::deleteAutosaves($this->page->getDetail()->getSiteNavItemId());
+		CmsPageDetailCollection::deleteAutosaves($this->page->getDetail()->getSiteNavItemId());
 
 		//We haven't got a single page to display, create one
 		if($this->page->getDetail()->isNew())
 		{
-			DinklyBuilder::loadFixture('cms_admin', 'SiteNavItem', true, false);
-			DinklyBuilder::loadFixture('cms_admin', 'PageDetail', true, false);
+			DinklyBuilder::loadFixture('cms', 'CmsSiteNavItem', null, true, false);
+			DinklyBuilder::loadFixture('cms', 'CmsPageDetail', null, true, false);
 
 			$this->page->init($this->page_id, true);
 		}
 
-		$this->revisions = PageDetailCollection::getAllRevisions($this->page->getDetail()->getSiteNavItemid());
+		$this->revisions = CmsPageDetailCollection::getAllRevisions($this->page->getDetail()->getSiteNavItemid());
 
 		//An index of page content
 		$this->content_index = $this->page->getContentIndex();
@@ -225,7 +239,7 @@ class PagesController extends SiteAdminController
 
 		//Create an array of available page templates for use in the 'add page' form
 		$this->available_templates = array();
-		foreach($this->site->getDesign()->getPageTemplates() as $template)
+		foreach($this->page->getDesign()->getPageTemplates() as $template)
 		{
 			$this->available_templates[] = $template;
 		}
@@ -312,12 +326,12 @@ class PagesController extends SiteAdminController
 			if(!$this->bad)
 			{
 				//Clean up previous autosaves
-				PageDetailCollection::deleteAutosaves($this->page->getDetail()->getSiteNavItemId());
+				CmsPageDetailCollection::deleteAutosaves($this->page->getDetail()->getSiteNavItemId());
 
 				$output_parameters = array('page' => $this->page_id);
 
 				//Update revision numbers
-				$new_revision_num = PageDetailCollection::getHighestRevision($this->page->getDetail()->getSiteNavItemId()) + 1;
+				$new_revision_num = CmsPageDetailCollection::getHighestRevision($this->page->getDetail()->getSiteNavItemId()) + 1;
 
 				$posted_content = array();
 
@@ -329,7 +343,7 @@ class PagesController extends SiteAdminController
 				}
 
 				//Set new one up
-				$new_page_detail = new PageDetail();
+				$new_page_detail = new CmsPageDetail();
 				if($autosave)
 				{
 					$new_page_detail->initAutosave($this->page->getDetail()->getSiteNavItemId());
@@ -364,7 +378,7 @@ class PagesController extends SiteAdminController
 				$new_page_detail->save();
 
 				//Re-initialize page object
-				$this->page = new Page();
+				$this->page = new CmsPage();
 				$this->page->init($parameters['page'], true, $autosave);
 
 				//Deal with uploaded files
@@ -421,10 +435,10 @@ class PagesController extends SiteAdminController
 									$filename = $v['name'];
 
 									$thumb_name = sys_get_temp_dir() . '/' . uniqid();
-									$thumb = Image::makeThumb($v['tmp_name'], $thumb_name, 128, $v['type']);
+									$thumb = CmsImage::makeThumb($v['tmp_name'], $thumb_name, 128, $v['type']);
 									$thumb_data = file_get_contents($thumb_name);
 
-									$thumb_image = new Image();
+									$thumb_image = new CmsImage();
 									$thumb_image->setImageData($thumb_data);
 									$thumb_image->setFormat($v['type']);
 									$thumb_image->save();
@@ -433,7 +447,7 @@ class PagesController extends SiteAdminController
 
 									$original_data = file_get_contents($v['tmp_name']);
 
-									$original = new Image();
+									$original = new CmsImage();
 									$original->setImageData($original_data);
 									$thumb_image->setFormat($v['type']);
 									$original->save();
@@ -515,7 +529,7 @@ class PagesController extends SiteAdminController
 				{
 					foreach($content as $key => $parts)
 					{
-						$page_content = new PageContent();
+						$page_content = new CmsPageContent();
 						$page_content->setCreatedAt(date('Y-m-d G:i:s'));
 						$page_content->setRevision($new_revision_num);
 						$page_content->setContentType($parts['content_type']);
@@ -527,7 +541,7 @@ class PagesController extends SiteAdminController
 					}
 				}
 
-				SiteActivityLogCollection::addSiteActivity('page', 'edited', json_encode($new_page_detail));
+				CmsActivityLogCollection::addSiteActivity('page', 'edited', json_encode($new_page_detail));
 
 				unset($_POST['posted']);
 
@@ -536,11 +550,11 @@ class PagesController extends SiteAdminController
 				{
 					//Because slideshows don't come along for the ride via ajax, we need to manually cut
 					//new records based on the previous version's content
-					$previous_version = new PageDetail();
+					$previous_version = new CmsPageDetail();
 					$previous_version->initWithNavId($this->page->getDetail()->getSiteNavItemid(), $this->current_revision);
 
 					//Get the previous version's content
-					$previous_content = PageContentCollection::getAllByDetailid($previous_version->getId());
+					$previous_content = CmsPageContentCollection::getAllByDetailid($previous_version->getId());
 
 					//Loop through the content, look for slideshows, and cut new records attached to the autosave
 					$pos = 1; //We start at 1 on purpose (this is where the content will start on slideshow posts)
@@ -599,10 +613,10 @@ class PagesController extends SiteAdminController
 		if(isset($post_array['page_detail_nav_label']))
 		{
 			$id = $this->page->getDetail()->getId(); //this should be the page detail id
-			$page_detail = new PageDetail();
+			$page_detail = new CmsPageDetail();
 			$new_slug = $page_detail->genSlug($post_array['page_detail_nav_label']);
 
-			if(PageDetailCollection::isDuplicateSlug($new_slug, $id))
+			if(CmsPageDetailCollection::isDuplicateSlug($new_slug, $id))
 			{
 				$this->bad[] = "Slug is already in use";
 			}
@@ -623,4 +637,3 @@ class PagesController extends SiteAdminController
 		return true;
 	}
 }
-

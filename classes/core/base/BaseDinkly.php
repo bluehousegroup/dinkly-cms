@@ -177,10 +177,11 @@ class BaseDinkly
 				parse_str($query_string, $unfriendly_parameters);
 			}
 
-			$uri_parts = array_filter(explode("/", $uri));
+			$uri_parts = explode("/", $uri);
+			unset($uri_parts[0]);
 
 			//If the URL is empty, give it a slash so it can match in the config
-			if($uri_parts == array()) { $uri_parts = array(1 => '/'); }
+			if($uri == "/") { $uri_parts = array(1 => '/'); }
 
 			//Figure out the current app, assume the default if we don't get one in the URL
 			foreach($config['apps'] as $app => $values)
@@ -401,7 +402,10 @@ class BaseDinkly
 		{
 			$this->resetContext();
 
-			$this->context['get_params'] = array_replace($this->context['get_params'], $parameters);
+			if($parameters)
+			{
+				$this->context['get_params'] = array_replace($this->context['get_params'], $parameters);
+			}
 		}
 
 		//If the app_name is not passed, assume whichever is set as the default in config.yml

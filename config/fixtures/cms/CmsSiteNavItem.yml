@@ -1,0 +1,5 @@
+table_name: cms_site_nav_item
+records:
+    -
+        parent_id:			0
+        position:			1

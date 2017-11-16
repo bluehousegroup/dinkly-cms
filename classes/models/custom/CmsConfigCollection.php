@@ -9,8 +9,10 @@
  */
 class CmsConfigCollection extends DinklyDataCollection
 {
-	public static function getSettings($db)
+	public static function getSettings($db = null)
 	{
+		if($db == null) { $db = static::fetchDB(); }
+		
 		$config_settings = self::getAll($db);
 
 		$output = array();
@@ -20,6 +22,11 @@ class CmsConfigCollection extends DinklyDataCollection
 			{
 				$output[$setting->getSettingKey()] = $setting->getSettingValue();
 			}
+		}
+
+		if(!isset($config_settings['site_custom_css']))
+		{
+			$output['site_custom_css'] = null;
 		}
 
 		return $output;

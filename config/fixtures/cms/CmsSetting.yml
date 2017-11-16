@@ -1,0 +1,5 @@
+table_name: cms_setting
+records:
+    -
+        setting_key:	design_code
+        setting_value:  table34

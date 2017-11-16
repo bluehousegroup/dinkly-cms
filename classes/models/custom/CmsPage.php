@@ -53,8 +53,10 @@ class CmsPage
 	{
 		if(!$this->template)
 		{
+			$templates = $this->getDesign()->getPageTemplates();
+
 			//Pin down which template we'll be using
-			foreach($this->getDesign()->getPageTemplates() as $template)
+			foreach($templates as $template)
 			{
 				if($template->getCode() == $this->getDetail()->getPageTemplateCode())
 				{
@@ -130,7 +132,7 @@ class CmsPage
 	{
 		if(!$this->design)
 		{
-			$settings = CmsConfigCollection::getAll(true);
+			$settings = CmsConfigCollection::getSettings();
 			$this->design = CmsDesignCollection::getByCode($settings['design_code']);
 		}
 		return $this->design;
