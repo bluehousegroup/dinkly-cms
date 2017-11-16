@@ -32,7 +32,7 @@
 								</div>
 							</form>
 						</div>
-						<h4><?php echo ($settings['site_name']) ? $site->getSettings()['site_name'] : 'Unnamed Site'; ?></h4>
+						<h4><?php echo ($settings['site_name']) ? $settings['site_name'] : 'Unnamed Site'; ?></h4>
 						<p>Using design <strong><?php echo $page->getDesign()->getTitle(); ?></strong></p>
 						<ul class="nav nav-pills nav-stacked site-nav">
 							<?php foreach($structure as $nav_item): ?>

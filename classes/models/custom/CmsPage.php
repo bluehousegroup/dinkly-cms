@@ -132,7 +132,7 @@ class CmsPage
 	{
 		if(!$this->design)
 		{
-			$settings = CmsConfigCollection::getSettings();
+			$settings = CmsSettingCollection::getAll(true);
 			$this->design = CmsDesignCollection::getByCode($settings['design_code']);
 		}
 		return $this->design;

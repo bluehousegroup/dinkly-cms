@@ -4,7 +4,7 @@ class CmsSetting extends BaseCmsSetting
 {
 	public function initWithKey($key)
 	{
-		try { SettingKeyCollection::isValidKey($key); }
+		try { CmsSettingKeyCollection::isValidKey($key); }
 		catch(Exception $e)
 		{
 			throw new Exception('Invalid setting key.');

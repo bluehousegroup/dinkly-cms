@@ -17,6 +17,8 @@ class CmsPageTemplate
 		{
 			foreach($content_blocks as $type => $content)
 			{
+				$c = null;
+
 				switch(key($content))
 				{
 					case 'slideshow':
@@ -35,18 +37,16 @@ class CmsPageTemplate
 						$c->initAsTemplate($content);
 						break;
 						
-					case 'menu':
-						$c = new CmsMenuContent();
-						$c->initAsTemplate($content);
-						break;
-						
 					case 'event':
 						$c = new CmsEventContent();
 						$c->initAsTemplate($content);
 						break;
 				}
 
-				$this->content_blocks[] = $c;
+				if($c)
+				{
+					$this->content_blocks[] = $c;
+				}
 			}
 		}
 	}

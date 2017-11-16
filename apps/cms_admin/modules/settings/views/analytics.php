@@ -5,7 +5,7 @@
 			<div class="content-header clearfix">
 				<h2 class="pull-left">Site Settings</h2>
 				<div class="pull-right">
-					<a target="_blank" href="/site/<?php echo $site->getDomain(); ?>" class="btn">View Draft Site</a>
+					<a target="_blank" href="/home/draft" class="btn">View Draft Site</a>
 				</div>
 			</div>
 			<div class="body-loader"></div>
@@ -24,13 +24,13 @@
 								<div class="control-group">
 									<label class="control-label" for="google_analytics_id">Google Analytics ID</label>
 									<div class="controls">
-										<input value="<?php echo $setting_values['google_analytics_id']; ?>" maxlength="<?php echo $setting_keys['google_analytics_id']['length']; ?>" name="settings[google_analytics_id]" type="text" class="input-block-level" id="google_analytics_id">
+										<input value="<?php echo isset($setting_values['google_analytics_id']) ? $setting_values['google_analytics_id'] : ''; ?>" maxlength="<?php echo $setting_values['google_analytics_id'] ? $setting_keys['google_analytics_id']['length'] : ''; ?>" name="settings[google_analytics_id]" type="text" class="input-block-level" id="google_analytics_id">
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label" for="custom_tracking_code">Custom Tracking Code</label>
 									<div class="controls">
-										<textarea name="settings[custom_tracking_code]" class="input-block-level" id="custom_tracking_code" rows="5"><?php echo $setting_values['custom_tracking_code']; ?></textarea>
+										<textarea name="settings[custom_tracking_code]" class="input-block-level" id="custom_tracking_code" rows="5"><?php echo isset($setting_values['custom_tracking_code']) ? $setting_values['custom_tracking_code'] : ''; ?></textarea>
 									</div>
 								</div>
 								<div class="form-actions">

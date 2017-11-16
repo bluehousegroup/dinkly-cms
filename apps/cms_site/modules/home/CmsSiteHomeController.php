@@ -34,6 +34,11 @@ class CmsSiteHomeController extends CmsSiteController
 
 	public function loadDefault($parameters)
 	{ 
+		if($parameters == array())
+		{
+			$parameters = $this->fetchGetParams();
+		}
+
 		//Initialize some variables
 		$this->page = null;
 		$this->page_template_code = null;
@@ -60,7 +65,7 @@ class CmsSiteHomeController extends CmsSiteController
 		if(isset($parameters['revision'])) { $this->is_revision = true; $this->is_draft = false; }
 
 		$this->structure = CmsSiteNavItemCollection::getStructure($this->is_draft);
-
+		
 		//Grab page slug, leave null if we can't find one
 		$this->base_path = '/';
 
@@ -109,7 +114,6 @@ class CmsSiteHomeController extends CmsSiteController
 		{
 			$this->page = new CmsPage();
 			
-			//Not sure what this does again, yet
 			$structure = $this->structure;
 			reset($this->structure);
 
@@ -164,7 +168,7 @@ class CmsSiteHomeController extends CmsSiteController
 			if($this->page->getDesign()->getLayout() == 'single')
 			{
 				$this->single_page_layout = true;
-				foreach($this->site->getStructure(true) as $nav_item)
+				foreach($this->structure as $nav_item)
 				{
 					$this->template_files[$nav_item->getPage()->getDetail()->getTitle()] = $nav_item->getPage()->getTemplate()->getCode() . '.php';
 

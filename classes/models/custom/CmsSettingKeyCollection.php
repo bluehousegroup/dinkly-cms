@@ -12,7 +12,7 @@ class CmsSettingKeyCollection
 
 	public static function getKeys()
 	{
-		$keys = Yaml::parse($_SERVER['APPLICATION_ROOT'].'config/cms_setting_keys.yml');
+		$keys = Yaml::parse($_SERVER['APPLICATION_ROOT'].'config/setting_keys.yml');
 
 		return $keys;
 	}

@@ -32,6 +32,11 @@ class CmsSiteNavItemCollection extends DinklyDataCollection
 				if($item->getPage($is_draft))
 				{
 					$structure[$item->getPosition()] = $item;
+
+					if($is_draft)
+					{
+						$item->setIsDraft(true);
+					}
 				}
 			}
 
@@ -44,7 +49,7 @@ class CmsSiteNavItemCollection extends DinklyDataCollection
 	public static function resetNav()
 	{
 		$db = self::fetchDB();
-		$db->exec("truncate site_nav_item");
+		$db->exec("truncate cms_site_nav_item");
 		return true;
 	}
 

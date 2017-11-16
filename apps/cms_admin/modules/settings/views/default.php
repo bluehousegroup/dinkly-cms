@@ -5,7 +5,7 @@
 			<div class="content-header clearfix">
 				<h2 class="pull-left">Site Settings</h2>
 				<div class="pull-right">
-					<a target="_blank" href="/site/<?php echo $site->getDomain(); ?>" class="btn">View Draft Site</a>
+					<a target="_blank" href="/" class="btn">View Draft Site</a>
 				</div>
 			</div>
 			<div class="body-loader"></div>

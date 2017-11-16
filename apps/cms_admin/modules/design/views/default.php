@@ -5,8 +5,7 @@
 			<div class="content-header clearfix">
 				<h2 class="pull-left">Design</h2>
 				<div class="pull-right">
-					<a target="_blank" href="/site/<?php echo $site->getDomain(); ?>" class="btn">View Draft Site</a>
-					<a class="btn btn-danger" data-reveal-id="consultform">Request a Custom Design Consultation</a>
+					<a target="_blank" href="/home/draft" class="btn">View Draft Site</a>
 				</div>
 			</div>
 			<div class="content-body scrollable">
@@ -14,24 +13,18 @@
 					<div class="block">
 						<div class="pad">
 							<div class="block-header form-header">
-								<?php if(isset($_SESSION['is_super_admin']) || $site->getAllowDesignSwitching()): ?>
 								<h4>Pick a Design <button onclick="saveDesign(); return false;" class="btn btn-primary save-button pull-right" data-loading-text="Saving...">Save Choice</button></h4>
-								<?php else: ?>
-								<h4>Preview Design <a class="btn btn-primary save-button pull-right" data-reveal-id="changeform">Request a Design Change</a></h4>
-								<?php endif; ?>
 							</div>
 							<div class="block-content">
 								<ul class="design-picker clearfix">
 									<?php foreach($designs as $design): ?>
-										<?php if($site->getDomain() == 'fourtopper.com' || $design->getIsPublic() == true): ?>
-											<li>
-												<a id="<?php echo $design->getCode(); ?>" class="design-select <?php echo ($design->getCode() == $design_code ? 'selected' : ''); ?>" href="#">
-													<img src="<?= $design->getPreviewImage(); ?>">
-													<h4><?php echo $design->getTitle(); ?></h4>
-													<p><?php echo $design->getDesc(); ?></p>
-												</a>
-											</li>
-										<?php endif; ?>
+										<li>
+											<a id="<?php echo $design->getCode(); ?>" class="design-select <?php echo ($design->getCode() == $design_code ? 'selected' : ''); ?>" href="#">
+												<img src="<?php echo $design->getPreviewImage(); ?>">
+												<h4><?php echo $design->getTitle(); ?></h4>
+												<p><?php echo $design->getDesc(); ?></p>
+											</a>
+										</li>
 									<?php endforeach; ?>
 								</ul>
 							</div>
@@ -39,7 +32,6 @@
 					</div>
 				</div>
 				<div class="dashboard-right">
-					<?php if(isset($_SESSION['is_super_admin'])): ?>
 					<div class="block">
 						<div class="pad">
 							<form action="/cms_admin/design/default_content" method="post">
@@ -49,7 +41,6 @@
 							</form>
 						</div>
 					</div>
-					<?php endif; ?>
 					<div class="block">
 						<div class="pad">
 							<form class="logo-form" method="post" action="/cms_admin/design/saveLogo" enctype="multipart/form-data">
@@ -57,14 +48,14 @@
 									<h4>Upload a Logo <button type="submit" class="btn btn-primary save-logo pull-right">Save Logo</button></h4>
 								</div>
 								<div class="control-group controls">
-									<img class="image-content-image" src="<?php echo ($setting_values['logo_image_thumb_id'] > 0) ? '/cms_admin/pages/display_image/image_id/'.$setting_values['logo_image_thumb_id'] : 'http://placehold.it/148x148/&amp;text=IMAGE';?>">
+									<img class="image-content-image" src="<?php echo ($settings['logo_image_thumb_id'] > 0) ? '/cms_admin/pages/display_image/image_id/'.$settings['logo_image_thumb_id'] : 'http://placehold.it/148x148/&amp;text=IMAGE';?>">
 									<label class="image-filename"></label>
 									<span class="btn fileinput-button">
 										<i class="icon-plus icon-white"></i>
 										<span>Select image</span>
 										<input type="file" class="input-image" name="logo">
 									</span>
-									<?php if($setting_values['logo_image_thumb_id'] > 0): ?>
+									<?php if($settings['logo_image_thumb_id'] > 0): ?>
 									<a href="#" class="remove-image btn btn-danger">Remove Image</a>
 									<?php endif; ?>
 									<input type="hidden" class="hidden-remove-image" name="" value="">
@@ -82,7 +73,7 @@
 								<div class="control-group">
 									<label class="control-label">Custom CSS</label>
 									<div class="controls">
-										<textarea id="site_custom_css" name="site_custom_css" class="input-block-level" rows="8"><?php echo $setting_values['site_custom_css']; ?></textarea>
+										<textarea id="site_custom_css" name="site_custom_css" class="input-block-level" rows="8"><?php echo $settings['site_custom_css']; ?></textarea>
 									</div>
 								</div>
 							</form>

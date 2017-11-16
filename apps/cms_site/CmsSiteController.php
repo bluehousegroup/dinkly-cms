@@ -19,7 +19,7 @@ class CmsSiteController extends Dinkly
 	public function __construct()
 	{
 		$this->db = DinklyDataConnector::fetchDB();
-		$this->settings = CmsConfigCollection::getSettings($this->db);
+		$this->settings = CmsSettingCollection::getAll(true);
 		$this->design = new CmsDesign($this->db);
 		$this->structure = null;
 

@@ -19,6 +19,16 @@ class CmsSiteNavItem extends BaseCmsSiteNavItem
 
 	protected $is_draft;
 
+	public function setIsDraft($is_draft)
+	{
+		$this->is_draft = $is_draft;
+	}
+
+	public function getIsDraft()
+	{
+		return $this->is_draft;
+	}
+
 	public function getPage($draft = false)
 	{
 		if(!$this->page)
@@ -46,7 +56,14 @@ class CmsSiteNavItem extends BaseCmsSiteNavItem
 	{
 		if(!$this->slug)
 		{
-			$this->slug = $this->getPage()->getDetail()->getSlug();
+			if($this->is_draft)
+			{
+				$this->slug = $this->getPage()->getDetail()->getSlug() . "/draft";
+			}
+			else
+			{
+				$this->slug = $this->getPage()->getDetail()->getSlug();
+			}
 		}
 		return $this->slug;
 	}

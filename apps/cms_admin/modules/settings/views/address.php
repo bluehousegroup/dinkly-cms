@@ -5,7 +5,7 @@
 			<div class="content-header clearfix">
 				<h2 class="pull-left">Site Settings</h2>
 				<div class="pull-right">
-					<a target="_blank" href="/site/<?php echo $site->getDomain(); ?>" class="btn">View Draft Site</a>
+					<a target="_blank" href="/home/draft" class="btn">View Draft Site</a>
 				</div>
 			</div>
 			<div class="body-loader"></div>
@@ -24,25 +24,25 @@
 								<div class="control-group">
 									<label class="control-label" for="street_address">Street Address</label>
 									<div class="controls">
-										<input value="<?php echo $setting_values['address']; ?>" maxlength="<?php echo $setting_keys['address']['length']; ?>" name="settings[address]" type="text" class="input-block-level" id="street_address">
+										<input value="<?php echo isset($setting_values['address']) ? $setting_values['address'] : ''; ?>" maxlength="<?php echo isset($setting_values['address']) ? $setting_keys['address']['length'] : ''; ?>" name="settings[address]" type="text" class="input-block-level" id="street_address">
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label" for="city">City</label>
 									<div class="controls">
-										<input value="<?php echo $setting_values['city']; ?>" maxlength="<?php echo $setting_keys['city']['length']; ?>" name="settings[city]" type="text" class="input-block-level" id="city">
+										<input value="<?php echo isset($setting_values['city']) ? $setting_values['city'] : ''; ?>" maxlength="<?php echo isset($setting_values['city']) ? $setting_keys['city']['length'] : ''; ?>" name="settings[city]" type="text" class="input-block-level" id="city">
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label" for="state">State</label>
 									<div class="controls">
-										<input value="<?php echo $setting_values['state']; ?>" maxlength="<?php echo $setting_keys['state']['length']; ?>" name="settings[state]" type="text" class="input-block-level" id="state">
+										<input value="<?php echo isset($setting_values['state']) ? $setting_values['state'] : ''; ?>" maxlength="<?php echo isset($setting_values['state']) ? $setting_keys['state']['length'] : ''; ?>" name="settings[state]" type="text" class="input-block-level" id="state">
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label" for="zip_code">Zip Code</label>
 									<div class="controls">
-										<input value="<?php echo $setting_values['zipcode']; ?>" maxlength="<?php echo $setting_keys['zipcode']['length']; ?>" name="settings[zipcode]" type="text" class="input-block-level" id="zip_code">
+										<input value="<?php echo isset($setting_values['zipcode']) ? $setting_values['zipcode'] : ''; ?>" maxlength="<?php echo isset($setting_values['zipcode']) ? $setting_keys['zipcode']['length'] : ''; ?>" name="settings[zipcode]" type="text" class="input-block-level" id="zip_code">
 									</div>
 								</div>
 								<div class="form-actions">
