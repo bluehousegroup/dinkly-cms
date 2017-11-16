@@ -54,13 +54,13 @@
 				<?php echo $hours_text->getHtml(); ?>
 			</div>
 			<!-- Locations -->
-			<?php if($settings['address'] OR $settings['city'] OR $settings['state']): ?>
+			<?php if(isset($settings['address']) OR isset($settings['city']) OR isset($settings['state'])): ?>
 				<div class="callout our-location">
 					<h3>Location</h3>
-						<?php echo $settings['address']; ?><?php if($settings['address'] AND ($settings['city'] OR $settings['state'])): ?>,<?php endif; ?>
-						<?php echo $settings['city']; ?>
-						<?php echo $settings['state']; ?>
-					<p><a class="tel" href="#"><?php echo $settings['phone']; ?></a></p>
+						<?php echo (isset($settings['address'])) ? $settings['address'] : ''; ?><?php if(isset($settings['address']) AND (isset($settings['city']) OR isset($settings['state']))): ?>,<?php endif; ?>
+						<?php echo (isset($settings['city'])) ? $settings['city'] : ''; ?>
+						<?php echo (isset($settings['state'])) ? $settings['state'] : ''; ?>
+					<p><a class="tel" href="#"><?php echo (isset($settings['phone'])) ? $settings['phone'] : ''; ?></a></p>
 					<p><a href="#">Make a Reservation</a></p>
 				</div>
 			<?php endif; ?>

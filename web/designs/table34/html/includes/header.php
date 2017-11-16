@@ -12,22 +12,21 @@
 	<?php endif; ?>
 	<?php
 	if($settings['page_title']=='Directions'):?>
-	<script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3KtsW-VipTtJNNpj0jtlYKxY0r_z79Kg&amp;sensor=false">
-</script>
-<?php endif; ?>
-<script type="text/javascript" src="/designs/table34/js/lib/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="/designs/table34/js/lib/twitter/bootstrap.min.js"></script>
-<script type="text/javascript" src="/designs/table34/js/thirdparty/flexslider/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="/designs/table34/js/behavior.js"></script>
-<style><?php echo $settings['site_custom_css']; ?></style>
-		<!--[if lt IE 9]>
-		<link rel="stylesheet" type="text/css" href="../css/ie.css">
-		<script type="text/javascript" src="./designs/table34/js/lib/html5shiv.js"></script>
-		<![endif]-->
-		<!--[if lte IE 7]>
-		<link rel="stylesheet" type="text/css" href="../css/ie7.css">
-		<![endif]-->
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3KtsW-VipTtJNNpj0jtlYKxY0r_z79Kg&amp;sensor=false">
+	</script>
+	<?php endif; ?>
+	<script type="text/javascript" src="/designs/table34/js/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/designs/table34/js/lib/twitter/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/designs/table34/js/thirdparty/flexslider/jquery.flexslider-min.js"></script>
+	<script type="text/javascript" src="/designs/table34/js/behavior.js"></script>
+	<style><?php echo $settings['site_custom_css']; ?></style>
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" href="../css/ie.css">
+	<script type="text/javascript" src="./designs/table34/js/lib/html5shiv.js"></script>
+	<![endif]-->
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" href="../css/ie7.css">
+	<![endif]-->
 	</head>
 	<body>
 		<?php if($is_draft): ?>
@@ -44,7 +43,7 @@
 						<span class="icon-bar"></span>
 					</a>
 
-					<a href="<?php echo $base_path; ?>" class="brand"><img src="<?php echo $logo_path; ?>" alt="<?php echo $settings['meta_title']; ?>"></a>
+					<a href="/" class="brand"><img src="<?php echo $logo_path; ?>" alt="<?php echo $settings['meta_title']; ?>"></a>
 
 					<div class="navbar-upper">
 						<div class="address">
@@ -65,7 +64,7 @@
 							<ul class="nav">
 								<?php if($nav_items != array()): ?>
 									<?php foreach($nav_items as $nav): ?>
-										<li><a href="<?php echo $base_path; ?>/<?php echo $nav->getSlug(); ?>"><?php echo $nav->getLabel(); ?></a></li>
+										<li><a href="/<?php echo $nav->getSlug(); ?>"><?php echo $nav->getLabel(); ?></a></li>
 									<?php endforeach; ?>
 								<?php endif; ?>
 							</ul>

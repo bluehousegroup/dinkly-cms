@@ -44,7 +44,7 @@
 					<?php include('../apps/cms_admin/modules/pages/views/revision_history.php'); ?>
 				</div>
 
-				<form id="content-form" class="editor-form form-horizontal" action="/cms_admin/pages/edit/page/<?php echo $parameters['page']; ?>" method="post" enctype="multipart/form-data">
+				<form id="content-form" class="editor-form form-horizontal" action="/cms_admin/pages/edit/page/<?php echo $page_id; ?>" method="post" enctype="multipart/form-data">
 					<div class="content-editor scrollable">
 						<div class="pad">
 							<div class="content-tabs">
@@ -77,14 +77,12 @@
 									<!-- Template Content Block Editing -->
 									<?php if($template_content_blocks != array()): ?>
 										<?php foreach($template_content_blocks as $block): ?>
-											<?php if(get_class($block) == 'SlideshowContent'): ?>
+											<?php if(get_class($block) == 'CmsSlideshowContent'): ?>
 												<?php include('../apps/cms_admin/modules/pages/views/slideshow_content.php'); ?>
-											<?php elseif(get_class($block) == 'ImageContent'): ?>
+											<?php elseif(get_class($block) == 'CmsImageContent'): ?>
 												<?php include('../apps/cms_admin/modules/pages/views/image_content.php'); ?>
-											<?php elseif(get_class($block) == 'TextContent'): ?>	
+											<?php elseif(get_class($block) == 'CmsTextContent'): ?>	
 												<?php include('../apps/cms_admin/modules/pages/views/text_content.php'); ?>
-											<?php elseif(get_class($block) == 'EmployeeContent'): ?>	
-												<?php include('../apps/cms_admin/modules/pages/views/employee_content.php'); ?>
 											<?php endif; ?>
 										<?php endforeach; ?>
 									<?php endif; ?>
@@ -113,7 +111,7 @@
 					</div>
 					<!-- Live Preview -->
 					<div class="content-preview">
-						<iframe id="autosave-preview" src="/site/<?php echo $page->getDetail()->getSiteNavItemId(); ?>/autosave" width="100%" height="100%" frameborder="0"></iframe>
+						<iframe id="autosave-preview" src="/home/default/site/<?php echo $page->getDetail()->getSiteNavItemId(); ?>/autosave" width="100%" height="100%" frameborder="0"></iframe>
 					</div>
 				</form>
 			</div>

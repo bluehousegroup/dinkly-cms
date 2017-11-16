@@ -42,6 +42,7 @@ class CmsSiteHomeController extends CmsSiteController
 		$this->logo_path = null;
 		$this->revision_number = null;
 		$this->is_draft = false;
+		$this->slug = null;
 
 		//For a one page layout, we'll need all pages right off the bat
 		$this->template_files = array();
@@ -62,9 +63,17 @@ class CmsSiteHomeController extends CmsSiteController
 
 		//Grab page slug, leave null if we can't find one
 		$this->base_path = '/';
-		$parts = explode('/', $_SERVER['REQUEST_URI']);
-		if(!isset($parts[1])) { $this->slug = 'home'; }
-		else { $this->slug = $parts[1]; }
+
+		if(isset($parameters['slug']))
+		{
+			$this->slug = $parameters['slug'];
+		}
+		else
+		{
+			$parts = explode('/', $_SERVER['REQUEST_URI']);
+			if(!isset($parts[1])) { $this->slug = 'home'; }
+			else { $this->slug = $parts[1]; }
+		}
 
 		if($this->is_autosave) //First we check if an autosave is being requested
 		{
@@ -114,7 +123,7 @@ class CmsSiteHomeController extends CmsSiteController
 		$this->template_file = null;
 
 		//If we have a matching page detail record, continue, otherwise send to 404
-		if(!$this->page->getDetail())
+		if($this->page->getDetail()->isNew())
 		{
 			header("HTTP/1.0 404 Not Found");
 
@@ -131,7 +140,7 @@ class CmsSiteHomeController extends CmsSiteController
 			$this->page_template_code = $this->page->getTemplate()->getCode();
 
 			//And the navigation
-			$this->nav_items = $this->site->getStructure($this->is_draft);
+			$this->nav_items = $this->structure;
 
 			//Override default SEO vals if they exist at the page-detail level
 			if($this->page->getDetail()->getMetaTitle() != '')
@@ -178,7 +187,7 @@ class CmsSiteHomeController extends CmsSiteController
 
 			//Set logo
 			$this->logo_path = $this->page->getDesign()->getDefaultLogo();
-			if($this->settings['logo_image_original_id'])
+			if(isset($this->settings['logo_image_original_id']))
 			{
 				$this->logo_path = '/display_image/image_id/' . $this->settings['logo_image_original_id'];
 			}

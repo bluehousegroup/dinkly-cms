@@ -16,7 +16,6 @@ page_templates:
     - about:
         - image: { code: about_image, has_caption: false, desc: 'Top Image', hint: 'Image will be cropped and resized to fit 1200px wide by 480px high', crop_height: 480, crop_width: 1200 }
         - text: { code: about_text, desc: 'Content', hint: '', editor_height: 120, editor: 'ckeditor' }
-        - employees: { code: about_employees, desc: 'Employees', hint: '' }
     - events:
         - image: { code: events_image, has_caption: false, desc: 'Top Image', hint: 'Image will be cropped and resized to fit 1200px wide by 480px high', crop_height: 480, crop_width: 1200 }
         - event: { code: event, desc: 'Event', hint: '' }

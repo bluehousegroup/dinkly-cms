@@ -15,10 +15,10 @@ class CmsAdminPagesController extends CmsAdminController
 
 		//thumbnail size
 		$thumb_name = sys_get_temp_dir() . '/' . uniqid();
-		$thumb = Image::makeThumb($temp_location, $thumb_name, 128, $type);
+		$thumb = CmsImage::makeThumb($temp_location, $thumb_name, 128, $type);
 		$thumb_data = file_get_contents($thumb_name);
 
-		$thumb_image = new Image();
+		$thumb_image = new CmsImage();
 		$thumb_image->setImageData($thumb_data);
 		$thumb_image->setFilename($filename);
 		$thumb_image->setFormat($type);
@@ -27,7 +27,7 @@ class CmsAdminPagesController extends CmsAdminController
 		$thumb_id = $thumb_image->getId();
 
 		//original size
-		$original = new Image();
+		$original = new CmsImage();
 		$original->setImageData($file);
 		$original->setFilename($filename);
 		$original->setFormat($type);
@@ -54,7 +54,7 @@ class CmsAdminPagesController extends CmsAdminController
 			$position = 1;
 			foreach($ids as $id)
 			{
-				$nav_item = new SiteNavItem();
+				$nav_item = new CmsSiteNavItem();
 				$nav_item->init($id);
 				$nav_item->setPosition($position);
 				$nav_item->save();
@@ -95,23 +95,28 @@ class CmsAdminPagesController extends CmsAdminController
 
 	public function loadPublish($parameters)
 	{
+		if(!isset($parameters))
+		{
+			$parameters = $this->fetchGetParams();
+		}
+
 		$this->page_id = $parameters['page'];
 
 		//Load current live page and unset
-		$live_page = new Page();
+		$live_page = new CmsPage();
 		$live_page->init($this->page_id, false);
 		$live_page->getDetail()->setIsCurrentLive(false);
 		$live_page->getDetail()->setIsEnabled(true);
 		$live_page->getDetail()->save();
 
 		//Load current draft page and set as current
-		$draft_page = new Page();
+		$draft_page = new CmsPage();
 		$draft_page->init($this->page_id, true);
 		$draft_page->getDetail()->setIsCurrentLive(true);
 		$draft_page->getDetail()->setIsEnabled(true);
 		$draft_page->getDetail()->save();
 
-		SiteActivityLogCollection::addSiteActivity('page', 'published', json_encode($live_page->getDetail()));
+		CmsActivityLogCollection::addSiteActivity('page', 'published', json_encode($live_page->getDetail()));
 
 		$this->loadModule('cms_admin', 'pages', 'edit', true, true, array('page' => $this->page_id, 'published' => 1));
 
@@ -123,7 +128,7 @@ class CmsAdminPagesController extends CmsAdminController
 		$this->page_id = $parameters['page'];
 
 		//Load current draft page mark it deleted
-		$draft_page = new Page();
+		$draft_page = new CmsPage();
 		$draft_page->init($this->page_id, true);
 		$site_nav_id = $draft_page->getDetail()->getSiteNavItemId();
 
@@ -137,7 +142,7 @@ class CmsAdminPagesController extends CmsAdminController
 		$draft_page->getDetail()->save();
 
 		//Load current live page mark and mark deleted (if one exists)
-		$live_page = new Page();
+		$live_page = new CmsPage();
 		$live_page->init($this->page_id, false);
 		if(!$live_page->getDetail()->isNew())
 		{
@@ -148,11 +153,11 @@ class CmsAdminPagesController extends CmsAdminController
 		}
 
 		//Remove from site nav table
-		$nav = new SiteNavItem();
+		$nav = new CmsSiteNavItem();
 		$nav->init($site_nav_id);
 		if(!$nav->isNew()) { $nav->delete(); }
 
-		SiteActivityLogCollection::addSiteActivity('page', 'deleted', $this->page_id);
+		CmsSiteActivityLogCollection::addSiteActivity('page', 'deleted', $this->page_id);
 
 		$this->loadModule('cms_admin', 'pages', '', true, true, array('deleted' => 1));
 
@@ -213,7 +218,7 @@ class CmsAdminPagesController extends CmsAdminController
 		$this->page = new CmsPage();
 		$this->page->init($this->page_id, true);
 
-		$this->structure = CmsSiteNavItemCollection::getStructure();
+		$this->structure = CmsSiteNavItemCollection::getStructure(true);
 		$this->settings = CmsSettingCollection::getAll(true);
 
 		//Clean up previous autosaves
@@ -256,16 +261,19 @@ class CmsAdminPagesController extends CmsAdminController
 			//Good to go
 			if(!$this->bad)
 			{
+				$this->page = new CmsPage();
+				$this->page->init($this->page_id, true);
+
 				//Cut a new site nav record, which is essentially the most meta record for a page
-				$site_nav_item = new SiteNavItem();
+				$site_nav_item = new CmsSiteNavItem();
 				$site_nav_item->setCreatedAt(date('Y-m-d G:i:s'));
-				$site_nav_item->setPosition(SiteNavItemCollection::getHighestPosition() + 1);
+				$site_nav_item->setPosition(CmsSiteNavItemCollection::getHighestPosition() + 1);
 				$site_nav_item->setParentId(0);
 				$site_nav_item->save();
 
 				//Line up the posted template
 				$selected_template = null;
-				foreach($this->site->getDesign()->getPageTemplates() as $template)
+				foreach($this->page->getDesign()->getPageTemplates() as $template)
 				{
 					if($_POST['page_template'] == $template->getCode())
 					{
@@ -274,7 +282,7 @@ class CmsAdminPagesController extends CmsAdminController
 				}
 
 				//Create a new page detail record
-				$page_detail = new PageDetail();
+				$page_detail = new CmsPageDetail();
 				$page_detail->setCreatedAt(date('Y-m-d G:i:s'));
 				$page_detail->setSiteNavItemId($site_nav_item->getId());
 				$page_detail->setPageTemplateCode($selected_template->getCode());
@@ -287,12 +295,12 @@ class CmsAdminPagesController extends CmsAdminController
 
 				//Generate and set slug
 				$slug = $page_detail->genSlug($page_detail->getNavLabel());
-				if(PageDetailCollection::isDuplicateSlug($slug))
+				if(CmsPageDetailCollection::isDuplicateSlug($slug))
 				{
 					$i=2;
 					while(true)
 					{
-						if(PageDetailCollection::isDuplicateSlug($slug . '-' . $i))
+						if(CmsPageDetailCollection::isDuplicateSlug($slug . '-' . $i))
 						{
 							$i++;
 						}
@@ -305,7 +313,7 @@ class CmsAdminPagesController extends CmsAdminController
 
 				$page_detail->save();
 
-				SiteActivityLogCollection::addSiteActivity('page', 'added', json_encode($page_detail));
+				CmsActivityLogCollection::addSiteActivity('page', 'added', json_encode($page_detail));
 
 				unset($_POST['add_page_posted']);
 

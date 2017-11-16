@@ -51,7 +51,7 @@ class CmsSiteNavItemCollection extends DinklyDataCollection
 	public static function getHighestPosition()
 	{
 		$db = self::fetchDB();
-		$peer_object = new SiteNavItem;
+		$peer_object = new CmsSiteNavItem;
 
 		$results = array();
 		$query = $peer_object->getSelectQuery() . ' order by position desc limit 1';
