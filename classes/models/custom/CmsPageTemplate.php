@@ -36,11 +36,6 @@ class CmsPageTemplate
 						$c = new CmsTextContent();
 						$c->initAsTemplate($content);
 						break;
-						
-					case 'event':
-						$c = new CmsEventContent();
-						$c->initAsTemplate($content);
-						break;
 				}
 
 				if($c)

@@ -12,11 +12,11 @@ class CmsAdminUserController extends CmsAdminController
 	{
 		if(isset($parameters['id']))
 		{
-			$user = new SiteAdminUser();
+			$user = new CmsAdminUser();
 			$user->init($parameters['id']);
 			$user->delete();
 
-			SiteActivityLogCollection::addSiteActivity('user', 'deleted', $parameters['id']);
+			CmsActivityLogCollection::addSiteActivity('user', 'deleted', $parameters['id']);
 
 			$this->loadModule('cms_admin', 'user', 'default', true, true, array('deleted' => true));
 			return false;
@@ -35,7 +35,7 @@ class CmsAdminUserController extends CmsAdminController
 
 			if(isset($parameters['id']))
 			{
-				$this->user = new SiteAdminUser();
+				$this->user = new CmsAdminUser();
 				$this->user->init($parameters['id']);
 			}
 
@@ -78,7 +78,7 @@ class CmsAdminUserController extends CmsAdminController
 			//Good to go
 			if(!$this->bad)
 			{
-				$user = new SiteAdminUser();
+				$user = new CmsAdminUser();
 				$user->setCreatedAt(date('Y-m-d G:i:s'));
 				$user->setUsername($_POST['username']);
 				$user->setPassword($_POST['password']);
@@ -88,7 +88,7 @@ class CmsAdminUserController extends CmsAdminController
 				$user->setIsActive(true);
 				$user->save();
 
-				SiteActivityLogCollection::addSiteActivity('user', 'new', json_encode($_POST));
+				CmsActivityLogCollection::addSiteActivity('user', 'new', json_encode($_POST));
 
 				$this->loadModule('cms_admin', 'user', 'view', true, true, array('created' => true, 'id' => $user->getId()));
 				return false;
@@ -106,7 +106,7 @@ class CmsAdminUserController extends CmsAdminController
 			return false;
 		}
 
-		$this->user = new SiteAdminUser();
+		$this->user = new CmsAdminUser();
 		$this->user->init($parameters['id']);
 
 		if(isset($_POST['posted']))
@@ -138,7 +138,7 @@ class CmsAdminUserController extends CmsAdminController
 				$this->user->setIsActive(true);
 				$this->user->save();
 
-				SiteActivityLogCollection::addSiteActivity('user', 'edited', json_encode($_POST));
+				CmsActivityLogCollection::addSiteActivity('user', 'edited', json_encode($_POST));
 
 				$this->loadModule('cms_admin', 'user', 'view', true, true, array('saved' => true, 'id' => $this->user->getId()));
 			}
@@ -149,7 +149,7 @@ class CmsAdminUserController extends CmsAdminController
 
 	public function loadDefault($parameters = null)
 	{
-		$this->users = SiteAdminUserCollection::getAll();
+		$this->users = CmsAdminUserCollection::getAll();
 
 		if(isset($parameters['deleted']))
 		{

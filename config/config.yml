@@ -11,6 +11,7 @@ global:
             french: 
                 - fr
                 - fr_FR
+        max_post_limit: 33554432
 
     apps:
         cms_site:

@@ -157,7 +157,7 @@ class CmsAdminPagesController extends CmsAdminController
 		$nav->init($site_nav_id);
 		if(!$nav->isNew()) { $nav->delete(); }
 
-		CmsSiteActivityLogCollection::addSiteActivity('page', 'deleted', $this->page_id);
+		CmsActivityLogCollection::addSiteActivity('page', 'deleted', $this->page_id);
 
 		$this->loadModule('cms_admin', 'pages', '', true, true, array('deleted' => 1));
 
@@ -168,7 +168,7 @@ class CmsAdminPagesController extends CmsAdminController
 	{
 		if(isset($parameters['image_id']))
 		{
-			$image = new Image();
+			$image = new CmsImage();
 			$image->init($parameters['image_id']);
 
 			header("Content-type: " . $image->getFormat());

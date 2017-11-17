@@ -66,7 +66,6 @@
 							<li <?php echo (Dinkly::getCurrentModule() == 'settings') ? 'class="active"' : ''; ?>><a href="/cms_admin/settings/">Settings</a></li>
 							<li <?php echo (Dinkly::getCurrentModule() == 'design') ? 'class="active"' : ''; ?>><a href="/cms_admin/design/">Design</a></li>
 							<li <?php echo (Dinkly::getCurrentModule() == 'user') ? 'class="active"' : ''; ?>><a href="/cms_admin/user/">Users</a></li>
-							<li <?php echo (Dinkly::getCurrentModule() == 'events') ? 'class="active"' : ''; ?>><a href="/cms_admin/events/">Events</a></li>
 							<li <?php echo (Dinkly::getCurrentModule() == 'analytics') ? 'class="active"' : ''; ?>><a href="/cms_admin/analytics/">Analytics</a></li>
 						</ul>
 						<ul class="util-nav nav pull-right">

@@ -6,7 +6,7 @@
 				<h2 class="pull-left">Pages <span class="loading" style="display: none;"></span></h2>
 				<div class="pull-right">
 					<a onclick="saveAndPublish();" class="btn">Publish Page</a>
-					<a target="_blank" href="/site/<?php echo $page->getDetail()->getSlug(); ?>" class="btn">View Draft</a>
+					<a target="_blank" href="/<?php echo $page->getDetail()->getSlug(); ?>/draft" class="btn">View Draft</a>
 				</div>
 			</div>
 			<div class="content-body">

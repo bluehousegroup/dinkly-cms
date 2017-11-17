@@ -38,7 +38,7 @@ class CmsAdminDesignController extends CmsAdminController
 			if($_FILES['logo']['size'] > 0)
 			{
 				//Enforce the max post limit (based on PHP and MySQL)
-				if($_FILES['logo']['size'] < Dinkly::getConfigValue('max_post_limit','cms_admin'))
+				if($_FILES['logo']['size'] < Dinkly::getConfigValue('max_post_limit'))
 				{
 					$filename = $_FILES['logo']['name'];
 					$type = $_FILES['logo']['type'];

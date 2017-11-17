@@ -29,7 +29,7 @@ class Dinkly extends BaseDinkly
 
 		$_SESSION['dinkly']['current_app_name'] = $context['current_app_name'];
 
-		$this->loadModule($context['current_app_name'], $context['module'], $context['view'], false, $context['get_params']);
+		$this->loadModule($context['current_app_name'], $context['module'], $context['view'], false, true, $context['get_params']);
 	}
 	
 	/**

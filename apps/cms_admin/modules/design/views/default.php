@@ -85,45 +85,6 @@
 	</div>
 </div>
 
-<!-- New Design Request -->
-<div id="changeform" class="reveal-modal">
-	<h3>Request a Design Change</h3>
-	<p>Your ticket is handled by our well trained staff.</p> 
-	<form class="form-vertical"  method="post">
-		<div class="control-group">
-			<div class="controls">
-				<input value="Change my design!" class="input-block-level ticket_subject" type="hidden" id="ticket_subject" placeholder="Subject"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<div class="controls">
-				<textarea class="input-block-level ticket_message" rows="5" id="ticket_message" placeholder="What design would you like? Any special requests?"></textarea>
-			</div>
-		</div>
-		<a href="#" class="ticket_submit btn" id="ticket_submit">Submit</a>
-	</form>
-	<a class="close-reveal-modal"><i class="icon icon-remove"></i></a>
-</div>
-
-<!-- Consultation Request -->
-<div id="consultform" class="reveal-modal">
-	<h3>Request a Custom Design Consultation</h3>
-	<p>Your ticket is handled by our well trained staff.</p> 
-	<form class="form-vertical"  method="post">
-		<div class="control-group">
-			<div class="controls">
-				<input value="Request for Design Consultation" class="ticket_subject input-block-level" type="hidden" id="ticket_subject" placeholder="Subject"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<div class="controls">
-				<textarea class="input-block-level ticket_message" rows="5" id="ticket_message" placeholder="What sort of design would you like? Any special requests?"></textarea>
-			</div>
-		</div>
-		<a href="#" class="ticket_submit btn" id="ticket_submit">Submit</a>
-	</form>
-	<a class="close-reveal-modal"><i class="icon icon-remove"></i></a>
-</div>
 <script>
 
 /******************************************************************************** HELPER FUNCTIONS */
