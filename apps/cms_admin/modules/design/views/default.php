@@ -34,15 +34,6 @@
 				<div class="dashboard-right">
 					<div class="block">
 						<div class="pad">
-							<form action="/cms_admin/design/default_content" method="post">
-								<div class="block-header just-header">
-									<h4>Default Content <button type="submit" class="btn btn-primary save-logo pull-right">Load Content</button></h4>
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="block">
-						<div class="pad">
 							<form class="logo-form" method="post" action="/cms_admin/design/saveLogo" enctype="multipart/form-data">
 								<div class="block-header form-header">
 									<h4>Upload a Logo <button type="submit" class="btn btn-primary save-logo pull-right">Save Logo</button></h4>

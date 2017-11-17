@@ -119,14 +119,6 @@ class CmsAdminDesignController extends CmsAdminController
 		return false;
 	}
 
-	public function loadDefaultContent($parameters)
-	{
-		$design_short_name = $this->site->getDesign()->getShortName();
-		$this->site->setDefaultContent($design_short_name);
-
-		$this->loadModule('cms_admin', 'design', 'default', true, true, array('default_content_loaded' => true));
-	}
-
 	public function loadDefault($parameters)
 	{
 		//Output any messaging

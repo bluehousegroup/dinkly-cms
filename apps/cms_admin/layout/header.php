@@ -69,16 +69,12 @@
 							<li <?php echo (Dinkly::getCurrentModule() == 'analytics') ? 'class="active"' : ''; ?>><a href="/cms_admin/analytics/">Analytics</a></li>
 						</ul>
 						<ul class="util-nav nav pull-right">
-							<li><a href="/cms_admin/help">Help</a></li>
-							<!-- <li><a href="/cms_admin/account/upgrade">Upgrade</a></li> -->
 							<li class="dropdown">
 								<a href="#" class="user dropdown-toggle" title="Logged in as <?php echo CmsAdminUser::getLoggedUsername('cms_admin'); ?>" data-toggle="dropdown">
 									<span class="username"><?php echo CmsAdminUser::getLoggedUsername('cms_admin'); ?> </span><i class="icon-caret-down"></i>
 								</a>
 								<ul class="dropdown-menu pull-right">
 									<li class="user-info">Logged in as <?php echo CmsAdminUser::getLoggedUsername('cms_admin'); ?></li>
-									<!-- <li><a href="/cms_admin/account">Account</a></li> -->
-									<!-- <li><a href="/cms_admin/account/billing">Billing</a></li> -->
 									<li><a href="/cms_admin/login/logout">Logout</a></li>
 								</ul>
 							</li>
