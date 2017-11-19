@@ -7,8 +7,8 @@ default_logo: http://placehold.it/400x200
 is_public: true
 page_templates:
     - home:
-        - slideshow: { code: slideshow, desc: 'Slideshow' }
-        - image: { code: image1, desc: 'Left column image', has_caption: true, hint: '' }
+        #- slideshow: { code: slideshow, desc: 'Slideshow' }
+        #- image: { code: image1, desc: 'Left column image', has_caption: true, hint: '' }
         - text: { code: left_text, desc: 'Left column content', hint: '', editor_height: 120, editor: 'ckeditor' }
         - text: { code: upcomingevents_text, desc: 'Upcoming events', hint: '', editor_height: 120, editor: 'ckeditor' }
         - text: { code: specials_text, desc: "Today's specials", hint: '', editor_height: 120, editor: 'ckeditor' }

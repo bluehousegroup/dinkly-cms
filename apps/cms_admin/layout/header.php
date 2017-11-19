@@ -1,86 +1,57 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Site Admin</title>
-		<link rel="stylesheet" href="/css/datatables-bootstrap.css">
-		<link rel="stylesheet" href="/css/site-admin.css" />
-		<link rel="stylesheet" href="/css/mini-ticket.css" />
+<head>
+	<title>Site Admin</title>
+	<!-- https://bootswatch.com/united/ - Bootstrap Admin Style -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/custom.css">
 
-		<!-- Bootstrap and jQuery -->
-		<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="/js/bootstrap/bootstrap.min.js"></script>
+	<!-- Bootstrap and jQuery -->
+	<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/js/popper.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
-		<!-- Site Admin Behaviors -->
-		<script type="text/javascript" src="/js/behavior.js"></script>
-
-		<!-- Datatables -->
-		<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
-
-		<!-- CKEditor -->
-		<script type="text/javascript" src="/js/ckeditor/ckeditor.js"></script>
-
-		<!-- jQuery UI (Includes UI Sortable) -->
-		<script type="text/javascript" src="/js/jquery-ui-1.10.2.custom.min.js"></script>
-
-		<!-- Twitter Bootstrap timepicker http://jdewit.github.io/bootstrap-timepicker/ -->
-		<script type="text/javascript" src="/js/bootstrap/twitter/bootstrap-timepicker.min.js"></script>
-
-		<!-- Twitter Bootstrap datepicker https://github.com/eternicode/bootstrap-datepicker -->
-		<script type="text/javascript" src="/js/bootstrap/twitter/bootstrap-datepicker.js"></script>
-
-		<!-- MiniTicket js -->
-		<script type="text/javascript" src="/js/mini-ticket.js"></script>		
-    	<script type="text/javascript" src="/js/jquery.foundation.reveal.js"></script>
-
-    	<!-- Chart js -->
-		<script type="text/javascript" src="/js/Chart.js"></script>
-
-		<!-- HTML5 Uploader js -->
-		<script type="text/javascript" src="/js/html5_uploader/code.js"></script>
-		<link rel="stylesheet" href="/js/html5_uploader/style.css" />
-
-		<!-- Session Keepalive -->
-		<script type="text/javascript">
+	<!-- Session Keepalive -->
+	<script type="text/javascript">
+		$.get('/cms_admin/user/keep_alive');
 		setInterval(function(){
-		   $.get('/cms_admin/user/keep_alive');
+			$.get('/cms_admin/user/keep_alive');
 		}, 300000); // 5 mins * 60 * 1000
-		</script>
+	</script>
 
-		<!-- jQuery Debounce -->
-		<script type="text/javascript" src="/js/jquery.ba-throttle-debounce.js"></script>
-
-		<link rel="stylesheet" href="/css/jquery.fileupload-ui.css">
-
-		<!-- Module Header -->
-		<?php echo $this->getModuleHeader(); ?>
-	</head>
-	<body>
+	<!-- Module Header -->
+	<?php echo $this->getModuleHeader(); ?>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="/cms_admin/home">Dinkly CMS</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 		<?php if(CmsAdminUser::isLoggedIn('cms_admin')): ?>
-		<header id="header" role="banner">
-			<div class="navbar navbar-inverse navbar-static-top">
-				<div class="navbar-inner">
-					<div class="container-fluid">
-						<a href="/cms_admin" class="brand">Dinkly CMS Admin</a>
-						<ul class="nav pull-left">
-							<li <?php echo (Dinkly::getCurrentModule() == 'pages') ? 'class="active"' : ''; ?>><a href="/cms_admin/pages/">Content</a></li>
-							<li <?php echo (Dinkly::getCurrentModule() == 'settings') ? 'class="active"' : ''; ?>><a href="/cms_admin/settings/">Settings</a></li>
-							<li <?php echo (Dinkly::getCurrentModule() == 'design') ? 'class="active"' : ''; ?>><a href="/cms_admin/design/">Design</a></li>
-							<li <?php echo (Dinkly::getCurrentModule() == 'user') ? 'class="active"' : ''; ?>><a href="/cms_admin/user/">Users</a></li>
-							<li <?php echo (Dinkly::getCurrentModule() == 'analytics') ? 'class="active"' : ''; ?>><a href="/cms_admin/analytics/">Analytics</a></li>
-						</ul>
-						<ul class="util-nav nav pull-right">
-							<li class="dropdown">
-								<a href="#" class="user dropdown-toggle" title="Logged in as <?php echo CmsAdminUser::getLoggedUsername('cms_admin'); ?>" data-toggle="dropdown">
-									<span class="username"><?php echo CmsAdminUser::getLoggedUsername('cms_admin'); ?> </span><i class="icon-caret-down"></i>
-								</a>
-								<ul class="dropdown-menu pull-right">
-									<li class="user-info">Logged in as <?php echo CmsAdminUser::getLoggedUsername('cms_admin'); ?></li>
-									<li><a href="/cms_admin/login/logout">Logout</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
+			<div class="collapse navbar-collapse" id="navbar">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item <?php echo (Dinkly::getCurrentModule() == 'pages') ? 'active' : ''; ?>">
+						<a class="nav-link" href="/cms_admin/pages">Pages</a>
+					</li>
+					<li class="nav-item<?php echo (Dinkly::getCurrentModule() == 'settings') ? 'active' : ''; ?>">
+						<a class="nav-link" href="/cms_admin/settings">Settings</a>
+					</li>
+					<li class="nav-item <?php echo (Dinkly::getCurrentModule() == 'user') ? 'active' : ''; ?>">
+						<a class="nav-link" href="/cms_admin/user">Users</a>
+					</li>
+					<li class="nav-item <?php echo (Dinkly::getCurrentModule() == 'design') ? 'active' : ''; ?>">
+						<a class="nav-link" href="/cms_admin/design ">Design</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download" aria-expanded="false"><?php echo CmsAdminUser::getLoggedUsername('cms_admin'); ?></a>
+						<div class="dropdown-menu" aria-labelledby="download">
+							<a class="dropdown-item" href="/cms_admin/login/logout">Logout</a>
+						</div>
+					</li>
+				</ul>
 			</div>
-		</header>
 		<?php endif; ?>
+	</nav>
