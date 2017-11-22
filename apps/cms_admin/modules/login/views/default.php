@@ -1,26 +1,24 @@
-<div id="content">
-	<div class="content-wrapper no-nav">
-		<div class="content-body">
-			<div id="login" class="loginform">
-				<div class="pad">
-					<div  class="block-header form-header" style="text-align: center;">
-						<h4>Dinkly CMS Site Admin</h4>
-					</div>
+<div class="container-fluid viewport-height">
+	<div class="row align-items-center viewport-height">
+		<div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+			<div class="card">
+				<h4 class="card-header">Dinkly CMS Site Admin</h4>
+				<div class="card-body">
 					<?php include_once('../apps/cms_admin/layout/messaging.php'); ?>
-					<form method="post" action="" class="form-vertical">
-						<div class="control-group">
-							<label for="username" class="control-label"></label>
+					<form method="post" action="">
+						<div class="form-group">
+							<label for="username">Email</label>
 							<div class="controls">
-								<input type="text" class="input-block-level" id="username" name="username" placeholder="Username" value="">
+								<input type="text" class="form-control" id="username" name="username" placeholder="Username" value="">
 							</div>
 						</div>
-						<div class="control-group">
-							<label for="password" class="control-label"></label>
+						<div class="form-group">
+							<label for="password">Password</label>
 							<div class="controls">
-								<input type="password" class="input-block-level" id="password" name="password" placeholder="Password">
+								<input type="password" class="form-control" id="password" name="password" placeholder="Password">
 							</div>
 						</div>
-						<div class="form-actions">
+						<div class="form-group">
 							<button type="submit" class="btn btn-primary">Login</button>
 						</div>
 					</form>

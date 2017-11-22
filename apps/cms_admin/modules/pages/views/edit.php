@@ -67,7 +67,7 @@
 					<a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">History</a>
 				</li>
 			</ul>
-			<div class="tab-content" id="myTabContent">
+			<div class="tab-content">
 				<div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
 					<!-- Template Content Block Editing -->
 					<?php if($template_content_blocks != array()): ?>

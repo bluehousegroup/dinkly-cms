@@ -5,3 +5,12 @@
 .content-sidebar {
 	margin-top: 1.0em;
 }
+
+/* Utility to assign 100% height based on browser viewport */
+.viewport-height {
+	height: 100vh;
+}
+
+.editor-content-card {
+	margin-top: 1.0em;
+}
