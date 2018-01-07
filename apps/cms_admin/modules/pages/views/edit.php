@@ -1,3 +1,6 @@
+<!-- TODO -->
+<!-- Fix responsive on small pages -->
+<!-- Pin save buttons to footer, if possible -->
 <div class="container">
 	<div class="page-header section-header">
 		<h2>
@@ -11,7 +14,7 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-3 col-sm-6">
 			<label>Live Preview &nbsp;</label>
 			<div class="btn-group" data-toggle="buttons">
 				<label class="btn btn-secondary active">
@@ -22,7 +25,7 @@
 				</label>
 			</div>
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-9 col-sm-6">
 			<h4><?php echo ($settings['site_name']) ? $settings['site_name'] : 'Unnamed Site'; ?>: <?php echo $page->getTemplate()->getTemplateName(); ?></h4>
 			<p>Current Template: <strong><?php echo $page->getDesign()->getTitle(); ?></strong></p>
 		</div>
@@ -67,31 +70,33 @@
 					<a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">History</a>
 				</li>
 			</ul>
-			<div class="tab-content">
-				<div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
-					<!-- Template Content Block Editing -->
-					<?php if($template_content_blocks != array()): ?>
-						<?php foreach($template_content_blocks as $block): ?>
-							<?php if(get_class($block) == 'CmsSlideshowContent'): ?>
-								<?php include('../apps/cms_admin/modules/pages/views/slideshow_content.php'); ?>
-							<?php elseif(get_class($block) == 'CmsImageContent'): ?>
-								<?php include('../apps/cms_admin/modules/pages/views/image_content.php'); ?>
-							<?php elseif(get_class($block) == 'CmsTextContent'): ?>	
-								<?php include('../apps/cms_admin/modules/pages/views/text_content.php'); ?>
-							<?php endif; ?>
-						<?php endforeach; ?>
-					<?php endif; ?>
+			<form action="" method="post" name="edit_page">
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
+						<!-- Template Content Block Editing -->
+						<?php if($template_content_blocks != array()): ?>
+							<?php foreach($template_content_blocks as $block): ?>
+								<?php if(get_class($block) == 'CmsSlideshowContent'): ?>
+									<?php include('../apps/cms_admin/modules/pages/views/slideshow_content.php'); ?>
+								<?php elseif(get_class($block) == 'CmsImageContent'): ?>
+									<?php include('../apps/cms_admin/modules/pages/views/image_content.php'); ?>
+								<?php elseif(get_class($block) == 'CmsTextContent'): ?>	
+									<?php include('../apps/cms_admin/modules/pages/views/text_content.php'); ?>
+								<?php endif; ?>
+							<?php endforeach; ?>
+						<?php endif; ?>
 
-					<input type="hidden" name="posted" value="true" />
-					<input type="hidden" name="publish" id="hidden-publish" value="" />
+						<input type="hidden" name="posted" value="true" />
+						<input type="hidden" name="publish" id="hidden-publish" value="" />
+					</div>
+					<div class="tab-pane fade" id="metadata" role="tabpanel" aria-labelledby="metadata-tab">
+						<?php include('../apps/cms_admin/modules/pages/views/metadata.php'); ?>
+					</div>
+					<div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+						<?php include('../apps/cms_admin/modules/pages/views/revision_history.php'); ?>
+					</div>
 				</div>
-				<div class="tab-pane fade" id="metadata" role="tabpanel" aria-labelledby="metadata-tab">
-					
-				</div>
-				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-					
-				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>

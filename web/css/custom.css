@@ -14,3 +14,7 @@
 .editor-content-card {
 	margin-top: 1.0em;
 }
+
+.filedrag-preview-container-slideshow {
+	max-width: 240px;
+}

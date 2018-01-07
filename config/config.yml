@@ -8,10 +8,10 @@ global:
             english:
                 - en
                 - en_US
-            french: 
-                - fr
-                - fr_FR
+        
+        #Dinkly CMS settings
         max_post_limit: 33554432
+        image_store: filesystem # `database` is also an option for easier data replication
 
     apps:
         cms_site:

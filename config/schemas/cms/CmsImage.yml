@@ -1,6 +1,9 @@
 table_name: cms_image
 registry:
   - id
+  - created_at
+  - updated_at
   - format: { type: varchar, length: 64, allow_null: false }
   - image_data: { type: longblob, allow_null: false }
   - filename: { type: varchar, length: 256, allow_null: true }
+  - unique_name: { type: varchar, length: 256, allow_null: true }

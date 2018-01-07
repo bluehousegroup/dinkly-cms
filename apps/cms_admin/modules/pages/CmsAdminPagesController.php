@@ -4,31 +4,86 @@ class CmsAdminPagesController extends CmsAdminController
 {
 	public function loadImageUpload($parameters)
 	{
+		//Grab the original filename
 		$filename = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
-		$file = file_get_contents('php://input');
+
+		//Grab the original file data
+		$original_image_data = file_get_contents('php://input');
+
+		//Determine the file type
 		$type = "image/" . $parameters['filetype'];
 
-		$temp_location = sys_get_temp_dir() . '/' . uniqid();
-		file_put_contents($temp_location, file_get_contents('php://input'));
+		//Set the destination upload folder
+		$uploads_path = $_SERVER['APPLICATION_ROOT'] . "web/uploads/";
 
-		//somewhere in here we need to also check the cropped sizes
+		//Determine the extension we'll be using
+		$extension = null;
+		if($type == 'image/jpeg')
+		{
+			$extension = '.jpg';
+		}
+		else if($type == 'image/png')
+		{
+			$extension = '.png';
+		}
 
-		//thumbnail size
-		$thumb_name = sys_get_temp_dir() . '/' . uniqid();
-		$thumb = CmsImage::makeThumb($temp_location, $thumb_name, 128, $type);
-		$thumb_data = file_get_contents($thumb_name);
+		//Create a unique name for the new files
+		$unique_name = uniqid();
 
+		//Set a temporary location to do image manipulation
+		$temp_location = sys_get_temp_dir() . '/' . $unique_name;
+
+		//Take the image data out of the upload stream and place it in a temp location
+		file_put_contents($temp_location, $original_image_data);
+
+		//Set a name for the thumbnail
+		$thumb_name = $unique_name . '_thumb';
+
+		//Set the thumbail location
+		$temp_thumb_location = sys_get_temp_dir() . '/' . $thumb_name . $extension;
+
+		//Create the thumbnail from the temp file and place it in another temp location
+		$thumb = CmsImage::makeThumb($temp_location, $temp_thumb_location, 128, $type);
+
+		//Grab the new thumbnail image data
+		$thumb_data = file_get_contents($temp_thumb_location);
+
+		//Create new CmsImage object, to keep a record of the image in the database
 		$thumb_image = new CmsImage();
-		$thumb_image->setImageData($thumb_data);
+
+		//Store thumb images in database or on the filesystem, depending on config value
+		if(Dinkly::getConfigValue('image_store') == 'database')
+		{
+			$thumb_image->setImageData($thumb_data);	
+		}
+		else
+		{
+			file_put_contents($uploads_path . $thumb_name . $extension, $thumb_data);
+		}
+		
+		$thumb_image->setCreatedAt(date('Y-m-d G:i:s'));
+		$thumb_image->setUniqueName($thumb_name . $extension);
 		$thumb_image->setFilename($filename);
 		$thumb_image->setFormat($type);
 		$thumb_image->save();
 
 		$thumb_id = $thumb_image->getId();
 
-		//original size
+		//Store original image
 		$original = new CmsImage();
-		$original->setImageData($file);
+
+		//Store original images in database or on the filesystem, depending on config value
+		if(Dinkly::getConfigValue('image_store') == 'database')
+		{
+			$original->setImageData($file);
+		}
+		else
+		{
+			file_put_contents($uploads_path . $unique_name . $extension, $original_image_data); 
+		}
+		
+		$original->setCreatedAt(date('Y-m-d G:i:s'));
+		$original->setUniqueName($unique_name . $extension);
 		$original->setFilename($filename);
 		$original->setFormat($type);
 		$original->save();
@@ -172,8 +227,15 @@ class CmsAdminPagesController extends CmsAdminController
 			$image->init($parameters['image_id']);
 
 			header("Content-type: " . $image->getFormat());
-			echo $image->getImageData();
-			die();
+
+			if(Dinkly::getConfigValue('image_store') == 'database')
+			{
+				echo $image->getImageData();
+			}
+			else
+			{
+				file_get_contents($_SERVER['APPLICATION_ROOT'] . "web/uploads/" . $image->getUniqueName());
+			}
 		}
 		return false;
 	}
