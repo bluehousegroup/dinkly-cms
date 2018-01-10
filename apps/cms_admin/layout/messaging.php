@@ -1,17 +1,23 @@
-<div id="message">
-	<div class="alert alert-error" style="display:none;">
-		<p class="bad-message"></p>
-	</div>
-	<div class="alert alert-success" style="display:none;">
-		<p class="good-message"></p>
-	</div>
-</div>
-<div id="modal-confirm-template" data-backdrop="static" class="modal hidden fade">
-    <div class="modal-body confirm-message"></div>
-    <div class="modal-footer">
-        <a href="#" class="confirm-yes btn btn-danger">Yes</a>
-        <a class="btn btn-secondary confirm-no" href="javascript:$('#modal-confirm').modal('hide')">No</a>
+<?php if(DinklyFlash::exists('success')): ?>
+    <div class="alert alert-success">
+        <button type="button" class="close message-close" aria-hidden="true">&times;</button>
+        <br>
+        <?php echo DinklyFlash::get('success'); ?>
     </div>
-    <input type="hidden" class="callback">
-    <input type="hidden" class="target-id">
-</div>
+<?php endif; ?>
+<?php if(DinklyFlash::exists('error')): ?>
+    <div class="alert alert-danger">
+        <button type="button" class="close message-close" aria-hidden="true">&times;</button>
+        <?php echo DinklyFlash::get('error'); ?>
+    </div>
+<?php endif; ?>
+<?php if(DinklyFlash::exists('errors')): ?>
+    <div class="alert alert-danger">
+        <button type="button" class="close message-close" aria-hidden="true">&times;</button>
+        <ul>
+            <?php foreach(DinklyFlash::get('errors') as $error): ?>
+                <li><?php echo $error; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

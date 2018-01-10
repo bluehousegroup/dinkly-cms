@@ -2,14 +2,18 @@
 <html>
 <head>
 	<title>Site Admin</title>
-	<!-- https://bootswatch.com/united/ - Bootstrap Admin Style -->
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css/custom.css">
 
-	<!-- Bootstrap and jQuery -->
+	<link href="/css/bootstrap.4.0.0-beta.3.min.css" rel="stylesheet">
+	<link href="/css/fontawesome-all.5.0.3.min.css" rel="stylesheet">
+	<link href="/css/datatables.1.10.16.combined.min.css" rel="stylesheet">
+	<link href="/css/dinkly.3.29.css" rel="stylesheet">
+	<link href="/css/dinkly-cms.css" rel="stylesheet">
+
 	<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="/js/popper.min.js"></script>
-	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.4.0.0-beta.3.min.js"></script>
+	<script type="text/javascript" src="/js/datatables.1.10.16.combined.min.js"></script>
+	<script type="text/javascript" src="/js/dinkly.3.29.js"></script>
+	<script type="text/javascript" src="/js/dinkly-cms.js"></script>
 
 	<!-- Session Keepalive -->
 	<script type="text/javascript">

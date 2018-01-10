@@ -7,14 +7,14 @@ class CmsAdminLoginController extends CmsAdminController
 		parent::__construct();
 	}
 
-	public function loadDefault($parameters)
+	public function loadDefault($parameters = array())
 	{
 		//Handle login post and attempt to authenticate
 		if(isset($_POST['username']) && isset($_POST['password']))
 		{
 			if(!CmsAdminUser::authenticate($_POST['username'], $_POST['password']))
 			{
-				$parameters['bad_auth'] = true;
+				DinklyFlash::set('error', "We couldn't verify your username and password");
 			}
 		}
 
@@ -24,8 +24,6 @@ class CmsAdminLoginController extends CmsAdminController
 			$this->loadModule('cms_admin', 'home', 'default', true);
 			return false;
 		}
-
-		$this->setMessages($parameters);
 
 		return true;
 	}
@@ -37,13 +35,5 @@ class CmsAdminLoginController extends CmsAdminController
 		$this->loadModule('cms_admin', 'login', 'default', true);
 
 		return false;
-	}
-
-	public function setMessages($parameters)
-	{
-		if(isset($parameters['bad_auth']))
-		{
-			$this->bad[] = 'Invalid login.';
-		}
 	}
 }
