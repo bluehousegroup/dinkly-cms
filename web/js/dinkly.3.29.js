@@ -4,6 +4,6 @@ $(document).ready(function() {
 	});
 
 	$('.dinkly-datatable').DataTable({
-    	responsive: true
+		//Options
 	});
 });

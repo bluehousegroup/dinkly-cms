@@ -1,11 +1,8 @@
-<!-- TODO -->
-<!-- Fix responsive on small pages -->
-<!-- Pin save buttons to footer, if possible -->
 <div class="container">
-	<div class="page-header section-header">
+	<div class="page-header mt-4">
 		<h2>
 			Pages
-			<div class="float-right">
+			<div class="float-md-right">
 				<button type="button" class="btn btn-primary">Save</button>	
 				<button type="button" class="btn btn-info">Save and Publish</button>
 				<button type="button" class="btn btn-secondary">View Draft</button>
@@ -16,7 +13,7 @@
 	<div class="row">
 		<div class="col-md-3 col-sm-6">
 			<label>Live Preview &nbsp;</label>
-			<div class="btn-group" data-toggle="buttons">
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary active">
 					<input type="radio" name="options" id="option1" checked="checked"> Off
 				</label>
@@ -25,30 +22,28 @@
 				</label>
 			</div>
 		</div>
-		<div class="col-md-9 col-sm-6">
+		<div class="col-sm-12 pt-sm-2 pt-lg-0 pt-md-0 pt-2 col-md-9">
 			<h4><?php echo ($settings['site_name']) ? $settings['site_name'] : 'Unnamed Site'; ?>: <?php echo $page->getTemplate()->getTemplateName(); ?></h4>
 			<p>Current Template: <strong><?php echo $page->getDesign()->getTitle(); ?></strong></p>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-3 col-sm-12">
 			<form action="" method="post" name="add_page" class="form-inline">
-				<div class="form-group">
-					<div>
-						<select name="page_template" class="form-control">
-							<option value="">New page...</option>
-							<?php if($available_templates == array()): ?>
-								<option value=""><em>All available pages have been added</em></option>
-							<?php else: ?>
-								<?php foreach($available_templates as $template): ?>
-									<option value="<?php echo $template->getCode(); ?>"><?php echo $template->getTemplateName(); ?></option>
-								<?php endforeach; ?>
-							<?php endif; ?>
-						</select>
-						<input type="hidden" name="add_page_posted" value="true">
-						<input class="btn btn-primary template-submit" type="submit" value="Add" name="page_template_submit">
-					</div>
-				</div>
+				<form class="form-inline">
+					<select name="page_template" class="form-control mb-2 mr-2">
+						<option value="">New page...</option>
+						<?php if($available_templates == array()): ?>
+							<option value=""><em>All available pages have been added</em></option>
+						<?php else: ?>
+							<?php foreach($available_templates as $template): ?>
+								<option value="<?php echo $template->getCode(); ?>"><?php echo $template->getTemplateName(); ?></option>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</select>
+
+					<input class="btn btn-primary template-submit mb-2" type="submit" value="Add" name="page_template_submit">
+				</form>
 			</form>
 			<nav class="navbar navbar-light bg-light content-sidebar">
 				<nav class="nav nav-pills flex-column">
@@ -101,3 +96,18 @@
 	</div>
 </div>
 <input type="hidden" name="page_id" id="page_id" value="<?php echo $page_id; ?>">
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		//This little ditty will make sure the datatable gets draw to the correct width when its initialzed
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+			if($(this).html() == 'History') {
+				if(!$.fn.DataTable.isDataTable("#revision-table")) {
+					$('#revision-table').DataTable({
+						searching: false
+					});
+				}
+			}
+		});
+	});
+</script>
