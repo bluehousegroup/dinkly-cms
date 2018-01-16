@@ -1,14 +1,17 @@
-<div class="container mt-4 mb-4">
-	<?php include($_SERVER['APPLICATION_ROOT'] . 'plugins/basic_admin/apps/admin/layout/messaging.php'); ?>
+<div class="container">
+	<?php include($_SERVER['APPLICATION_ROOT'] . 'apps/cms_admin/layout/messaging.php'); ?>
+	<div class="page-header mt-4">
+		<h2>
+			User Detail <button type="button" data-toggle="modal" data-target="#delete-user-modal" class="float-right btn btn-link">Delete User</button>
+		</h2>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/cms_admin/user/">Users</a></li>
+				<li class="breadcrumb-item active" aria-current="page">User Detail</li>
+			</ol>
+		</nav>
+	</div>
 
-	<nav aria-label="breadcrumb">
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="/admin/user/">Users</a></li>
-			<li class="breadcrumb-item active" aria-current="page">User Detail</li>
-		</ol>
-	</nav>
-
-	<h2>User Detail <button type="button" data-toggle="modal" data-target="#delete-user-modal" class="float-right btn btn-link">Delete User</button></h2>
 	<hr>
 	
 	<div class="row">
@@ -17,11 +20,11 @@
 				<legend>User Info <button style="" type="button" class="btn btn-xs btn-link btn-edit-user">Edit</button></legend>
 				<div class="form-group">
 					<label for="created">Created</label>
-					<input value="<?php echo $user->getCreatedAt($date_format); ?>" type="text" disabled="disabled" class="form-control" id="created" name="created">
+					<input value="<?php echo $user->getCreatedAt(); ?>" type="text" disabled="disabled" class="form-control" id="created" name="created">
 				</div>	
 				<div class="form-group">
 					<label for="updated">Updated</label>
-					<input value="<?php echo $user->getUpdatedAt($date_format); ?>" type="text" disabled="disabled" class="form-control" id="updated" name="updated">
+					<input value="<?php echo $user->getUpdatedAt(); ?>" type="text" disabled="disabled" class="form-control" id="updated" name="updated">
 				</div>
 				<hr>
 				<div class="form-group">
@@ -58,7 +61,7 @@
 							<tr>
 								<td><?php echo $group->getName(); ?></td>
 								<td><?php echo $group->getAbbreviation(); ?></td>
-								<td><a href="/admin/user/remove_group/id/<?php echo $user->getId(); ?>/group_id/<?php echo $group->getId(); ?>">remove</a></td>
+								<td><a href="/cms_admin/user/remove_group/id/<?php echo $user->getId(); ?>/group_id/<?php echo $group->getId(); ?>">remove</a></td>
 							</tr>
 						<?php endforeach; ?>
 					<?php else: ?>
@@ -74,7 +77,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.btn-edit-user').click(function() { 
-			window.location = "/admin/user/edit/id/<?php echo $user->getId(); ?>";
+			window.location = "/cms_admin/user/edit/id/<?php echo $user->getId(); ?>";
 			return true;
 		});
 
@@ -84,7 +87,7 @@
 		});
 
 		$('.btn-delete-user').click(function() {
-			window.location = "/admin/user/delete/id/<?php echo $user->getId(); ?>";
+			window.location = "/cms_admin/user/delete/id/<?php echo $user->getId(); ?>";
 		});
 	});	
 </script>
@@ -100,7 +103,7 @@
 			</div>
 			<div class="modal-body">
 				<?php if($available_groups != array()): ?>
-					<form class="form-horizontal" id="add-group-form" method="post" action="/admin/user/add_group/id/<?php echo $user->getId(); ?>" role="form">
+					<form class="form-horizontal" id="add-group-form" method="post" action="/cms_admin/user/add_group/id/<?php echo $user->getId(); ?>" role="form">
 						<select id="group" name="group[]" class="form-control multiselect" multiple="multiple">
 							<?php if($available_groups != array()): ?>
 								<?php foreach($available_groups as $group): ?>

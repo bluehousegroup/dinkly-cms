@@ -4,10 +4,17 @@ registry:
   - created_at
   - updated_at
   - username: { type: varchar, length: 64, allow_null: false }
-  - password: { type: varchar, length: 512, allow_null: false }
+  - password: { type: varchar, length: 1024, allow_null: false }
   - first_name: { type: varchar, length: 24, allow_null: true }
   - last_name: { type: varchar, length: 24, allow_null: true }
-  - title: { type: varchar, length: 24, allow_null: true }
+  - title: { type: varchar, length: 128, allow_null: true }
   - last_login_at: { type: datetime, allow_null: true }
   - login_count: { type: int, allow_null: false }
-  - is_active: { type: boolean, allow_null: false }
+  - date_format: { type: varchar, length: 24, allow_null: true }
+  - time_format: { type: varchar, length: 24, allow_null: true }
+  - time_zone: { type: varchar, length: 50, allow_null: true }
+  - auto_login_hash: { type: varchar, length: 255, allow_null: true }
+  - auto_login_expire: { type: datetime, allow_null: true }
+  - failed_login_count: { type: int, allow_null: false }
+  - last_failed_login_at: { type: datetime, allow_null: true }
+  - is_locked: { type: boolean, allow_null: false }

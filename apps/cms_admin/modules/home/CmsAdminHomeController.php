@@ -9,8 +9,6 @@ class CmsAdminHomeController extends CmsAdminController
 
 	public function loadDefault($parameters)
 	{
-		$this->activity_log = CmsActivityLogCollection::getRecent($this->db, 7);
-		
-		return true;
+		return $this->loadModule('cms_admin', 'pages', 'default', true);
 	}
 }

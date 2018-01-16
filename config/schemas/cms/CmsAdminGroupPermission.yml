@@ -1,0 +1,5 @@
+table_name: cms_admin_group_permission
+registry:
+  - id
+  - group_id: { type: int, allow_null: false }
+  - permission_id: { type: int, allow_null: false }

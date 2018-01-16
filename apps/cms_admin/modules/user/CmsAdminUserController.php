@@ -240,7 +240,7 @@ class CmsAdminUserController extends CmsAdminController
 			$this->user->init($parameters['id']);
 
 			//Build a collection of groups that the user in not currently in
-			$temp_groups = DinklyGroupCollection::getAll();
+			$temp_groups = CmsAdminGroupCollection::getAll();
 
 			if($temp_groups != array())
 			{

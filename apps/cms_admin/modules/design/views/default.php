@@ -1,84 +1,93 @@
-<div id="main" role="main">
-	<div id="content">
-		<div class="content-wrapper has-header">
-			<?php include_once('../apps/cms_admin/layout/messaging.php'); ?>
-			<div class="content-header clearfix">
-				<h2 class="pull-left">Design</h2>
-				<div class="pull-right">
-					<a target="_blank" href="/home/draft" class="btn">View Draft Site</a>
+<div class="container">
+	<?php include($_SERVER['APPLICATION_ROOT'] . 'apps/cms_admin/layout/messaging.php'); ?>
+	<div class="page-header mt-4">
+		<h2>
+			Design
+		</h2>	
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-7">
+			<div class="card">
+				<div class="card-header">Select a design</div>
+				<div class="card-body">
+					<?php foreach($designs as $design): ?>
+						<li>
+							<a id="<?php echo $design->getCode(); ?>" class="design-select <?php echo ($design->getCode() == $design_code ? 'selected' : ''); ?>" href="#">
+								<img src="<?php echo $design->getPreviewImage(); ?>">
+								<h4><?php echo $design->getTitle(); ?></h4>
+								<p><?php echo $design->getDesc(); ?></p>
+							</a>
+						</li>
+					<?php endforeach; ?>
 				</div>
 			</div>
-			<div class="content-body scrollable">
-				<div class="dashboard-left">
-					<div class="block">
-						<div class="pad">
-							<div class="block-header form-header">
-								<h4>Pick a Design <button onclick="saveDesign(); return false;" class="btn btn-primary save-button pull-right" data-loading-text="Saving...">Save Choice</button></h4>
-							</div>
-							<div class="block-content">
-								<ul class="design-picker clearfix">
-									<?php foreach($designs as $design): ?>
-										<li>
-											<a id="<?php echo $design->getCode(); ?>" class="design-select <?php echo ($design->getCode() == $design_code ? 'selected' : ''); ?>" href="#">
-												<img src="<?php echo $design->getPreviewImage(); ?>">
-												<h4><?php echo $design->getTitle(); ?></h4>
-												<p><?php echo $design->getDesc(); ?></p>
-											</a>
-										</li>
-									<?php endforeach; ?>
-								</ul>
+			<div class="card mt-4">
+				<div class="card-header">Custom CSS</div>
+				<div class="card-body">
+					<form>
+						<div class="block-header form-header">
+							<h4>Add Custom CSS <button onclick="saveCss(); return false;" class="btn btn-primary save-button pull-right" data-loading-text="Saving...">Save Custom CSS</button></h4>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Custom CSS</label>
+							<div class="controls">
+								<textarea id="site_custom_css" name="site_custom_css" class="input-block-level" rows="8"><?php echo $settings['site_custom_css']; ?></textarea>
 							</div>
 						</div>
-					</div>
+					</form>
 				</div>
-				<div class="dashboard-right">
-					<div class="block">
-						<div class="pad">
-							<form class="logo-form" method="post" action="/cms_admin/design/saveLogo" enctype="multipart/form-data">
-								<div class="block-header form-header">
-									<h4>Upload a Logo <button type="submit" class="btn btn-primary save-logo pull-right">Save Logo</button></h4>
-								</div>
-								<div class="control-group controls">
-									<img class="image-content-image" src="<?php echo ($settings['logo_image_thumb_id'] > 0) ? '/cms_admin/pages/display_image/image_id/'.$settings['logo_image_thumb_id'] : 'http://placehold.it/148x148/&amp;text=IMAGE';?>">
-									<label class="image-filename"></label>
-									<span class="btn fileinput-button">
-										<i class="icon-plus icon-white"></i>
-										<span>Select image</span>
-										<input type="file" class="input-image" name="logo">
-									</span>
-									<?php if($settings['logo_image_thumb_id'] > 0): ?>
-									<a href="#" class="remove-image btn btn-danger">Remove Image</a>
-									<?php endif; ?>
-									<input type="hidden" class="hidden-remove-image" name="" value="">
-									<input type="hidden" name="posted" value="true">
-								</div>
-							</form>
+			</div>
+		</div>
+		<div class="col-md-5">
+			<div class="card">
+				<div class="card-header">Logo</div>
+				<div class="card-body">
+					<form class="logo-form" method="post" action="/cms_admin/design/saveLogo" enctype="multipart/form-data">
+						<div class="block-header form-header">
+							<h4>Upload a Logo <button type="submit" class="btn btn-primary save-logo pull-right">Save Logo</button></h4>
 						</div>
-					</div>
-					<div class="block">
-						<div class="pad">
-							<form>
-								<div class="block-header form-header">
-									<h4>Add Custom CSS <button onclick="saveCss(); return false;" class="btn btn-primary save-button pull-right" data-loading-text="Saving...">Save Custom CSS</button></h4>
-								</div>
-								<div class="control-group">
-									<label class="control-label">Custom CSS</label>
-									<div class="controls">
-										<textarea id="site_custom_css" name="site_custom_css" class="input-block-level" rows="8"><?php echo $settings['site_custom_css']; ?></textarea>
-									</div>
-								</div>
-							</form>
+						<div class="control-group controls">
+							<img class="image-content-image" src="<?php echo ($settings['logo_image_thumb_id'] > 0) ? '/cms_admin/pages/display_image/image_id/'.$settings['logo_image_thumb_id'] : 'http://placehold.it/148x148/&amp;text=IMAGE';?>">
+							<label class="image-filename"></label>
+							<span class="btn fileinput-button">
+								<i class="icon-plus icon-white"></i>
+								<span>Select image</span>
+								<input type="file" class="input-image" name="logo">
+							</span>
+							<?php if($settings['logo_image_thumb_id'] > 0): ?>
+								<a href="#" class="remove-image btn btn-danger">Remove Image</a>
+							<?php endif; ?>
+							<input type="hidden" class="hidden-remove-image" name="" value="">
+							<input type="hidden" name="posted" value="true">
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
+<!-- <div class="block">
+	<div class="pad">
+		<form>
+			<div class="block-header form-header">
+				<h4>Add Custom CSS <button onclick="saveCss(); return false;" class="btn btn-primary save-button pull-right" data-loading-text="Saving...">Save Custom CSS</button></h4>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Custom CSS</label>
+				<div class="controls">
+					<textarea id="site_custom_css" name="site_custom_css" class="input-block-level" rows="8"><?php echo $settings['site_custom_css']; ?></textarea>
+				</div>
+			</div>
+		</form>
+	</div>
+</div> -->
+
+
 <script>
 
-/******************************************************************************** HELPER FUNCTIONS */
+	/******************************************************************************** HELPER FUNCTIONS */
 
 //CSS Form - AJAX post of the custom css form
 function saveCss() {

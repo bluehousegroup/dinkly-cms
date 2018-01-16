@@ -29,7 +29,7 @@ class BaseDinklyDataTables
 	*			array('db' => 'district_code',  'dt' => 4, 'table' => 'congressional_district'),
 	*			array('db' => 'id', 'dt' => 5, 'table' => 'user_referral', 'count' => 'true', 'label' => 'referral_count'),
 	*			array('db' => 'id', 'dt' => 6, 'table' => 'dinkly_user', 
-	*				'formatter' => function($d, $row) { return '<a target="_blank" href="/admin/user/detail/id/' . $d . '">view</a>'; }
+	*				'formatter' => function($d, $row) { return '<a target="_blank" href="/cms_admin/user/detail/id/' . $d . '">view</a>'; }
 	*			)
 	*		);
 	*
@@ -51,7 +51,7 @@ class BaseDinklyDataTables
 	*	         { "bSortable": false }
 	*	       ],
 	*	    "ajax": {
-	*	      "url": "/admin/user/user_data_table",
+	*	      "url": "/cms_admin/user/user_data_table",
 	*	      "type": "POST"
 	*	    }
 	*	  });
@@ -268,7 +268,7 @@ class BaseDinklyDataTables
 	 *						array('db' => 'district_code',  'dt' => 4, 'table' => 'congressional_district'),
 	 *						array('db' => 'id', 'dt' => 5, 'table' => 'user_referral', 'count' => 'true', 'label' => 'referral_count'),
 	 *						array('db' => 'id', 'dt' => 6, 'table' => 'dinkly_user', 
-	 *							'formatter' => function($d, $row) { return '<a target="_blank" href="/admin/user/detail/id/' . $d . '">view</a>'; }
+	 *							'formatter' => function($d, $row) { return '<a target="_blank" href="/cms_admin/user/detail/id/' . $d . '">view</a>'; }
 	 *						)
 	 *					);
 	 *  @param  array $joins Join information (supports multiple joins, and of any type) example:

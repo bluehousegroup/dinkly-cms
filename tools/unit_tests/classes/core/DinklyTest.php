@@ -70,7 +70,7 @@ class DinklyBaseTest extends PHPUnit_Framework_TestCase
 		// $this->base->loadModule('admin');
 
 		// //Provide sample URI to be used
-		// $_SERVER['REQUEST_URI'] = "/admin/home/default/id/1";
+		// $_SERVER['REQUEST_URI'] = "/cms_admin/home/default/id/1";
 		
 		// //make sure view is constructed correctly
 		// $this->assertEquals($this->base->getCurrentView(),'default');

@@ -1,0 +1,5 @@
+table_name: cms_admin_user_group
+registry:
+  - id
+  - user_id: { type: int, allow_null: false }
+  - group_id: { type: int, allow_null: false }

@@ -3,9 +3,7 @@
 	<div class="page-header mt-4">
 		<h2>
 			Site Settings
-			<div class="float-md-right">
-				<button type="button" class="btn btn-info">Save Settings</button>
-			</div>
+			<button type="button" class="btn btn-info float-right">Save Settings</button>
 		</h2>	
 	</div>
 	<hr>	
