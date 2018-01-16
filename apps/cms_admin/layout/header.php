@@ -38,7 +38,7 @@
 						<li class="nav-item <?php echo (Dinkly::getCurrentModule() == 'pages') ? 'active' : ''; ?>">
 							<a class="nav-link" href="/cms_admin/pages">Pages</a>
 						</li>
-						<li class="nav-item<?php echo (Dinkly::getCurrentModule() == 'settings') ? 'active' : ''; ?>">
+						<li class="nav-item <?php echo (Dinkly::getCurrentModule() == 'settings') ? 'active' : ''; ?>">
 							<a class="nav-link" href="/cms_admin/settings">Settings</a>
 						</li>
 						<li class="nav-item <?php echo (Dinkly::getCurrentModule() == 'user') ? 'active' : ''; ?>">

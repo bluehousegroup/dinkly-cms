@@ -2,6 +2,11 @@
 
 class CmsAdminPagesController extends CmsAdminController 
 {
+	public function __construct()
+	{
+		parent::__construct();
+	}
+	
 	public function loadImageUpload($parameters)
 	{
 		//Grab the original filename

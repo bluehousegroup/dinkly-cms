@@ -1,161 +1,270 @@
 <?php
-
+/**
+ * AdminUserController
+ *
+ * @package    Dinkly
+ * @subpackage AppsCmsAdminUserController
+ * @author     Christopher Lewis <lewsid@lewsid.com>
+ */
 class CmsAdminUserController extends CmsAdminController
 {
-	public function loadKeepAlive()
+	protected $user;
+
+	protected $errors = array();
+
+	public function __construct()
 	{
-		echo 'refreshed';
+		parent::__construct();
+	}
+
+	public function loadDefault($parameters = array())
+	{
+		$this->users = CmsAdminUserCollection::getAll();
+		return true;
+	}
+
+	public function loadDelete($parameters = array())
+	{
+		$user = new CmsAdminUser();
+
+		if(isset($parameters['id']))
+		{
+			$user->init($parameters['id']);
+
+			if(!$user->isNew())
+			{
+				$user->delete();
+
+				DinklyFlash::set('good_user_message', 'User successfully deleted');
+
+				return $this->loadModule('admin', 'user', 'default', true);
+			}
+		}
+
 		return false;
 	}
 
-	public function loadDelete($parameters = null)
+	public function loadNew($parameters = array())
+	{
+		$this->user = new CmsAdminUser($this->db);
+
+		if(isset($_POST['username']))
+		{
+			$this->validateUserPost($_POST);
+
+			//If we have no errors, save the user and redirect to detail
+			if($this->errors == array())
+			{
+				$this->user->save();
+
+				DinklyFlash::set('good_user_message', 'User successfully created');
+
+				return $this->loadModule('admin', 'user', 'detail', true, array('id' => $this->user->getId()));
+			}
+		}
+
+		return true;
+	}
+
+	public function validateUserPost($post_array)
+	{
+		//If the passed username doesn't match the existing one, update
+		if($post_array['username'] != $this->user->getUsername())
+		{
+			//Check the username/email for uniqueness
+			if(!CmsAdminUserCollection::isUniqueUsername($this->db, $post_array['username']))
+			{
+				$this->errors[] = "Email address already in use, please try another.";
+			}
+
+			//Make sure it's also a valid email address
+			if(!filter_var($post_array['username'], FILTER_VALIDATE_EMAIL))
+			{
+			    $this->errors[] = "Invalid username. It must be a valid email address.";
+			}
+
+			$this->user->setUsername($post_array['username']);
+
+			//If we're editing the current user, we should update the session'd username
+			if($this->user->getId() == CmsAdminUser::getAuthSessionValue('logged_id'))
+			{
+				CmsAdminUser::setAuthSessionValue('logged_username', $this->user->getUsername());
+			}
+		}
+
+		//If the password isn't blank
+		if($post_array['password'] != "" && $post_array['confirm-password'] != "")
+		{
+			$has_error = false;
+
+			//Make sure both match
+			if($post_array['password'] != $post_array['confirm-password'])
+			{
+				$has_error = true;
+				$this->errors[] = "Passwords do not match.";
+			}
+
+			//Check for length
+			if(strlen($post_array['password']) < 8)
+			{
+				$has_error = true;
+				$this->errors[] = "Password must be at least 8 characters in length.";
+			}
+
+			//If the password is valid, update
+			if(!$has_error) { $this->user->setPassword($post_array['password']); }
+		}
+		else if($_POST['user-id'] == "" && $_POST['password'] == "")
+		{
+			$this->errors[] = "Password is a required field";
+		}
+
+		//If the first name isn't empty and doesn't match the existing one, update
+		if($post_array['first-name'] != "" && $post_array['first-name'] != $this->user->getFirstName())
+		{
+			$this->user->setFirstName($post_array['first-name']);
+		}
+
+		//If the last name isn't empty and doesn't match the exiting one, update
+		if($post_array['last-name'] != "" && $post_array['last-name'] != $this->user->getLastName())
+		{
+			$this->user->setLastName($post_array['last-name']);
+		}
+
+		//If the title isn't empty and does't match the existing one, update
+		if($post_array['title'] != "" && $post_array['title'] != $this->user->getTitle())
+		{
+			$this->user->setTitle($post_array['title']);
+		}
+
+		if($this->errors != array())
+		{
+			DinklyFlash::set('errors', $this->errors);
+		}
+	}
+
+	public function loadEdit($parameters = array())
+	{
+		$this->user = new CmsAdminUser();
+
+		if(isset($parameters['id']))
+		{
+			$this->user->init($parameters['id']);
+
+			if(isset($_POST['username']))
+			{
+				$this->validateUserPost($_POST);
+
+				if($_POST['source'] == 'profile')
+				{
+					if($_POST['date-format'] == 'MM/DD/YY')
+					{
+						$this->user->setDateFormat('m/d/y');
+					}
+					else if($_POST['date-format'] == 'YYYY-MM-DD')
+					{
+						$this->user->setDateFormat('Y-m-d');
+					}
+				}
+
+				//If we have no errors, save the user and redirect to detail
+				if($this->errors == array())
+				{
+					$this->user->save();
+
+					//If the source is 'profile' this was in a modal, and sent via ajax
+					if($_POST['source'] == 'profile')
+					{
+						echo 'success';
+						die();
+					}
+					else
+					{
+						DinklyFlash::set('good_user_message', 'User successfully updated');
+
+						return $this->loadModule('admin', 'user', 'detail', true, array('id' => $this->user->getId()));
+					}
+				}
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+	public function loadAddGroup($parameters = array())
 	{
 		if(isset($parameters['id']))
 		{
-			$user = new CmsAdminUser();
-			$user->init($parameters['id']);
-			$user->delete();
+			if(isset($_POST['group']))
+			{
+				$user = new CmsAdminUser($this->db);
+				$user->init($parameters['id']);
+				$user->addToGroups($_POST['group']);
 
-			CmsActivityLogCollection::addSiteActivity('user', 'deleted', $parameters['id']);
+				DinklyFlash::set('good_user_message', 'User groups updated');
 
-			$this->loadModule('cms_admin', 'user', 'default', true, true, array('deleted' => true));
-			return false;
+				return $this->loadModule('admin', 'user', 'detail', true, array('id' => $user->getId()));
+			}
 		}
+
 		return false;
 	}
 
-	public function loadView($parameters = null)
+	public function loadRemoveGroup($parameters = array()) 
 	{
-		if($parameters)
+		if(isset($parameters['id']) && isset($parameters['group_id']))
 		{
-			if(isset($parameters['created']))
-			{
-				$this->good[] = "User created";
-			}
+			$user = new CmsAdminUser($this->db);
+			$user->init($parameters['id']);
 
-			if(isset($parameters['id']))
-			{
-				$this->user = new CmsAdminUser();
-				$this->user->init($parameters['id']);
-			}
+			$user->removeFromGroup($parameters['group_id']);
 
-			//User doesn't exist, therefore we do not belong here
-			if($this->user->isNew())
-			{
-				$this->loadModule('cms_admin', 'user', 'default', true, true);
-				return false;
-			}
+			DinklyFlash::set('good_user_message', 'User removed from group');
 
-			if(isset($parameters['saved']))
-			{
-				$this->good[] = "User saved";
-			}
+			return $this->loadModule('admin', 'user', 'detail', true, array('id' => $user->getId()));
 		}
 
-		return true;
+		return false;
 	}
 
-	public function loadNew()
+	public function loadDetail($parameters = array())
 	{
-		if(isset($_POST['posted']))
+		$this->user = null;
+		$this->available_groups = array();
+
+		if(isset($parameters['id']))
 		{
-			//Validate
-			if(!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL))
+			$this->user = new CmsAdminUser($this->db);
+			$this->user->init($parameters['id']);
+
+			//Build a collection of groups that the user in not currently in
+			$temp_groups = DinklyGroupCollection::getAll();
+
+			if($temp_groups != array())
 			{
-			    $this->bad[] = "Invalid email address";
-			}
-
-			if(!SiteAdminUserCollection::isUniqueUsername($_POST['username']))
-		    {
-		    	$this->bad[] = "User already exists with that email address";
-		    }
-
-			if(strlen($_POST['password']) < 8)
-			{
-				$this->bad[] = "Password must be at least 8 characters";
-			}
-
-			//Good to go
-			if(!$this->bad)
-			{
-				$user = new CmsAdminUser();
-				$user->setCreatedAt(date('Y-m-d G:i:s'));
-				$user->setUsername($_POST['username']);
-				$user->setPassword($_POST['password']);
-				$user->setFirstName($_POST['first_name']);
-				$user->setLastName($_POST['last_name']);
-				$user->setTitle($_POST['title']);
-				$user->setIsActive(true);
-				$user->save();
-
-				CmsActivityLogCollection::addSiteActivity('user', 'new', json_encode($_POST));
-
-				$this->loadModule('cms_admin', 'user', 'view', true, true, array('created' => true, 'id' => $user->getId()));
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	public function loadEdit($parameters)
-	{
-		if(!$parameters)
-		{
-			$this->loadModule('super_admin', 'user', 'default', true, true);
-			return false;
-		}
-
-		$this->user = new CmsAdminUser();
-		$this->user->init($parameters['id']);
-
-		if(isset($_POST['posted']))
-		{
-			//Validate that shit
-			if(!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL))
-			{
-			    $this->bad[] = "Invalid email address";
-			}
-
-			if(strlen($_POST['password']) < 8 && strlen($_POST['password']) > 1)
-			{
-				$this->bad[] = "Password must be at least 8 characters";
-			}
-
-			//Good to go
-			if(!$this->bad)
-			{
-				$this->user->setUsername($_POST['username']);
-
-				if(isset($_POST['password']))
+				foreach($temp_groups as $temp_group)
 				{
-					$this->user->setPassword($_POST['password']);					
+					$has_group = false;
+					if($this->user->getGroups() != array())
+					{
+						foreach($this->user->getGroups() as $g)
+						{
+							if($temp_group->getId() == $g->getId())
+							{
+								$has_group = true;
+							}
+						}
+					}
+
+					if(!$has_group) { $this->available_groups[] = $temp_group; }
 				}
-				
-				$this->user->setFirstName($_POST['first_name']);
-				$this->user->setLastName($_POST['last_name']);
-				$this->user->setTitle($_POST['title']);
-				$this->user->setIsActive(true);
-				$this->user->save();
-
-				CmsActivityLogCollection::addSiteActivity('user', 'edited', json_encode($_POST));
-
-				$this->loadModule('cms_admin', 'user', 'view', true, true, array('saved' => true, 'id' => $this->user->getId()));
 			}
+
+			return true;
 		}
 
-		return true;
-	}
-
-	public function loadDefault($parameters = null)
-	{
-		$this->users = CmsAdminUserCollection::getAll();
-
-		if(isset($parameters['deleted']))
-		{
-			$this->good[] = "User deleted";
-		}
-
-		return true;
+		return false;
 	}
 }

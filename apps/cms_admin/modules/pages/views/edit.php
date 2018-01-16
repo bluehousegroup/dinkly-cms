@@ -1,4 +1,5 @@
 <div class="container">
+	<?php include($_SERVER['APPLICATION_ROOT'] . 'apps/cms_admin/layout/messaging.php'); ?>
 	<div class="page-header mt-4">
 		<h2>
 			Pages
