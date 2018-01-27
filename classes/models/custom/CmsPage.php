@@ -8,7 +8,7 @@ class CmsPage
 
 	protected $template;
 
-	protected $design;
+	protected $theme;
 
 	public function init($site_nav_item_id, $draft = false, $autosave = false)
 	{
@@ -53,7 +53,7 @@ class CmsPage
 	{
 		if(!$this->template)
 		{
-			$templates = $this->getDesign()->getPageTemplates();
+			$templates = $this->getTheme()->getPageTemplates();
 
 			//Pin down which template we'll be using
 			foreach($templates as $template)
@@ -128,14 +128,14 @@ class CmsPage
 
 	public function getDetail() { return $this->detail; }
 
-	public function getDesign() 
+	public function getTheme() 
 	{
-		if(!$this->design)
+		if(!$this->theme)
 		{
 			$settings = CmsSettingCollection::getAll(true);
-			$this->design = CmsDesignCollection::getByCode($settings['design_code']);
+			$this->theme = CmsThemeCollection::getByCode($settings['theme_code']);
 		}
-		return $this->design;
+		return $this->theme;
 	}
 
 	public function getContent() { return $this->content; }

@@ -2,7 +2,7 @@
 
 use Symfony\Component\Yaml\Yaml;
 
-class CmsDesign
+class CmsTheme
 {
 	protected $title;
 	protected $desc;

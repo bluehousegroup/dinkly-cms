@@ -20,7 +20,7 @@ class CmsSiteController extends Dinkly
 	{
 		$this->db = DinklyDataConnector::fetchDB();
 		$this->settings = CmsSettingCollection::getAll(true);
-		$this->design = new CmsDesign($this->db);
+		$this->theme = new CmsTheme($this->db);
 		$this->structure = null;
 
 		return true;

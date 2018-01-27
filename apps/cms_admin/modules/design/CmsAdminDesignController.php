@@ -127,9 +127,9 @@ class CmsAdminDesignController extends CmsAdminController
 		$this->setMessages($parameters);
 
 		$this->settings = CmsSettingCollection::getAll(true);
-		$this->design_code = $this->settings['design_code'];
-		$this->design = CmsDesignCollection::getByCode($this->design_code);
-		$this->designs = CmsDesignCollection::getAll();
+		$this->theme_code = $this->settings['theme_code'];
+		$this->theme = CmsThemeCollection::getByCode($this->theme_code);
+		$this->themes = CmsThemeCollection::getAll();
 
 		return true;
 	}
@@ -139,19 +139,19 @@ class CmsAdminDesignController extends CmsAdminController
 		if(isset($_POST))
 		{
 			$setting = new CmsSetting();
-			$setting->initWithKey('design_code');
-			$previous_design_code = $setting->getSettingValue('design_code');
+			$setting->initWithKey('theme_code');
+			$previous_theme_code = $setting->getSettingValue('theme_code');
 
-			if(!$previous_design_code)
+			if(!$previous_theme_code)
 			{
-				$previous_design_code = 'table34';
+				$previous_theme_code = 'table34';
 			}
 			
-			$new_design_code = $_POST['design_code'];
+			$new_design_code = $_POST['theme_code'];
 
 			//Create index of the previous design's page template codes
-			$previous_design = CmsDesignCollection::getByCode($previous_design_code);
-			$previous_page_templates = $previous_design->getPageTemplates();
+			$previous_theme = CmsThemeCollection::getByCode($previous_theme_code);
+			$previous_page_templates = $previous_theme->getPageTemplates();
 			$previous_template_index = array();
 
 			foreach($previous_page_templates as $template)
@@ -160,8 +160,8 @@ class CmsAdminDesignController extends CmsAdminController
 			}
 
 			//Create index of the new design's page template codes
-			$new_design = CmsDesignCollection::getByCode($new_design_code);
-			$new_page_templates = $new_design->getPageTemplates();
+			$new_theme = CmsThemeCollection::getByCode($new_theme_code);
+			$new_page_templates = $new_theme->getPageTemplates();
 			$new_template_index = array();
 
 			foreach($new_page_templates as $template)
@@ -262,12 +262,12 @@ class CmsAdminDesignController extends CmsAdminController
 			}
 
 			//Update settings with new design code
-			$setting->setSettingValue($new_design_code);
+			$setting->setSettingValue($new_theme_code);
 			$setting->save();
 
 			CmsActivityLogCollection::addSiteActivity('design', 'changed', json_encode($_POST));
 
-			echo 'Design successfully changed';
+			echo 'Design successfully updated';
 		}
 
 		return false;

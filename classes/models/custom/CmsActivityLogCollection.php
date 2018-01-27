@@ -15,7 +15,7 @@ class CmsActivityLogCollection extends DinklyDataCollection
 		$site_activity = new CmsActivityLog();
 		$site_activity->setCreatedAt(date('Y-m-d H:i:s'));
 		$site_activity->setEntryType($entry_type);
-		$site_activity->setUserId($_SESSION['dinkly']['cms_admin']['logged_id_num']);
+		$site_activity->setUserId(CmsAdminUser::getLoggedId());
 		$site_activity->setEvent($event);
 		$site_activity->setData(json_encode($data));
 		$site_activity->save();

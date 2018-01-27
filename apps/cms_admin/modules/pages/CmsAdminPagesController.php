@@ -311,7 +311,7 @@ class CmsAdminPagesController extends CmsAdminController
 
 		//Create an array of available page templates for use in the 'add page' form
 		$this->available_templates = array();
-		foreach($this->page->getDesign()->getPageTemplates() as $template)
+		foreach($this->page->getTheme()->getPageTemplates() as $template)
 		{
 			$this->available_templates[] = $template;
 		}
@@ -340,7 +340,7 @@ class CmsAdminPagesController extends CmsAdminController
 
 				//Line up the posted template
 				$selected_template = null;
-				foreach($this->page->getDesign()->getPageTemplates() as $template)
+				foreach($this->page->getTheme()->getPageTemplates() as $template)
 				{
 					if($_POST['page_template'] == $template->getCode())
 					{

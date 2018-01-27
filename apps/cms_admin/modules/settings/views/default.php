@@ -1,28 +1,29 @@
 <div class="container">
 	<?php include($_SERVER['APPLICATION_ROOT'] . 'apps/cms_admin/layout/messaging.php'); ?>
-	<div class="page-header mt-4">
-		<h2>
-			Site Settings
-			<button type="button" class="btn btn-info float-right">Save Settings</button>
-		</h2>	
-	</div>
-	<hr>	
-	<ul class="nav nav-tabs" id="myTab" role="tablist">
-		<li class="nav-item">
-			<a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="seo" aria-selected="false">Contact Info</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" id="analytics-tab" data-toggle="tab" href="#analytics" role="tab" aria-controls="analytics" aria-selected="false">Tracking &amp; Analytics</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" id="seo-tab" data-toggle="tab" href="#seo" role="tab" aria-controls="seo" aria-selected="false">Search Engine Optimization</a>
-		</li>
-	</ul>
-	<div class="container">
-		<form action="" method="post" name="settings">
+	<form action="" method="post" name="settings">
+		<div class="page-header mt-4">
+			<h2>
+				Site Settings
+				<button type="submit" class="btn btn-info float-right">Save Settings</button>
+			</h2>	
+		</div>
+		<hr>	
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="seo" aria-selected="false">Contact Info</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="analytics-tab" data-toggle="tab" href="#analytics" role="tab" aria-controls="analytics" aria-selected="false">Tracking &amp; Analytics</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="seo-tab" data-toggle="tab" href="#seo" role="tab" aria-controls="seo" aria-selected="false">Search Engine Optimization</a>
+			</li>
+		</ul>
+		<div class="container">
+
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
 					<div class="container mt-4">
@@ -125,6 +126,7 @@
 					</div>
 				</div>
 			</div>
-		</form>
-	</div>
+		</div>
+		<input type="hidden" name="source" value="settings">
+	</form>
 </div>

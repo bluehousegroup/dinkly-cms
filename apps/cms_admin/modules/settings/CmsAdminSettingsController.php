@@ -7,40 +7,25 @@ class CmsAdminSettingsController extends CmsAdminController
 		parent::__construct();
 	}
 
-	public function setMessages($parameters)
+	public function loadDefault()
 	{
-		if(isset($parameters['saved']))
+		if($this->hasPostParam('source'))
 		{
-			$this->good[] = "Settings saved";
-		}		
-	}
+			$post = $this->fetchPostParams();
 
-	//A save funnel for each of the different sections of settings
-	public function loadSaveSettings()
-	{
-		if(isset($_POST['posted']))
-		{
-			$settings = $_POST['settings'];
-			$source = $_POST['source'];
-
-			foreach($settings as $key => $value)
+			foreach($post['settings'] as $key => $value)
 			{
-				$setting = new CmsSetting();
+				$setting = new CmsSetting($this->db);
 				$setting->initWithKey($key);
 				$setting->setSettingValue($value);
 				$setting->save();
 			}
 
-			CmsActivityLogCollection::addSiteActivity('settings', 'updated', json_encode($settings));
+			CmsActivityLogCollection::addSiteActivity('settings', 'updated', json_encode($post['settings']));
 
-			$this->loadModule('cms_admin', 'settings', $source, true, true, array('saved' => true));
+			DinklyFlash::set('success', 'Settings updated');
 		}
 
-		return false;
-	}
-
-	public function loadDefault()
-	{
 		//Get our settings
 		$this->setting_keys = CmsSettingKeyCollection::getKeys();
 		$this->setting_values = CmsSettingCollection::getAll(true);

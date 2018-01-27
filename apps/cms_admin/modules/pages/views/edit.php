@@ -25,7 +25,7 @@
 		</div>
 		<div class="col-sm-12 pt-sm-2 pt-lg-0 pt-md-0 pt-2 col-md-9">
 			<h4><?php echo ($settings['site_name']) ? $settings['site_name'] : 'Unnamed Site'; ?>: <?php echo $page->getTemplate()->getTemplateName(); ?></h4>
-			<p>Current Template: <strong><?php echo $page->getDesign()->getTitle(); ?></strong></p>
+			<p>Current Theme: <strong><?php echo $page->getTheme()->getTitle(); ?></strong></p>
 		</div>
 	</div>
 	<div class="row">

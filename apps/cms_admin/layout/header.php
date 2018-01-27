@@ -14,14 +14,6 @@
 	<script type="text/javascript" src="/js/datatables.1.10.16.combined.min.js"></script>
 	<script type="text/javascript" src="/js/dinkly.3.29.js"></script>
 
-	<!-- Session Keepalive -->
-	<script type="text/javascript">
-		$.get('/cms_admin/user/keep_alive');
-		setInterval(function(){
-			$.get('/cms_admin/user/keep_alive');
-		}, 300000); // 5 mins * 60 * 1000
-	</script>
-
 	<!-- Module Header -->
 	<?php echo $this->getModuleHeader(); ?>
 </head>
@@ -38,14 +30,14 @@
 						<li class="nav-item <?php echo (Dinkly::getCurrentModule() == 'pages') ? 'active' : ''; ?>">
 							<a class="nav-link" href="/cms_admin/pages">Pages</a>
 						</li>
+						<li class="nav-item <?php echo (Dinkly::getCurrentModule() == 'design') ? 'active' : ''; ?>">
+							<a class="nav-link" href="/cms_admin/design ">Design</a>
+						</li>
 						<li class="nav-item <?php echo (Dinkly::getCurrentModule() == 'settings') ? 'active' : ''; ?>">
 							<a class="nav-link" href="/cms_admin/settings">Settings</a>
 						</li>
 						<li class="nav-item <?php echo (Dinkly::getCurrentModule() == 'user') ? 'active' : ''; ?>">
 							<a class="nav-link" href="/cms_admin/user">Users</a>
-						</li>
-						<li class="nav-item <?php echo (Dinkly::getCurrentModule() == 'design') ? 'active' : ''; ?>">
-							<a class="nav-link" href="/cms_admin/design ">Design</a>
 						</li>
 					</ul>
 					<ul class="navbar-nav">
