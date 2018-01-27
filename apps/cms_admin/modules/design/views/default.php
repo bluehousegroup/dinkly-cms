@@ -1,13 +1,13 @@
 <div class="container">
 	<?php include($_SERVER['APPLICATION_ROOT'] . 'apps/cms_admin/layout/messaging.php'); ?>
-	<div class="page-header mt-4">
-		<h2>
-			Design
-			<button class="btn btn-info float-right">Save Design</button>
-		</h2>	
-	</div>
-	<hr>
 	<form action="" method="post">
+		<div class="page-header mt-4">
+			<h2>
+				Design
+				<button type="submit" class="btn btn-info float-right">Save Design</button>
+			</h2>	
+		</div>
+		<hr>
 		<div class="row">
 			<div class="col-md-7">
 				<div class="card">
@@ -21,13 +21,26 @@
 									<p class="text-muted"><?php echo $theme->getDesc(); ?></p>
 									<div class="btn-group btn-group-toggle pr-2" data-toggle="buttons">
 										<label class="btn btn-primary <?php echo ($theme_code == $theme->getCode()) ? 'active focus' : ''; ?>">
-											<input type="radio" name="themes[]" <?php echo ($theme_code == $theme->getCode()) ? 'checked="checked"' : ''; ?>> Active
+											<input type="radio" class="theme-toggle" value="<?php echo $theme->getCode(); ?>" name="themes[]" <?php echo ($theme_code == $theme->getCode()) ? 'checked="checked"' : ''; ?>> Active
 										</label>
 									</div>
 									<button type="button" class="btn btn-secondary">Preview</button>
 								</div>
 							</div>
 						<?php endforeach; ?>
+						<div class="card m-3">
+							<img class="card-img-top" src="" data-holder-rendered="true">
+							<div class="card-body">
+								<h5>Test</h5>
+								<p class="text-muted">Description</p>
+								<div class="btn-group btn-group-toggle pr-2" data-toggle="buttons">
+									<label class="btn btn-primary ">
+										<input type="radio" class="theme-toggle" value="test" name="themes[]"> Active
+									</label>
+								</div>
+								<button type="button" class="btn btn-secondary">Preview</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -38,7 +51,18 @@
 						<div class="form-group">
 							<div class="filedrag neat-little-uploader" id="uploader-logo">
 								<div class="filedrag-preview-container" style="display: none;">
-									<img src="" class="filedrag-preview">
+									<img src="" class="filedrag-preview" <?php echo ($settings['logo_background'] == 'light') ? 'style="background-color: #e9ecef"' : 'style="background-color: #808080"';?>>
+								</div>
+								<div class="background-toggle pb-3" style="display: none;">
+									Background: &nbsp;
+									<div class="btn-group btn-group-toggle" data-toggle="buttons">
+										<label class="btn btn-secondary disabled <?php echo ($settings['logo_background'] == 'light') ? 'active focus' : '';?>">
+											<input class="background-toggle" type="radio" name="background_color[]" value="light" <?php echo ($settings['logo_background'] == 'light') ? 'checked="checked"' : '';?>> Light
+										</label>
+										<label class="btn btn-secondary <?php echo ($settings['logo_background'] == 'dark') ? 'active focus' : '';?>">
+											<input class="background-toggle" type="radio" name="background_color[]" value="dark <?php echo ($settings['logo_background'] == 'dark') ? 'checked="checked"' : '';?>"> Dark
+										</label>
+									</div>
 								</div>
 								<div class="filedrag-droparea">
 									<div class="filedrag-display-filename"></div>
@@ -46,8 +70,7 @@
 								</div>
 								<div class="filedrag-progress"></div>
 								<input type="file" class="filedrag-input" id="file-input" name="file-input">
-								<input class="filedrag-input hidden-original" type="hidden" name="logo_original" value="">
-								<input class="filedrag-input hidden-new" type="hidden" name="logo_new" value="">
+								<input type="hidden" id="logo-image-id" name="logo_image_id" value="<?php echo $settings['logo_image_id']; ?>">
 							</div>
 						</div>
 					</div>
@@ -67,7 +90,30 @@
 </div>
 
 <script type="text/javascript">
-$(function() {	
-	initUploader('uploader-logo', '/cms_admin/pages/image_upload');
-});
+	function uploadComplete(response) {
+		$('.background-toggle').show();
+		$('#logo-image-id').val(response.original_id);
+	}
+
+	$(function() {
+
+		$('.background-toggle').on('click', function () {
+			if($(this).val()) {
+				$.ajax({
+					type: "POST",
+					url: '/cms_admin/design/update_logo_background/', 
+					data: { background: $(this).val() }
+				});
+
+				if($(this).val() == 'light') {
+					$('.filedrag-preview').css({"background-color": "#e9ecef" });	
+				}
+				else {
+					$('.filedrag-preview').css({"background-color": "#808080" });
+				}
+			}
+		});
+
+		initUploader('uploader-logo', '/cms_admin/pages/image_upload', 'uploadComplete');
+	});
 </script>

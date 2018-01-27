@@ -2,152 +2,29 @@
 
 class CmsAdminDesignController extends CmsAdminController 
 {
-	public function setMessages()
-	{
-		$parameters = $this->fetchGetParams();
-
-		if(isset($parameters['logo_saved']))
-		{
-			$this->good[] = "Logo saved";
-		}		
-		if(isset($parameters['logo_removed']))
-		{
-			$this->good[] = "Logo removed";
-		}
-		if(isset($parameters['default_content_loaded']))
-		{
-			$this->good[] = "Default content loaded";
-		}	
-		if(isset($parameters['image_exceed']))
-		{
-			$this->bad[] = "Bummer, the logo exceeded the maximum size limit of 32MB. Reverting to previous logo.";
-		}
-	}
-
-	public function loadSaveLogo()
-	{
-		if($this->hasPostParam('posted'))
-		{
-			$setting = new CmsSetting();
-			$setting->initWithKey('logo_image_thumb_id');
-			$thumb_id = $setting->getSettingValue();
-
-			$setting = new CmsSetting();
-			$setting->initWithKey('logo_image_original_id');
-			$original_id = $setting->getSettingValue();
-
-			//We only need to store an image if we actually get one
-			if($_FILES['logo']['size'] > 0)
-			{
-				//Enforce the max post limit (based on PHP and MySQL)
-				if($_FILES['logo']['size'] < Dinkly::getConfigValue('max_post_limit'))
-				{
-					$filename = $_FILES['logo']['name'];
-					$type = $_FILES['logo']['type'];
-
-					$thumb_name = sys_get_temp_dir() . '/' . uniqid();
-					$thumb = CmsImage::makeThumb($_FILES['logo']['tmp_name'], $thumb_name, 128, $_FILES['logo']['type']);
-					$thumb_data = file_get_contents($thumb_name);
-
-					$thumb_image = new CmsImage();
-					$thumb_image->init($thumb_id);
-					$thumb_image->setImageData($thumb_data);
-					$thumb_image->setFormat($type);
-					$thumb_image->save();
-
-					$thumb_id = $thumb_image->getId();
-
-					$original_data = file_get_contents($_FILES['logo']['tmp_name']);
-
-					$original = new CmsImage();
-					$original->init($original_id);
-					$original->setImageData($original_data);
-					$original->setFormat($type);
-					$original->save();
-
-					$original_id = $original->getId();
-
-					//Update settings
-					$setting = new CmsSetting();
-					$setting->initWithKey('logo_image_thumb_id');
-					$setting->setSettingValue($thumb_id);
-					$setting->save();
-
-					$setting = new CmsSetting();
-					$setting->initWithKey('logo_image_original_id');
-					$setting->setSettingValue($original_id);
-					$setting->save();
-
-					$this->loadModule('cms_admin', 'design', 'default', true, true, array('logo_saved' => true));
-				}
-				else
-				{
-					$this->loadModule('cms_admin', 'design', 'default', true, true, array('image_exceed' => true));
-				}
-			}
-			else
-			{
-				//We got no image, delete
-				$setting = new CmsSetting();
-				$setting->initWithKey('logo_image_thumb_id');
-				$thumb_id = $setting->getSettingValue();
-
-				//Delete the thumb
-				$thumb = new CmsImage();
-				$thumb->init($thumb_id);
-				$thumb->delete();
-
-				//Set the setting null
-				$setting->setSettingValue(null);
-				$setting->save();
-
-				//Grab the original
-				$setting = new CmsSetting();
-				$setting->initWithKey('logo_image_original_id');
-
-				//Delete that too
-				$thumb = new CmsImage();
-				$thumb->init($original_id);
-				$thumb->delete();
-
-				//And set you null
-				$setting->setSettingValue(null);
-				$setting->save();
-
-				$this->loadModule('cms_admin', 'design', 'default', true, true, array('logo_removed' => true));
-			}
-		}
-
-		return false;
-	}
-
 	public function loadDefault($parameters)
 	{
-		//Output any messaging
-		$this->setMessages($parameters);
-
 		$this->settings = CmsSettingCollection::getAll(true);
 		$this->theme_code = $this->settings['theme_code'];
 		$this->theme = CmsThemeCollection::getByCode($this->theme_code);
 		$this->themes = CmsThemeCollection::getAll();
 
-		return true;
-	}
-
-	public function loadSaveDesign()
-	{
-		if(isset($_POST))
+		if($this->hasPostParam('source'))
 		{
-			$setting = new CmsSetting();
-			$setting->initWithKey('theme_code');
-			$previous_theme_code = $setting->getSettingValue('theme_code');
+			echo '<pre>';
+			print_r($_POST);
+			die();
+
+			$theme_setting = new CmsSetting();
+			$theme_setting->initWithKey('theme_code');
+			$previous_theme_code = $theme_setting->getSettingValue('theme_code');
 
 			if(!$previous_theme_code)
 			{
 				$previous_theme_code = 'table34';
 			}
 			
-			$new_design_code = $_POST['theme_code'];
+			$new_theme_code = $this->fetchPostParam('theme_code');
 
 			//Create index of the previous design's page template codes
 			$previous_theme = CmsThemeCollection::getByCode($previous_theme_code);
@@ -262,29 +139,45 @@ class CmsAdminDesignController extends CmsAdminController
 			}
 
 			//Update settings with new design code
-			$setting->setSettingValue($new_theme_code);
-			$setting->save();
+			$theme_setting->setSettingValue($new_theme_code);
+			$theme_setting->save();
 
-			CmsActivityLogCollection::addSiteActivity('design', 'changed', json_encode($_POST));
+			//Update Custom CSS
+			$custom_css_setting = new CmsSetting($this->db);
+			$custom_css_setting->initWithKey('custom_css');
+			$custom_css_setting->setSettingValue($this->getPostParam('custom_css'));
+			$custom_css_setting->save();
 
-			echo 'Design successfully updated';
+			//Update Custom CSS
+			$custom_css_setting = new CmsSetting($this->db);
+			$custom_css_setting->initWithKey('logo_image_id');
+			$custom_css_setting->setSettingValue($this->getPostParam('logo_image_id'));
+			$custom_css_setting->save();
+
+			CmsActivityLogCollection::addSiteActivity('design', 'changed', json_encode($this->fetchPostParams()));
+
+			DinklyFlash::set('success', 'Design updated');
+
+			//Pull the latest
+			$this->settings = CmsSettingCollection::getAll(true);
+			$this->theme_code = $this->settings['theme_code'];
+			$this->theme = CmsThemeCollection::getByCode($this->theme_code);
+			$this->themes = CmsThemeCollection::getAll();
 		}
 
-		return false;
+		return true;
 	}
 
-	public function loadSaveCss()
+	public function loadUpdateLogoBackground()
 	{
-		if(isset($_POST))
+		if($this->hasPostParam('background'))
 		{
-			$setting = new CmsSetting();
-			$setting->initWithKey('site_custom_css');
-			$setting->setSettingValue($_POST['site_custom_css']);
+			$setting = new CmsSetting($this->db);
+			$setting->initWithKey('logo_background');
+			$setting->setSettingValue($this->fetchPostParam('background'));
 			$setting->save();
 
-			CmsActivityLogCollection::addSiteActivity('site_custom_css', 'saved', json_encode($_POST));
-
-			echo 'Custom CSS successfully saved';
+			die('success');
 		}
 
 		return false;

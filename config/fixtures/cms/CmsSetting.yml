@@ -3,3 +3,9 @@ records:
     -
         setting_key:	design_code
         setting_value:  table34
+    -
+        setting_key:  logo_background
+        setting_value:  light
+    -
+        setting_key:  logo_image_id
+        setting_value:  
