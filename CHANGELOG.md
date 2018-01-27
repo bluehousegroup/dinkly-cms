@@ -1,6 +1,22 @@
 Dinkly Change Log
 =================
 
+01.20.18 (v3.32): Fix for nocache redirect
+
+01.20.18 (v3.31): Updated bootstrap from beta to official v4 release
+
+01.10.18 (v3.30): Found and fixed a copy/paste typo in DinklyDataBuilder
+
+01.09.18 (v3.29): Included bootstrap version from 3 to 4, as well as updated datatables, font-awesome, and jquery
+
+01.09.18 (v3.28): Added support for model 'core' class autoloading to improve compatibility with plugins
+
+01.09.18 (v3.27): Fixed bug preventing plugin footer from loading properly
+
+01.08.18 (v3.26): Removed extra paramter from filterFiles
+
+01.08.18 (v3.25): Forced query results to be utf8 encoded to prevent issues with rendering with DinklyDataTables
+
 11.16.17 (v3.24): Updated resetContext to accept URI string
 
 10.24.17 (v3.23): Fixed a routing bug that presented itself when zeros were passed as parameter values.

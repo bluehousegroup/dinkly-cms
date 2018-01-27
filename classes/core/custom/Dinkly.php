@@ -22,7 +22,7 @@ class Dinkly extends BaseDinkly
 	 * @param string $uri default null to be parsed to get correct context
 	 * @return Array of matching objects or false if not found
 	 */
-	
+
 	public function route($uri = null)
 	{
 		$context = $this->getContext($uri);

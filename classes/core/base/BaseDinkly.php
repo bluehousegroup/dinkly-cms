@@ -681,7 +681,8 @@ class BaseDinkly
 
 				if($is_plugin)
 				{
-					$app_footer_path = $_SERVER['APPLICATION_ROOT'] . 'apps/' . $app_name . '/layout/footer.php';
+					$app_footer_path = $_SERVER['APPLICATION_ROOT'] . 'plugins/' . $plugin_name 
+						. '/apps/' . $app_name . '/layout/footer.php';
 				}
 				else
 				{
@@ -733,11 +734,9 @@ class BaseDinkly
 	/**
 	 * Pass file variables through here, to be overloaded and filtered as needed
 	 * 
-	 * @param $files Array array of uploaded files indexed by input name
-	 * 
 	 * @return Array value of array of filtered files
 	 */
-	public function filterFiles($files) { return $_FILES; }
+	public function filterFiles() { return $_FILES; }
 
 	/**
 	 * Pass class variables through here to allow an override function where 
