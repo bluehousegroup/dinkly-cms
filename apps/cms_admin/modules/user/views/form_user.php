@@ -42,7 +42,7 @@
 		<label for="btn-create-user" class="col-sm-4"></label>
 		<div class="col-md-7">
 			<hr>
-			<button type="submit" class="btn btn-primary btn-save-user float-right">Save User</button>
+			<button type="submit" class="btn btn-info btn-save-user float-right">Save User</button>
 			<button type="button" class="btn btn-link btn-cancel-user" data-dismiss="modal">Cancel</button>
 		</div>
 	</div>

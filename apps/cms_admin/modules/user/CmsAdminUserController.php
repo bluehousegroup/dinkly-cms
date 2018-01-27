@@ -35,9 +35,9 @@ class CmsAdminUserController extends CmsAdminController
 			{
 				$user->delete();
 
-				DinklyFlash::set('good_user_message', 'User successfully deleted');
+				DinklyFlash::set('success', 'User successfully deleted');
 
-				return $this->loadModule('admin', 'user', 'default', true);
+				return $this->loadModule('cms_admin', 'user', 'default', true);
 			}
 		}
 
@@ -57,9 +57,9 @@ class CmsAdminUserController extends CmsAdminController
 			{
 				$this->user->save();
 
-				DinklyFlash::set('good_user_message', 'User successfully created');
+				DinklyFlash::set('success', 'User successfully created');
 
-				return $this->loadModule('admin', 'user', 'detail', true, array('id' => $this->user->getId()));
+				return $this->loadModule('cms_admin', 'user', 'detail', true, true, array('id' => $this->user->getId()));
 			}
 		}
 
@@ -180,9 +180,9 @@ class CmsAdminUserController extends CmsAdminController
 					}
 					else
 					{
-						DinklyFlash::set('good_user_message', 'User successfully updated');
+						DinklyFlash::set('success', 'User successfully updated');
 
-						return $this->loadModule('admin', 'user', 'detail', true, array('id' => $this->user->getId()));
+						return $this->loadModule('cms_admin', 'user', 'detail', true, true, array('id' => $this->user->getId()));
 					}
 				}
 			}
@@ -203,9 +203,9 @@ class CmsAdminUserController extends CmsAdminController
 				$user->init($parameters['id']);
 				$user->addToGroups($_POST['group']);
 
-				DinklyFlash::set('good_user_message', 'User groups updated');
+				DinklyFlash::set('success', 'User groups updated');
 
-				return $this->loadModule('admin', 'user', 'detail', true, array('id' => $user->getId()));
+				return $this->loadModule('cms_admin', 'user', 'detail', true, true, array('id' => $user->getId()));
 			}
 		}
 
@@ -221,9 +221,9 @@ class CmsAdminUserController extends CmsAdminController
 
 			$user->removeFromGroup($parameters['group_id']);
 
-			DinklyFlash::set('good_user_message', 'User removed from group');
+			DinklyFlash::set('success', 'User removed from group');
 
-			return $this->loadModule('admin', 'user', 'detail', true, array('id' => $user->getId()));
+			return $this->loadModule('cms_admin', 'user', 'detail', true, true, array('id' => $user->getId()));
 		}
 
 		return false;
