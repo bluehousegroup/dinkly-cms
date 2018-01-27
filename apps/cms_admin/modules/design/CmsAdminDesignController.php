@@ -2,8 +2,10 @@
 
 class CmsAdminDesignController extends CmsAdminController 
 {
-	public function setMessages($parameters)
+	public function setMessages()
 	{
+		$parameters = $this->fetchGetParams();
+
 		if(isset($parameters['logo_saved']))
 		{
 			$this->good[] = "Logo saved";
@@ -24,7 +26,7 @@ class CmsAdminDesignController extends CmsAdminController
 
 	public function loadSaveLogo()
 	{
-		if(isset($_POST['posted']))
+		if($this->hasPostParam('posted'))
 		{
 			$setting = new CmsSetting();
 			$setting->initWithKey('logo_image_thumb_id');
